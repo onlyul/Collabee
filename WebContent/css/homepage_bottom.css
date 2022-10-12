@@ -1,0 +1,277 @@
+@charset "EUC-KR";
+	    .section3_web {
+	        display:block;
+	        height:340px;
+	        background: url(https://cdn.collabee.co/front/collabee.co/hornet/524/static/media/bg-freetrial.8e4e0488.png) center center no-repeat rgb(0, 89, 73);;
+	        text-align:center;
+	        display: flex;
+	        justify-content: center;
+	    }
+	    .title_sec4{
+	        font-size: 34px;
+	        font-weight: bold;
+	        line-height: 1.47;
+	        color: rgb(255, 255, 255);
+	    }
+	    .summary_sec4{
+	        font-size:15px;
+	        color: rgba(255, 255, 255, 0.8);
+	        padding-top:13px;
+	    }
+	    .emailVal {
+	        width: 330px;
+	        height:50px;
+	        border: 1px solid rgb(204, 204, 204);
+	        border-radius: 6px;
+	        font-size: 18px !important;
+	        margin-top:30px; 
+	        padding-left:13px;
+	    }
+	    .emailVal::placeholder{
+	        color:rgb(204, 204, 204);
+	    }
+	    .free_start_bnt{
+	        width: 162px;
+	        height:55px;
+	        border-radius: 6px;
+	        margin-left: 8px;
+	        font-size: 18px;
+	        font-weight: bold;
+	        color: rgb(255, 255, 255);
+	        background-color: rgb(217, 173, 43);
+	        border-color:rgb(217, 173, 43);
+	        line-height: 1.5;
+	        cursor: pointer;
+	        transition: background-color 0.2s ease 0s;
+	    }
+	    .free_start_bnt:hover{
+	        background-color: rgb(189, 148, 26);
+	    }
+	    .start_login_bnt{
+	        text-decoration:underline;
+	        color:rgb(255, 255, 255);
+	        cursor:pointer;
+	        transition: color 0.2s ease 0s;
+	    }
+	    .start_login_bnt:hover{
+	        color: rgb(217, 173, 43);
+	    }
+	     /* ½ºÅ©·Ñ */
+	     ::-webkit-scrollbar {
+	        width: 4px;
+	    } 
+	    ::-webkit-scrollbar-track{
+	        -webkit-box-shadow: none;
+	    }
+	    ::-webkit-scrollbar-thumb {
+	        border-radius: 2px;
+	        background-color: rgb(204, 204, 204);
+	    }    
+    
+    
+		.section9{
+			flex-direction: row;
+			display: flex;
+			-webkit-box-align: center;
+		    align-items: center;
+		    -webkit-box-pack: justify;
+		    justify-content: space-between;
+		    max-width: 1100px;
+		    min-width: 700px;
+		    width: 100%;
+		    margin: 0px auto;
+		    padding: 64px 20px;
+		    border-bottom: 1px solid rgb(225, 225, 225);
+		}
+		@media (max-width: 1050px) {
+	  		.section9 {
+	    		flex-direction: column;
+	  		}
+		}
+		.section9_1{
+			text-align: center;
+			font-size: 16px;
+	    	font-weight: normal;
+		}
+		.section9_2{
+			margin-top: 24px;
+		}
+		.downroad{
+			margin-left: 6px;
+	    	margin-right: 6px;
+	    	cursor: pointer;
+		}
+		.section10{
+			padding-top: 73px;
+		}
+		.container10{
+			width: 1100px;
+	    	margin: 0px auto;
+		}
+		.container10::after{
+			display: block;
+		    content: "";
+		    clear: both;
+		}
+		h6{
+			float: left;
+		}
+		.welcome{
+			font-size: 16px;
+		    line-height: 1.4em;
+		    color: rgb(34, 34, 34);
+		    text-size-adjust: none;
+		}
+		.container10_1{
+			float: right;
+		}
+		dl{
+			float: left;
+		    min-width: 120px;
+		    margin-left: 78px;
+		}
+		dt{
+			display: block;
+		    padding: 10px;
+		    font-size: 20px;
+		    color: rgb(34, 34, 34);
+		}
+		dd{
+			display: block;
+		    position: relative;
+		    padding: 10px;
+		    font-size: 14px;
+		    color: rgb(102, 102, 102);
+		    margin-left: 0px;
+		}
+		.dd:hover{
+			color: rgb(217, 173, 43);
+		}
+		.footer{
+			width: 1100px;
+			height: 130px;
+			bottom: 0;
+			background-color: white;
+			text-decoration: none;
+			padding-top: 30px;
+			padding-left: 40px;
+			padding-right: 40px;
+			margin: 0 auto;
+		}
+		.footer1{
+			float: left;
+		    font-size: 14px;
+		    color: rgb(136, 136, 136);
+		}
+		.footer2{
+			float: right;
+	    	position: relative;
+		}
+		.f_btn1{
+			cursor: pointer;
+			padding: 10px;
+			background: url(https://cdn.collabee.co/front/collabee.co/hornet/528/static/media/btn-footer-language-arrow.8122679b.png) right center no-repeat;
+			padding-right: 35px !important;
+			border: none;
+			font-weight: bold;
+		}
+		.clicked{
+			background: url(https://cdn.collabee.co/front/collabee.co/hornet/530/static/media/btn-footer-language-arrow-hover.142d0a23.png) right center no-repeat;
+		}
+		.f_btn1:hover{
+			color: rgb(171, 136, 32);
+		}
+		.language{
+			display: none;
+		    position: absolute;
+		    border-radius: 4px;
+		    box-shadow: rgb(0 0 0 / 10%) 0px 4px 10px 2px;
+		    border: 1px solid rgb(225, 225, 225);
+		    background-color: rgb(255, 255, 255);
+		    margin-top: -3px;
+		    box-sizing: border-box;
+		    padding: 20px;
+		    bottom: 40px;
+		    left: 15px;
+		    margin-left: -70px;
+		    font-size: 14px;
+		    min-width: 200px;
+		}
+		.language::before{
+			border-left: 8px solid transparent;
+		    border-right: 8px solid transparent;
+		    border-top: 8px solid rgba(0, 0, 0, 0.05);
+		    margin-left: -8px;
+		    display: block;
+		    content: "";
+		    width: 0px;
+		    height: 0px;
+		    position: absolute;
+		    top: 100%;
+		    left: 50%;
+		    clear: both;
+		}
+		.language::after{
+			border-left: 6px solid transparent;
+		    border-right: 6px solid transparent;
+		    border-top: 6px solid rgb(255, 255, 255);
+		    margin-left: -6px;
+		    display: block;
+		    content: "";
+		    width: 0px;
+		    height: 0px;
+		    position: absolute;
+		    top: 100%;
+		    left: 50%;
+		    clear: both;
+		}
+		.l_detail{
+			min-width: 200px;
+		    padding: 10px;
+		    font-size: 14px;
+		    line-height: 1.4em;
+		    color: rgb(34, 34, 34);
+		    text-size-adjust: none;
+		}
+		.active{
+			background: url(https://cdn.collabee.co/front/collabee.co/hornet/528/static/media/ic-footer-language-check.96d4f2d6.png) right center no-repeat;
+		}
+		.l_detail:hover{
+			color: #bababa;
+		}
+		.f_btn2{
+			cursor: pointer;
+			font-size: 14px;
+	    	font-weight: bold;
+	    	margin-left: 10px;
+	    	border: none;
+		    background: none;
+		    margin: 0px;
+		    padding: 0px;
+		    width: auto;
+		    overflow: visible;
+		    outline: none;
+		    vertical-align: middle;
+		}
+		.lottie{
+			position: absolute;
+		    left: 103px;
+		    top: 88px;
+		    z-index: 99;
+		    width: 705px;
+		    height: 494px;
+		    overflow: hidden;
+		    margin: 0 auto;
+		    outline: none;
+		}		
+		.section8{
+			background: url(https://cdn.collabee.co/front/collabee.co/hornet/543/static/media/bg-freetrial.8e4e0488.png) center center / cover no-repeat rgb(0, 89, 73);
+		    height: 340px;
+		    box-sizing: border-box;
+		    display: flex;
+		    flex-direction: column;
+		    -webkit-box-pack: center;
+		    justify-content: center;
+		    padding: 120px 0px;
+    		margin: 0 auto;
+		}			    	

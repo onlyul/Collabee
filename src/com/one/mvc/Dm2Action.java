@@ -9,6 +9,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.one.dao.PrivateIdDao;
 import com.yr.dao.DmDao;
 import com.yr.dto.ArticleDto;
 import com.yr.dto.ArticleCommentDto;
@@ -53,7 +54,9 @@ public class Dm2Action implements Action{
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
+		PrivateIdDao dao = new PrivateIdDao();
+		int privateSpaceId = dao.getPrivateId(member_id);
+		request.setAttribute("workspaceId", privateSpaceId);
 		
 		//ModalWorkspaceListDao mWDao = new ModalWorkspaceListDao();
 		//ArrayList<ModalWorkspaceListDto> mWList = mWDao.workspaceList(member_id);

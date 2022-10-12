@@ -20,6 +20,9 @@ public class DocumentUpdateAction implements Action{
 		DocumentUpdateDao dao = new DocumentUpdateDao();
 		dao.updateDocument(title, content, document_id);
 		
-		request.getRequestDispatcher("postedDocument.jsp?documentId="+document_id+"?workspaceId="+workspace_id).forward(request, response);
+		
+		request.setAttribute("documentId", document_id);
+		request.setAttribute("workspaceId", workspace_id);
+		request.getRequestDispatcher("postedDocument.jsp").forward(request, response);
 	}
 }

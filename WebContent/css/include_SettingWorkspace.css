@@ -1,0 +1,567 @@
+@charset "EUC-KR";
+		*{
+			box-sizing: border-box;
+			outline:none;
+	    }
+		body, *{
+	        font-family: -apple-system,BlinkMacSystemFont,Malgun Gothic,Hiragino Kaku Gothic ProN,Hiragino Sans,Meiryo,MS PGothic,sans-serif,Dotum;
+	        margin:0;
+	        padding:0;
+	        outline: none;
+	     }
+        .modal_mws{
+            position:fixed;
+            margin:0;
+            width:100%;
+            height:100%;
+            background-color:rgba(0, 0, 0, 0.8);
+            box-shadow: 0px 11px 15px -7px rgb(0 0 0 / 20%), 0px 24px 38px 3px rgb(0 0 0 / 14%), 0px 9px 46px 8px rgb(0 0 0 / 12%);
+            align-items: center;
+            box-sizing:border-box;
+            z-index: 100;
+        }
+        .modal_content_mws{
+            background-color: rgb(255, 255, 255);
+            width: 580px;
+            height: 580px;
+            inset: calc(50% - 260px) 40px 40px calc(50% - 265px);
+        }
+        #mws{
+            padding:0;
+            margin:0;
+            overflow: hidden;
+            font-size: 13px;
+            color: #222;
+            outline: none;
+        }
+        #mws button{
+            border:none;
+        }
+        #manage_workspace{ /* section */ 
+            border: 1px solid rgb(204, 204, 204);
+            background: rgb(255, 255, 255);
+            border-radius: 4px;
+            overflow:auto;
+        }
+        #manage_workspace header{
+            margin: 0px 28px;
+            padding-top: 29px;
+        }
+        #manage_workspace .closing_bnt{
+            padding-left: 0;
+            padding-right: 0;
+            cursor: pointer;
+            transition: fill 0.2s ease 0s;
+            background-color: transparent;
+            fill: rgb(136, 136, 136);
+            border:none;
+        }
+        #manage_workspace .closing_bnt:hover{
+            fill:rgb(86, 86, 86);
+        }
+        .tab_mws{
+            margin:13px 28px;
+            border-bottom: 1px solid rgb(225, 225, 225);
+        }
+        .ontab_mws{
+            all: unset;
+            cursor: pointer;
+            font-size: 12px;
+            margin-right: 20px;
+            padding-bottom: 8px;
+            padding-top: 6px;
+            transition: color 0.2s ease 0s, border-color 0.2s ease 0s;
+            font-weight: bold;
+            color: rgb(51, 132, 108);
+            border-bottom: 1px solid rgb(51, 132, 108);
+        }
+        .untab_mws:hover{
+            color: rgb(51, 132, 108);
+        }
+        .untab_mws{ /*클릭 해제되면*/
+            all: unset;
+            cursor: pointer;
+            font-size: 12px;
+            margin-right: 24px;
+            padding-bottom: 7px;
+            padding-top: 6px;
+            transition: color 0.2s ease 0s, border-color 0.2s ease 0s;
+
+            color: rgb(136, 136, 136);
+            border-bottom: 1px solid transparent;
+        }
+        #name_mws{
+            width: 517px;
+            height:42px;
+        }
+        #setname_mws{
+            width:94%;
+            font-size: 13px;
+            border: none;
+            transition: border-bottom-color 0.2s ease 0s;
+            background-color:#fff;
+            color:rgb(34, 34, 34);
+            overflow: hidden;
+            outline:none;
+        }
+        #summary_mws{
+            width:517px;
+            height:42px;
+        }
+        #setsummary_mws{
+            width:94%;
+            border:none;
+            font-size: 13px;
+            overflow: hidden;
+            outline:none;
+        }
+        .save_mws{
+            font-size: 14px;
+            line-height: 1.5;
+            background-color: transparent;
+            cursor: pointer;
+            transition: color 0.2s ease 0s, background-color 0.2s ease 0s;
+            color:rgb(51, 132, 108);
+         
+            pointer-events: auto;
+        }
+        .save_mws:hover{
+            color: rgb(42, 98, 81);
+        }
+        .cancel_mws{
+            font-size: 14px;
+            line-height: 1.5;
+            background-color: transparent;
+            cursor: pointer;
+            transition: color 0.2s ease 0s, background-color 0.2s ease 0s;
+            color: rgb(136, 136, 136);
+            pointer-events: auto;
+        }
+        .input_label{
+            font-size: 12px;
+            color: rgb(136, 136, 136);
+            margin-top: 6px;
+            line-height: 1.5;
+            font-weight: bold;
+            margin-left:30px;
+        }
+        .input_sec{
+            display: flex;
+            flex-direction: row;
+            -webkit-box-align: center;
+            align-items: center;
+            transition: border-color 0.2s ease 0s;
+            border-bottom: 1px solid rgb(225, 225, 225);
+            margin:8px 28px;
+        }
+        .cnt_mws{
+            color: rgb(136, 136, 136);
+            line-height: 1.5;
+            font-size: 12px;
+            padding: 3px 0px 9px 30px;
+            transition: opacity 0.2s ease 0s;
+        }
+        #link_copy_mws svg{
+            position:absolute;
+            background-color:transparent;
+            margin-right:65px;
+            cursor:pointer;
+        }
+        #link_copy_mws svg path:hover{
+            fill:rgb(42, 98, 81);
+        }    
+        #link_copy_mws button{
+            position:absolute;
+            background-color:transparent;
+        }
+        #link_copy_mws{
+            width:93px;
+            height:41px;
+            position:absolute;
+            margin-left: 440px;
+            display: flex;
+            flex-direction: row;
+            justify-content:flex-end;
+            margin-top: 20px;
+        }
+        #invite_link_mws{
+            display:flex;
+            border:1px solid rgb(225, 225, 225);
+            border-radius:4px;
+            flex-direction: row;
+            transition: border-color 0.2s ease 0s;
+            margin: 10px 0px 6px 30px;
+            padding-left: 12px;
+            padding-right: 105px;
+            background-color: rgb(250, 250, 250);
+            cursor: copy;
+            width:517px;
+            height:43px;
+            outline: none;
+        }
+        #invite_link_mws:hover{
+            border:1px solid rgb(51, 132, 108);
+        }
+        /*input이 체크되먄 div bottom과 save/cancel버튼이 활성화*/
+        /* input:checked{ 
+    		border-bottom:1px solid rgb(51, 132, 108);
+		} */
+        .input_radio{
+            font-size: 14px;
+            color: rgb(34, 34, 34);
+            margin-left:30px;
+        }
+        /* 선택되면 */
+        .on_sel{
+            position: relative;
+            cursor: pointer;
+            z-index: 2;
+            flex: 0 0 50%;
+            font-size: 14px;
+            text-align: center;
+            padding: 0px 3px;
+            transition: color 0.2s ease-in 0s;
+            color: rgb(255, 255, 255);
+            background-color:transparent;
+        }
+        /* 선택 안됐을때 */
+        .off_sel{
+            position: relative;
+            cursor: pointer;
+            z-index: 2;
+            flex: 0 0 50%;
+            font-size: 14px;
+            text-align: center;
+            padding: 0px 3px;
+            transition: color 0.2s ease-in 0s;
+            color: rgb(193, 193, 193);
+            background-color:transparent;
+        }
+       
+        .select_bnt_mws{
+            z-index:1;
+            position: absolute;
+            width: 100px;
+            height: 38px;
+            border-radius: 4px;
+            box-shadow: rgb(0 0 0 / 30%) 1px 0px 5px 0px;
+            border: 1px solid rgb(51, 132, 108);
+            background-color: rgb(51, 132, 108);
+            transition: transform 0.3s ease-out 0s;
+            transform: translateX(0px);
+        }
+        .container2_mws{
+            display: flex;
+            flex-direction: row;
+            padding-bottom: 30px;
+            border-bottom: 1px solid rgb(225, 225, 225);
+            margin-top: 30px;
+            align-items:center;
+        }
+        .container3_mws{
+            z-index:0;
+            position: relative;
+            display: flex;
+            flex-direction: row;
+            width: 200px;
+            height: 38px;
+            border-radius: 4px;
+            border: 1px solid rgb(225, 225, 225);
+            background-color: rgb(255, 255, 255);
+            -webkit-box-align: center;
+            align-items: center;
+            margin-left:20px;
+            cursor:pointer;
+        }
+        #del_mws{
+            font-size: 14px;
+            line-height: 1.5;
+            background-color: transparent;
+            cursor: pointer;
+            transition: color 0.2s ease 0s, background-color 0.2s ease 0s;
+            color: rgb(237, 84, 84);
+            pointer-events: auto;  
+            margin:30px 0px 20px 30px;
+        }
+
+
+
+        .scroll_bar_mws{
+            /* background: #f7f6f5; */
+            position: fixed;
+            overflow-y:auto;
+        }
+        .scroll_bar_mws::-webkit-scrollbar{
+            width:4px;
+        }
+        .scroll_bar_mws::-webkit-scrollbar-thumb{
+            border-radius: 2px;
+            background-color: #e1e1e1;
+            height:60%;
+        }
+        #workspace_del_mws{
+            font-size:12px;
+            color:rgb(34, 34, 34);
+            margin:30px;
+        }
+        #insert_pw_mws{
+            margin:30px 0px;
+        }
+        #pw_mws{
+            border: 1px solid rgb(225, 225, 225);
+            width: 100%;
+            height: 42px;
+            border-radius: 4px;
+            transition: border-color 0.2s ease 0s;
+            font-size: 12px;
+            color: rgb(136, 136, 136);
+            line-height: 1.5;
+            margin-bottom:6px;
+            padding:0px 20px;
+        }
+        #pw_mws::placeholder{
+            font-weight:bold;
+        }
+        #pw_mws + label{
+            color: rgb(136, 136, 136);
+        }
+        #pw_mws:focus{
+        	    border-color: rgb(51, 132, 108);
+        }
+        #del_bnt_mws{
+            margin-top:30px;
+            display:flex;
+            justify-content:flex-end;
+            font-size: 14px;
+            font-weight: normal;
+        }
+        #del_cancel_mws{
+            color: rgb(136, 136, 136);
+            border:none;
+            outline:none;
+            cursor: pointer;
+            background-color:rgb(255, 255, 255);
+            padding: 10px 2px 10px 8px
+        }
+        #del_cancel_mws:hover{
+        	color: rgba(136, 136, 136, 0.8);
+        }
+        #del2_mws{
+            color:rgb(255,255,255);
+            border-radius: 4px;
+            border:1px solid rgb(237, 84, 84);
+            background-color:rgb(237, 84, 84);
+            cursor: pointer;
+            margin-left: 30px;
+            padding: 10px 32px;
+            transition: background-color 0.2s ease 0s, color 0.2s ease 0s, border-color 0.4s ease 0s, fill 0.2s ease 0s, opacity 0.2s ease 0s;
+        }
+        #del2_mws:hover{
+        	background-color: rgb(189, 2, 25);
+   			border-color: rgb(189, 2, 25);
+        }
+        .hidden{
+            visibility: hidden;
+            opacity:0;
+        }
+
+	#manage_member_workspace{
+		border: 1px solid rgb(204, 204, 204);
+	    border-radius: 4px;
+	    margin-top: 157px;
+	    margin:0;
+	    position:relative;
+	}
+	#mbws header{
+	    margin:0px 28px;
+	    padding-top: 29px;
+	}
+	#manage_member_workspace .closing_bnt{
+	    padding-left: 0;
+	    padding-right: 0;
+	    cursor: pointer;
+	    transition: fill 0.2s ease 0s;
+	    background-color: transparent;
+	    fill: rgb(136, 136, 136);
+	    border:none;
+	}
+	#manage_member_workspace .closing_bnt:hover{
+	    fill:rgb(86, 86, 86);
+	}
+	#tab_mbws{
+	    margin:13px 28px;
+	    border-bottom: 1px solid rgb(225, 225, 225);
+	}
+	/* 검색창부터 끝까지 */
+	#container1_mbws{ 
+		position: relative;
+		height: calc(462px);
+	    display: flex;
+	    flex-direction: column;
+	}
+	#container2_mbws{
+	    margin-top: 15px;
+	    padding-left: 14px;
+	    padding-right: 14px;
+	    height: 326px;
+	    position:relative;
+	}
+	#search_member_mbws{
+	    width: 99%;
+	    height: 41px;
+	    border-radius: 4px;
+	    border: 1px solid rgb(225, 225, 225);
+	    padding-left: 12px;
+	    padding-right: 42px;
+	    color: rgb(34, 34, 34);
+	    font-size: 14px;
+	}
+    ::placeholder{
+        color:rgb(193, 193, 193);
+    }
+    #search_member_mbws:focus{
+        border-color: rgb(136, 136, 136);
+    }
+    #box_mbws{
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+	    padding-left: 23px;
+	    padding-right: 31px;
+	}
+	#del_bnt_mbws{
+	    position: absolute;
+	    margin-right:8px;
+	}
+	#del_bnt_mbws svg{
+	    padding-left: 0px;
+	    padding-right: 0px;
+	    display:inline-block;
+	    transition: fill 0.2s ease 0s;
+	    background-color: transparent;
+	}
+	#member_list_mbws{
+	    display: flex;
+	    flex-flow: row wrap;
+	    margin-top: 5px;
+	}
+	.profile_mbws{
+	    flex: 0 0 50%;
+	    display: flex;
+	    flex-direction:row;
+	    -webkit-box-pack: justify;
+	    padding: 10px 10px;
+	}
+	.pf1_mbws{
+	    display: flex;
+	    flex-direction: row;
+	    -webkit-box-align: center;
+	    align-items: center;
+	    flex: 1 0 auto;
+	}
+	.pf1_mbws > div{
+	    display: flex;
+	    flex-direction: column;
+	    margin-left: 8px;
+	    font-size: 12px;
+	    width: 140px;
+	}
+	.pf2_mbws{
+	    flex: 0 0 60px;
+	    display: flex;
+	    flex-direction: row;
+	    -webkit-box-pack: end;
+	    justify-content: flex-end;
+	    padding-top: 3px;
+	    padding-right: 10px;
+	}
+	.pf2_mbws svg{
+	    margin-left: 3px;
+	    margin-right: 3px;
+	}
+	.picture_mbws{
+	    display: block;
+	    top: 0px;
+	    left: 0px;
+	    background-color: rgb(255, 255, 255);
+	    width: 36px;
+	    height: 36px;
+	    border-radius: 50%;
+	    background-size: cover;
+	    background-position: center center;
+	    content: "";
+	    border: 1px solid rgba(0, 0, 0, 0);
+	    transition: border-color 0.3s ease 0s;
+	}
+	.name_nbws {
+	    padding-top: 2px;
+	    color: rgb(34, 34, 34);
+	    white-space: nowrap;
+	    text-overflow: ellipsis;
+	    overflow: hidden;
+	}
+	.email_mbws{
+	    padding-top: 5px;
+	    color: rgb(136, 136, 136);
+	    white-space: nowrap;
+	    text-overflow: ellipsis;
+	    overflow: hidden;
+	}
+	.footer_mbws{
+	    display: flex;
+	    flex-direction: row;
+	    align-items: center;
+	    justify-content: flex-end;
+	    padding-right:31px;
+	    margin-top: 14px;
+	}
+	.footer_mbws > label{
+	    display:flex;
+	    position:relative;
+	    z-index: 10;
+	    font-size: 14px;
+	    padding: 10px 32px;
+	    font-weight: normal;
+	    color:rgb(255, 255, 255);
+	    cursor: pointer;
+	}
+	#invite_bnt_mbws{
+	    width:155.5px;
+	    height:43.5px;
+	    position:absolute;
+	    border-radius: 4px;
+	    transition: background-color 0.2s ease 0s, color 0.2s ease 0s, border-color 0.4s ease 0s, fill 0.2s ease 0s, opacity 0.2s ease 0s;
+	    background-color: rgb(51, 132, 108);
+	    cursor: pointer;
+	    border:none;
+	}
+	#invite_bnt_mbws:hover{
+	    background-color: rgb(42, 98, 81);
+	    border-color: rgb(42, 98, 81);
+	}
+	.setting_mbws{
+	    width: 190px;
+	    border-radius: 4px;
+	    box-shadow: rgb(0 0 0 / 10%) 0px 0px 6px 2px;
+	    border: 1px solid rgb(225, 225, 225);
+	    top: 0px;
+	    left:0px;
+	    z-index: 3;
+	    position: absolute;
+	    background-color: rgb(255, 255, 255);
+	    padding: 12px 0px;
+    }
+    .setting_mbws li{
+        list-style-type:none;
+        cursor: pointer;
+        box-sizing: border-box;
+        width: 100%;
+        background-color: rgb(255, 255, 255);
+        font-size: 13px;
+        color: rgb(34, 34, 34);
+        padding: 8px 0px 8px 18px;
+        transition: background-color 0.2s ease 0s;
+    }
+    .setting_mbws li:hover{
+        background-color: rgb(242, 242, 242);
+    }

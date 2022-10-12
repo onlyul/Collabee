@@ -20,9 +20,9 @@ public class LoginCheckAction implements Action{
 		int member_id = gM.GetMemberId(email);
 		System.out.println(member_id);
 		
-		HttpSession session = request.getSession();
-		session.setAttribute("member_id", member_id);
-		request.getRequestDispatcher("homehome.jsp").forward(request, response);
+		
+		request.setAttribute("loginId", member_id);
+		request.getRequestDispatcher("Controller?command=Home").forward(request, response);
 		
 	}
 

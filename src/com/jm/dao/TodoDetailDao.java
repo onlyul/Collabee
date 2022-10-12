@@ -29,7 +29,8 @@ public class TodoDetailDao {
 				pic_name = rs.getString("name");
 				pic_p = rs.getString("picture");
 			}
-			
+			rs.close();
+			pstmt.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

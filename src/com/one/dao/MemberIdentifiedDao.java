@@ -17,10 +17,30 @@ public class MemberIdentifiedDao {
 			if(rs.next()) {
 				pw = rs.getString("pw");	
 			}
-			DBConnection.getClose(pstmt, rs);
+			rs.close();
+			pstmt.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return pw;
+	}
+	
+	public String MemberNameIdentified(int member_id) {
+		String sql = "SELECT name FROM member WHERE member_id = ?";
+		Connection conn = DBConnection.getConnection();
+		String name="";
+		try {
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, member_id);
+			ResultSet rs = pstmt.executeQuery();
+			if(rs.next()) {
+				name = rs.getString("name");	
+			}
+			rs.close();
+			pstmt.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return name;
 	}
 }

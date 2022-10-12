@@ -17,6 +17,8 @@ public class PrivateIdDao {
 			if(rs.next()) {
 				privateScpaceId = rs.getInt("workspace_id");
 			}
+			rs.close();
+			pstmt.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

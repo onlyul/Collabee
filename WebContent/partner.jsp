@@ -6,6 +6,7 @@
 	<meta charset="UTF-8">
 	<title>Insert title here</title>
 	<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+	<link href="css/partner.css" rel="stylesheet" type="text/css">
     <script>
         $(function(){
             $("#bt1").on("click", function(){ // 알림 펼쳐보기 버튼
@@ -48,95 +49,6 @@
             // 자바메일 api
         });
     </script>
-    <style>
-        .parentsAlarm {
-            display: block;
-        }
-        #partners {
-            float: right;
-            border-radius: 5px;
-            width:200px;
-            height: 890px;
-            border: 1px solid #888888;
-            display: none;
-        }
-        #partnerSc{
-            width:190x;
-            height:785px;
-            margin-top: 15px;
-            overflow: auto;
-        }
-        #partnerSc::-webkit-scrollbar{
-            width:5px;
-            
-        }
-         #partnerSc::-webkit-scrollbar-thumb{
-            background-color: #e1e1e1;
-            border-radius: 5px;
-        }
-        #partnerSc::-webkit-scrollbar-track{
-            background-color: white;
-            border-radius: 5px;
-        }    
-        #invitePartner {
-            width: 180px;
-            height: 30px;
-            margin-left: 10px;
-            margin-top: 10px;
-            border-radius: 5px;
-            background-color: #d9ad2b;
-            color: white;
-            border: none;
-        }
-        .gray {
-            filter: brightness(0) saturate(100%) invert(57%) sepia(1%) saturate(0%) hue-rotate(282deg) brightness(94%) contrast(88%);
-        }
-        .hideBtn, #inviteXbtn {
-            float: right;
-            width: 20px;
-            height: 20px;
-            padding: 0px;
-            border:none;
-            background-color:white;
-        }
-        .buttonImg{
-            width: 20px;
-            filter: brightness(0) saturate(100%) invert(0%) sepia(86%) saturate(2941%) hue-rotate(215deg) brightness(85%) contrast(110%);
-        }
-        #partnerInviteBox {
-            width: 900px;
-            height: 530px;
-            border: 1px solid black;
-            border-radius: 5px;
-            float: right;
-            display: none;
-            padding: 20px 30px 20px 30px;
-        }
-        .inviteCancellationBtn {
-            background-color: white;
-            margin-top: 15px; margin-left: -25px; clear:both; padding: 0px; width: 80px; height: 25px; border-radius: 5px; border: 1px solid gray; color:gray;
-        }
-        .retryInvite {
-            background-color: white;
-            width: 80px; height: 25px;  border: 1px solid #d9ad2b; border-radius: 5px; color:#d9ad2b;
-        }
-        .chattingMemberPicture {
-            background-image: url('image/fileTop.png'); 
-            width: 32px; 
-            height: 32px;
-            float: left; 
-            border-radius: 35px; 
-        }
-        .onOffImg {        
-            width:8px; 
-            float: right;
-            border-radius: 35px;
-            border: 1px solid gray;
-            filter: brightness(0) saturate(100%) invert(92%) sepia(82%) saturate(4726%) hue-rotate(30deg) brightness(112%) contrast(97%);
-            background-color: #96fc1f;
-            display: block;
-        }
-    </style>
 	</head>
 <body>
 	 <button id="partnerBtn" style="float: right;">파트너</button>

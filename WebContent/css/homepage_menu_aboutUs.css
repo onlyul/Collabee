@@ -1,0 +1,885 @@
+@charset "EUC-KR";
+		body, *{
+	        font-family: -apple-system,BlinkMacSystemFont,Malgun Gothic,Hiragino Kaku Gothic ProN,Hiragino Sans,Meiryo,MS PGothic,sans-serif,Dotum;
+	        box-sizing: border-box;
+			margin: 0;
+    		padding: 0;
+    		border: 0;
+    		outline: 0;
+	    } 
+	    body{
+	        height:100%;
+	        overflow: auto !important;
+	    }
+		img {
+		    border-style: none;
+		}
+		a{
+			text-decoration:none;
+        	color:#666666;
+		}
+		a:link{
+			text-decoration: none;
+		}
+		button{
+			border: none;
+    		box-sizing: border-box;
+    		font-size: 12px;
+    		outline: 0;
+    		text-transform: none;
+    		overflow: visible;
+    		line-height: 1.15;
+    		margin: 0;
+		}
+		input{
+			background-color: #fff;
+			overflow: visible;
+			margin: 0;
+		}
+		
+		input::placeholder{
+			color: #d6d6d6;
+		}
+	    
+	    /* 위 */
+	    .section1_web {
+	        content: "";
+	        z-index: -1;
+	    }
+	    .menubar_web{
+	        height:70px;
+	        display:flex;
+	        justify-content:center;
+	        background: transparent;
+	        z-index: 1;
+	        position:fixed; 
+	        top:0; 
+	        width:100%; 
+	    }
+	    .menubar_web ul li{
+	        list-style: none;
+	        z-index: 100;
+	        font-size: 15px;
+	        color: rgb(34, 34, 34);
+	        line-height:70px;
+	        text-align:center;
+	        height:70px;
+	        cursor:pointer;
+	    }
+	    .menubar_web ul li:hover{
+	        color:rgb(217, 173, 43);
+	    }
+	    .menubar_web ul {
+	        margin:0 auto;
+	        display:flex;
+	        flex-direction:row;
+	    }
+	    .menu_tab li:nth-child(2){
+	        width:150px;
+	        color:rgb(34,34,34);
+	    }
+	    .menu_tab li:nth-child(2):hover{
+	        color:rgb(217, 173, 43);
+	    }
+	    .menu_tab>li:nth-child(2)::after{ /*메신저형 협업툴 옆 점*/
+	        content: "";
+	        position: absolute;
+	        top: 20px;
+	        background-color: rgb(217, 173, 43);
+	        width: 8px;
+	        height: 8px;
+	        border-radius: 50%;
+	    }
+	    .menu_tab li:nth-child(5)::after{ /*로그인 옆에 선*/
+	        position: absolute;
+	        top: 25px;
+	        width: 1px;
+	        margin-left: 15px;
+	        height: 20px;
+	        background-color: rgb(216, 216, 216);
+	        content: "";
+	    }
+	    .menu_tab svg{
+	        display: inline-block;
+	        vertical-align: middle;
+	    }
+	    .login_bnt_sec1{
+	        height: 34px;
+	        padding: 0px 10px;
+	        border: 1px solid rgb(217, 173, 43);
+	        border-radius: 6px;
+	        background-color: transparent;
+	        color: rgb(217, 173, 43);
+	        font-weight: bold;
+	        font-size: 15px;
+	        margin: 18px 0px 0px 12px;
+	        cursor: pointer;
+	    }
+	    .login_bnt_sec1:hover{
+	        background-color:rgb(217, 173, 43);
+	        color:rgb(255,255,255);
+	    }
+	    /* 하단 무료로그인 */
+	    .section3_web {
+	        display:block;
+	        height:340px;
+	        background: url(https://cdn.collabee.co/front/collabee.co/hornet/524/static/media/bg-freetrial.8e4e0488.png) center center no-repeat rgb(0, 89, 73);;
+	        text-align:center;
+	        display: flex;
+	        justify-content: center;
+	    }
+	    .title_sec4{
+	        font-size: 34px;
+	        font-weight: bold;
+	        line-height: 1.47;
+	        color: rgb(255, 255, 255);
+	    }
+	    .summary_sec4{
+	        font-size:15px;
+	        color: rgba(255, 255, 255, 0.8);
+	        padding-top:13px;
+	    }
+	    .emailVal {
+	        width: 330px;
+	        height:50px;
+	        border: 1px solid rgb(204, 204, 204);
+	        border-radius: 6px;
+	        font-size: 18px !important;
+	        margin-top:30px; 
+	        padding-left:13px;
+	    }
+	    .emailVal::placeholder{
+	        color:rgb(204, 204, 204);
+	    }
+	    .free_start_bnt{
+	        width: 162px;
+	        height:55px;
+	        border-radius: 6px;
+	        margin-left: 8px;
+	        font-size: 18px;
+	        font-weight: bold;
+	        color: rgb(255, 255, 255);
+	        background-color: rgb(217, 173, 43);
+	        border-color:rgb(217, 173, 43);
+	        line-height: 1.5;
+	        cursor: pointer;
+	        transition: background-color 0.2s ease 0s;
+	    }
+	    .free_start_bnt:hover{
+	        background-color: rgb(189, 148, 26);
+	    }
+	    .start_login_bnt{
+	        text-decoration:underline;
+	        color:rgb(255, 255, 255);
+	        cursor:pointer;
+	        transition: color 0.2s ease 0s;
+	    }
+	    .start_login_bnt:hover{
+	        color: rgb(217, 173, 43);
+	    }
+	     /* 스크롤 */
+	     ::-webkit-scrollbar {
+	        width: 4px;
+	    } 
+	    ::-webkit-scrollbar-track{
+	        -webkit-box-shadow: none;
+	    }
+	    ::-webkit-scrollbar-thumb {
+	        border-radius: 2px;
+	        background-color: rgb(204, 204, 204);
+	    }
+	    
+	    /* 로그인 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
+	    #login{
+	    	display: none;
+	    }
+	    .overlay{
+			position: fixed;
+    		top: 0;
+    		left: 0;
+    		right: 0;
+    		bottom: 0;
+    		z-index: 100;
+    		background-color: rgba(0,0,0,.8);
+		}
+		.white_box{
+			position: absolute;
+    		inset: 50% auto auto 50%;
+   			border: 1px solid rgb(204, 204, 204);
+    		background: rgb(255, 255, 255);
+    		overflow: auto;
+    		border-radius: 4px;
+    		outline: none;
+    		padding: 0px;
+    		margin-right: -50%;
+    		transform: translate(-50%, -50%);
+		}
+		.white_box_center{
+			padding: 28px 32px;
+			max-height: 680px;
+			position: relative;
+    		display: flex;
+    		flex-direction: column;
+    		z-index: 110;
+    		width: 580px;
+    		/* min-height: 229px;  */
+    		margin: auto;
+    		background-color: #fff;
+    		border-radius: 4px;
+		}
+		
+		.button_x_class{
+			position: absolute;
+    		top: 0px;
+    		right: 0px;
+    		transition: all 0.2s ease 0s;
+    		width: 32px;
+    		height: 32px;
+    		padding: 4px;
+    		background-color: transparent;
+    		
+    		cursor: pointer;
+    		pointer-events: auto;
+    		text-decoration: none;	
+		}
+		.button_x_class:hover{
+    		background-color: rgba(0, 0, 0, 0.05);
+    		border-radius: 6px;
+		}
+		
+		.button_x{
+			transition: fill 0.2s ease 0s;
+    		fill: rgb(136, 136, 136);
+		}
+		
+		.login_other{
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			margin-top: 16px;
+    		margin-bottom: 32px;
+		}
+		.login_other_button{
+			width: 252px;
+    		height: 36px;
+    		border: 1px solid rgb(224, 221, 217);
+    		border-radius: 4px;
+    		background: rgb(255, 255, 255);
+    		display: flex;
+   		 	justify-content: center;
+    		align-items: center;
+    		cursor: pointer;
+    		transition: all 0.2s ease 0s;
+    		padding: 6px 0px;
+		}
+		.login_other_button:hover{
+			background-color: rgb(247, 246, 245);
+		}
+		.login_other_span{
+			font-size: 14px;
+    		margin-left: 6px;
+		}
+		
+		.login_line{
+			border-top: 1px solid rgb(225, 225, 225);
+    		color: rgb(225, 225, 225);
+    		overflow: visible;
+    		text-align: center;
+    		height: 1px;
+    		position: relative;
+		}
+		.login_line2{
+			position: absolute;
+    		top: -8px;
+    		left: 240px;
+    		font-size: 12px;
+    		background: rgb(255, 255, 255);
+    		padding: 0px 8px;
+    		color: rgb(136, 136, 136);
+		}
+		
+		/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
+		.input_line_wrap{
+			margin-top: 0;
+		    position: relative;
+    		width: auto;
+    		padding-top: 18px;
+		}
+		.input_line_wrap_h3{
+			margin-left: 4px;
+			font-size: 12px;
+   			line-height: 18px;
+   			color: #888;
+		}
+		.input_line_wrap_label{
+			position: absolute;
+   			left: 3px;
+    		top: 0;
+		}
+		.input_line{
+			font-size: 20px;
+    		line-height: 30px;
+    		height: auto;
+    		padding: 10px 4px;
+    		
+    		display: block;
+    		width: 100%;
+    		border: none;
+    		border-bottom: 1px solid #e1e1e1;
+    		border-radius: 0;
+    		transition: all .25s ease-in-out;
+		}
+		/* .input_line:invalid{
+			border-bottom-color: #ed5454;
+		}
+		.input_line:required{
+			border-bottom-color: #ed5454;
+		} */
+		.input_line:focus{
+			outline: none;
+    		border-bottom-color: #d9ad2b;
+		}
+		.validate{
+			display: block;
+    		opacity: 0;
+    		margin-left: 4px;
+    		margin-top: 6px;
+    		font-size: 12px;
+    		line-height: 18px;
+    		color: #888;
+    		transition: all .1s ease-in-out;
+		}
+		
+		.login_help{
+			display: flex;
+    		justify-content: space-between;
+    		margin-top: 18px;
+    		padding-left: 5px;
+    		font-size: 14px;
+    		line-height: 22px;
+		}
+		
+		.auto_login{
+			margin-right: 0.2em;
+			vertical-align: middle;
+		}
+		.auto_login_checkbox{
+			fill: rgb(217, 173, 43);
+		}
+		
+		.button_text{
+			text-decoration: underline;
+		    color: #c90;
+		    cursor: pointer;
+		    min-width: 10px;
+		    padding-left: 0!important;
+		    padding-right: 0!important;
+		    background-color: initial;
+		    border-color: transparent;
+		    font-weight: 400;
+		    font-size: 14px;
+		}
+		.button_login{
+			height: 42px;
+    		font-weight: bold;
+		    font-size: 14px;
+		    border-radius: 6px;
+		   	position: relative;
+		    min-height: inherit;
+		    color: rgb(255, 255, 255);
+        	text-align: center;
+		    padding: 5px 18px;
+		    transition: background-color 0.2s ease 0s, color 0.2s ease 0s, border-color 0.4s ease 0s, fill 0.2s ease 0s, opacity 0.2s ease 0s;
+		    border-width: 1px;
+		    border-style: solid;
+		    border-color: rgb(217, 173, 43);
+		    background-color: rgb(217, 173, 43);
+		    opacity: 0.6;
+		    /* cursor: not-allowed; */
+		    width: 100%;
+		    box-shadow: none;
+		}
+		.button_login:hover{
+			background-color: rgb(179, 142, 34);
+		    border-color: rgb(179, 142, 34);
+		}
+		
+		/* 비밀번호 재설정ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
+		#resetPW{
+			display: none; 
+		}
+		.button_x_class2 {
+			position: absolute;
+		    top: 12px;
+		    right: 12px;
+	        min-width: inherit;
+		    min-height: inherit;
+		    padding-left: 0px;
+		    padding-right: 0px;
+		    transition: fill 0.2s ease 0s;
+		    cursor: pointer;
+		    pointer-events: auto;
+		    width: auto;
+		    background-color: transparent;
+		    text-decoration: none;
+		    color: mono3
+		}
+		.button_x_class2:hover{
+    		background-color: rgba(0, 0, 0, 0.05);
+    		border-radius: 6px;
+		}
+		
+		.header_for{
+			margin-bottom: 40px;
+		    color: rgb(136, 136, 136);
+		    flex: 0 1 auto;
+		}
+		.h2_for{
+		    font-size: 22px;
+		    line-height: 1.36;
+		    color: rgb(34, 34, 34);
+    		font-weight: bold;
+    		margin-bottom: 8px;			
+		} 
+		.span_for{
+			font-size: 15px;
+    		line-height: 1.47;
+        	color: rgb(136, 136, 136);
+		}
+		
+		.request_email{
+			flex: 1 1 auto;
+		    display: flex;
+		    flex-direction: column;
+		}
+		.request_email_container{
+			position: relative;
+		    display: flex;
+		    flex-direction: column;
+		    margin-bottom: 40px;
+		}
+		.label_for_request_email{
+			font-size: 12px;
+		    line-height: 1.5;
+		    font-weight: bold;
+		    color: rgb(136, 136, 136);
+		}
+		.inputBox_for_request_email{
+			display: flex;
+		    flex-direction: row;
+		    align-items: center;
+		    -webkit-box-pack: justify;
+		    justify-content: space-between;
+		    border-bottom: 1px solid rgb(225, 225, 225);
+		}
+		.input_for_request_email{
+			flex: 1 1 auto;
+		    font-size: 20px;
+		    line-height: 1.5;
+		    color: rgb(34, 34, 34);
+		    background-color: transparent;
+		    padding: 10px 0px;
+		}
+		.input_for_request_email:focus {
+			outline: none;
+    		border-bottom: 1px solid rgb(237, 84, 84);
+		}
+		.button_for_resetPW{
+			cursor: pointer;
+		    flex: 0 1 auto;
+		    background-color: transparent;
+		    font-size: 14px;
+		    line-height: 1.57;
+		    padding: 14px 0px 14px 14px;
+		    color: rgb(204, 153, 0);
+		}
+		.button_for_resetPW:hover{
+			color: rgb(179, 142, 34);
+		}
+		
+		.footer_for_resetPW{
+			flex: 0 1 auto;
+		    display: flex;
+		    flex-direction: column;
+		    justify-content: space-between;
+		}
+		.button_go_login{
+			font-size: 14px;
+		    font-weight: bold;
+		    line-height: 1.57;
+		    text-decoration: underline;
+		    align-self: flex-start;
+		    
+		    background-color: transparent;
+		    cursor: pointer;
+		    transition: color 0.2s ease 0s, background-color 0.2s ease 0s;
+		    color: rgb(204, 153, 0);
+		    pointer-events: auto;
+		}
+		.button_go_login:hover{
+			    color: rgb(179, 142, 34);
+		}
+		
+		/* 회원가입 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
+		#signUp{
+			display: none;
+		}
+		.white_box_center_signUp{
+			display: flex;
+		    position: relative;
+		    width: 404px;
+		    min-height: 310px;
+			padding: 28px 32px;
+    		display: flex;
+    		flex-direction: column;
+		}
+		.signUp_header{
+			margin-bottom: 16px;
+		    color: rgb(136, 136, 136);
+		    display: flex;
+		    -webkit-box-pack: justify;
+		    justify-content: space-between;
+		    flex: 0 1 auto;
+		}
+		.signUp_header_h2{
+			font-size: 16px;
+		    line-height: 1.36;
+		    color: rgb(34, 34, 34);
+		    font-weight: bold;
+		}
+		.signUp_header_btn{
+			margin-bottom: 8px;
+			min-width: inherit;
+		    min-height: inherit;
+		    padding-left: 0px;
+		    padding-right: 0px;
+		    transition: fill 0.2s ease 0s;
+		    cursor: pointer;
+		    pointer-events: auto;
+		    width: auto;
+		    background-color: transparent;
+		    text-decoration: none;
+		}
+		.signUp_header_btn_svg{
+			display: inline-block;
+		    vertical-align: middle;
+		    shape-rendering: inherit;
+		}
+		.signUp_header_btn_path{
+			transition: fill 0.2s ease 0s;
+    		fill: rgb(136, 136, 136);
+		}
+		.signUp_header_btn_path:hover{
+			fill: rgb(83, 83, 83);
+		}
+		.signUp_body{
+			flex: 1 1 auto;
+		    display: flex;
+		    flex-direction: column;
+		}
+		.signUp_body_social_btn{
+			width: 100%;
+		    height: 36px;
+		    border: 1px solid rgb(224, 221, 217);
+		    border-radius: 4px;
+		    background: rgb(255, 255, 255);
+		    display: flex;
+		    -webkit-box-align: center;
+		    align-items: center;
+		    cursor: pointer;
+		    transition: all 0.2s ease 0s;
+		    padding-top: 6px;
+		    padding-bottom: 6px;
+		    margin-bottom: 12px;
+		}
+		.signUp_body_social_btn:hover{
+		background-color: rgb(247, 246, 245);		
+		}
+		.signUp_body_social_btn>div:last-child{
+			width: 100%;
+		    font-size: 14px;
+		    margin: 6px 0px;
+		}
+		.signUp_body_btn_iconcontainer{
+			position: absolute;
+		    padding: 6px;
+		}
+		.signUp_body_divider{
+			border-top: 1px solid rgb(225, 225, 225);
+		    color: rgb(225, 225, 225);
+		    overflow: visible;
+		    text-align: center;
+		    height: 1px;
+		    margin-top: 20px;
+		    margin-bottom: 31px;
+		    position: relative;
+		}
+		.signUp_body_divider_text{
+			position: absolute;
+		    top: -8px;
+		    left: 135px;
+		    font-size: 13px;
+		    background: rgb(255, 255, 255);
+		    padding: 0px 8px;
+		    color: rgb(136, 136, 136);
+		}
+		.signUp_body_btn{
+			height: 36px;
+		    font-weight: bold;
+		    font-size: 14px;
+		    padding: 6px 40px;
+		    
+		    position: relative;
+		    min-height: inherit;
+		    color: rgb(255, 255, 255);
+		    line-height: 1.5;
+		    border-radius: 4px;
+		    text-align: center;
+		    padding: 5px 18px;
+		    transition: background-color 0.2s ease 0s, color 0.2s ease 0s, border-color 0.4s ease 0s, fill 0.2s ease 0s, opacity 0.2s ease 0s;
+		    border-width: 1px;
+		    border-style: solid;
+		    border-color: rgb(217, 173, 43);
+		    background-color: rgb(217, 173, 43);
+		    cursor: pointer;
+		    opacity: 1;
+		    width: auto;
+		    box-shadow: none;
+		}
+		.signUp_body_btn:hover{
+			background-color: rgb(179, 142, 34);
+    		border-color: rgb(179, 142, 34);
+		}
+		.signUp_footer{
+			flex: 0 1 auto;
+		    display: flex;
+		    flex-direction: row;
+		    -webkit-box-align: center;
+		    align-items: center;
+		    -webkit-box-pack: justify;
+		    justify-content: space-between;
+		}
+		.signUp_footer_message{
+			width: 100%;
+		    display: flex;
+		    -webkit-box-pack: center;
+		    justify-content: center;
+		    font-size: 12px;
+		    line-height: 1.5;
+		    color: rgb(136, 136, 136);
+		}
+		.signUp_footer_span{
+			border: 0px !important;
+		    background-color: inherit !important;
+		    color: inherit !important;
+		    padding: 0px !important;
+		    margin: 0px !important;
+		    display: inline !important;
+		    width: auto !important;
+		    height: auto !important;
+		}
+		.signUp_footer_btn{
+			line-height: 1.57;
+		    text-decoration: underline;
+		    margin-left: 4px;
+		    
+		    font-size: 12px;
+		    background-color: transparent;
+		    cursor: pointer;
+		    transition: color 0.2s ease 0s, background-color 0.2s ease 0s;
+		    color: rgb(204, 153, 0);
+		    pointer-events: auto;
+		}
+		.signUp_footer_btn:hover{
+			color: rgb(179, 142, 34);	
+		}
+		/* signUp1 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
+		#signUp1{
+			display: none;
+		}
+	    .signUp1_modal{
+			position: absolute;
+		    inset: 50% auto auto 50%;
+		    border: 1px solid rgb(204, 204, 204);
+		    background: rgb(255, 255, 255);
+		    overflow: auto;
+		    border-radius: 4px;
+		    outline: none;
+		    padding: 0px;
+		    margin-right: -50%;
+		    transform: translate(-50%, -50%);
+		}
+		.signUp1_wrapper{
+			display: flex;
+		    -webkit-box-pack: center;
+		    justify-content: center;
+		    position: relative;
+		}
+		.signUp_btn_x{
+			position: absolute;
+		    top: 12px;
+		    right: 12px;
+		    
+		    min-width: inherit;
+		    min-height: inherit;
+		    padding-left: 0px;
+		    padding-right: 0px;
+		    transition: fill 0.2s ease 0s;
+		    cursor: pointer;
+		    pointer-events: auto;
+		    width: auto;
+		    background-color: transparent;
+		    text-decoration: none;
+		}
+		.signUp1_content{
+			width: 580px;
+		    min-height: 322px;
+		    padding: 32px 32px 42px;
+		    display: flex;
+		    flex-direction: column;
+		}
+		.signUp1_message{
+			font-size: 14px;
+		    line-height: 1.57;
+		    color: rgb(136, 136, 136);
+		}
+		.signUp1_btn1_class{
+			font-size: 14px;
+		    line-height: 1.57;
+		    padding: 10px 40px;
+		    
+		    position: relative;
+		    min-height: inherit;
+		    color: rgb(255, 255, 255);
+		    font-weight: 500;
+		    border-radius: 4px;
+		    text-align: center;
+		    transition: background-color 0.2s ease 0s, color 0.2s ease 0s, border-color 0.4s ease 0s, fill 0.2s ease 0s, opacity 0.2s ease 0s;
+		    border-width: 1px;
+		    border-style: solid;
+		    border-color: rgb(217, 173, 43);
+		    background-color: rgb(217, 173, 43);
+		    cursor: pointer;
+		    opacity: 1;
+		    width: auto;
+		    box-shadow: none;
+		}
+		.signUp1_btn1:hover{
+			background-color: rgb(179, 142, 34);
+    		border-color: rgb(179, 142, 34);
+		}
+		
+		/* signUp2ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
+		#signUp2{
+			display: none;
+		}
+		.go_signUp1_btn{
+			font-size: 14px;
+		    line-height: 1.57;
+		    
+		   background-color: transparent;
+		    cursor: pointer;
+		    transition: color 0.2s ease 0s, background-color 0.2s ease 0s;
+		    color: rgb(136, 136, 136);
+		    pointer-events: auto;
+		}
+		.go_signUp1_btn:before{
+		    content: "< ";
+		}
+		
+		/* signUp3ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
+		#signUp3{
+			display:none;
+		}
+	    .signUp3_content{
+	    	width: 580px;
+		    min-height: 568px;
+		    padding: 32px 32px 42px;
+		    display: flex;
+		    flex-direction: column;
+	    }
+	    .signUp3_body{
+	    	flex: 1 1 auto;
+		    display: flex;
+		    flex-direction: column;
+	    }
+	    .signUp3_footer{
+	    	flex: 0 1 auto;
+		    display: flex;
+		    flex-direction: column;
+		    margin-top: 8px;
+	    }
+	    .signUp3_span{
+	    	text-align: center;
+		    font-size: 12px;
+		    line-height: 1.5;
+		    display: block !important;
+		    margin-top: 8px !important;
+		    color: rgb(136, 136, 136) !important;
+	    }
+	    .signUp3_a{
+	    	color: rgb(204, 153, 0);
+		    font-weight: bold;
+	    }
+	    
+		/* mini_menuㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
+	    .mini_menu_bold{
+	        font-weight:bold;
+	    } 
+	    #collabee_modal_mini_menu{
+	    	display: flex;
+	    	flex-flow: row wrap;
+	    	width: 476px;
+	    	margin-left: -150px;
+	    	position: absolute;
+	    	border-radius: 4px;
+	    	box-shadow: rgb(0 0 0 / 10%) 0px 4px 10px 2px;
+	    	border: 1px solid rgb(225,225,225);
+	    	background-color: rgb(255,255,255);
+	    	margin-top: -3px;
+	    	box-sizing: border-box;
+	    	padding: 20px;
+	    	
+	    	margin-block: 0px;
+	    	float: right;
+	    }
+	    #collabee_modal_mini_menu>li{
+	    	text-align: left; 
+	    	width: 217px;
+	    	float: left;
+	    	list-style: none;
+	    	height: 88px;
+	    }
+	    #collabee_modal_mini_menu>li:hover{
+	    	background-color: #fafafa;
+	    }
+	    #collabee_modal_mini_menu>li>a{
+	    	display: block;
+	    	box-sizing: border-box;
+	    	padding: 10px 12px;
+	    	font-size: 14px;
+	    	margin: 2px;
+	    	height: 100%;
+	    } 
+	    #collabee_modal_mini_menu>li>a>span{
+	    	display: block;
+	    	font-size: 14px;
+	    	line-height: 18px;
+	    	color: rgb(102,102,102);
+	    	margin-top: 4px;
+	    } 
+	    .collabee_modal_mini_menu_line{
+	    	display: block;
+	    	width: 100%;
+	    	height: 1px;
+	    	background: rgb(225, 225, 225);
+	    	margin-bottom: 16px;
+	    	float: left;
+	    }
+	    #collabee_modal_mini_menu_container{
+	    	display: none;
+	    }
+	    #collabee_modal_mini_menu_btn:hover #collabee_modal_mini_menu_container{
+			display: block;
+		}
+		

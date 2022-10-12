@@ -21,11 +21,23 @@ public class ActionFactory {
 		case "Home":
 			action = new HomeRecentAction();
 			break;
+		case "putRecentConnection" :
+			action = new PutRecentConnectionAction();
+			break;
+		case "AddOrder" :
+			action = new AddOrderAction();
+			break;
+		/*
+		 * case "dm1_write_action": action = new HomeRecentAction(); break;
+		 */
 		case "MemberDelete":
 			action = new MemberDeleteAction();
 			break;
-		case "dm1":
-			action = new Dm1Action();
+		case "WorkspaceMember":
+			action = new WorkspaceMemberAction();
+			break;
+		case "WorkspaceListYR":
+			action = new WorkspaceListYRAction();
 			break;
 		case "dm2":
 			action = new Dm2Action();
@@ -79,7 +91,7 @@ public class ActionFactory {
 		case "Option1ChangeTeam":
 			action = new Option1ChangeTeamAction();
 			break;
-		case "OPtion1MemberLogout":
+		case "Option1MemberLogout":
 			action = new Option1MemberLogoutAction();
 			break;
 		case "Search1":
@@ -165,7 +177,7 @@ public class ActionFactory {
 			break;
 		case "KanbanNewWS" : 
 			action = new KanbanNewWSAction();
-			
+			break;
 		case "Todo" :
 			action = new TodoAction();
 			break;
@@ -300,14 +312,12 @@ public class ActionFactory {
 		case "getThisWorkspaceMember" ://멤버 리스트 채우기
 			action = new GetThisWorkspaceMemberAction();
 			break;
-		case "ModalWorkspaceListjh" : //공간 리스트
-			action = new SelWorkspaceListAction();
-			break;
 		case "documentEtc" ://북마크, 알림 가져오기
 			action = new DocumentEtcAction();
 			break;
 		case "documentBookmarkAlarm" :
 			action = new DocumentBookmarkAlarmAction();
+			break;
 		case "documentDel" : //문서 삭제
 			action = new DocumentDelAction();
 			break;

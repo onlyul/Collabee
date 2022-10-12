@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.jm.dao.TodoListDao;
 import com.jm.dao.TodoListWidgetDao;
 import com.jm.dto.TodoListDto;
+import com.one.dao.PrivateIdDao;
 
 public class TodoAction implements Action{
 
@@ -27,6 +28,10 @@ public class TodoAction implements Action{
 		
 		TodoListWidgetDao todoW = new TodoListWidgetDao();
 		ArrayList<TodoListDto> todoListW = todoW.todoWidgetFinish(member_id);
+		
+		PrivateIdDao dao = new PrivateIdDao();
+		int privateSpaceId = dao.getPrivateId(4);
+		request.setAttribute("workspaceId", privateSpaceId); 
 		
 		request.setAttribute("tDtoList", tDtoList);
 		request.setAttribute("todoListW", todoListW);

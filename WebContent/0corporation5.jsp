@@ -7,280 +7,25 @@
 	<title>corporation5</title>
 	<link rel="icon" href="images/favicon.ico" type="image/x-icon">
 	<script src="js/jquery-3.6.0.min.js"></script>
-	<style>
-		a{
-			text-decoration: none;
-			color: black;
-		}
-		body{
-			font-family: -apple-system,BlinkMacSystemFont,Malgun Gothic,Hiragino Kaku Gothic ProN,Hiragino Sans,Meiryo,MS PGothic,sans-serif,Dotum;
-		}
-		.chosen{
-			font-weight: bold;
-			color: color: rgb(34, 34, 34);
-			fill: rgb(34, 34, 34);
-			background: rgb(242, 242, 242);
-		}
-		ul{
-			padding-left: 20px;
-			list-style-type: none;
-			font-size: 13px;
-			z-index: 1;
-		}
-		form{
-			flex: 1 0 auto;
-		}
-		li a{
-			text-decoration: none;
-			display: block;
-			line-height: 2.0;
-			color: rgb(34, 34, 34);
-			fill: rgb(117, 114, 111);
-		}
-		li a:hover{
-			font-weight: bold;
-			color: color: rgb(34, 34, 34);
-			fill: rgb(34, 34, 34);
-			background: rgb(242, 242, 242);
-		}
-		.cor1_title{
-			font-size: 11px;
-    		color: rgb(136, 136, 136);
-		}
-		.foot{
-			font-size: 13px;
-			color: rgb(136, 136, 136);
-			z-index: 3;
-			margin-left: 20px;
-			bottom: 30px;
-			position: fixed;
-		}
-		.sidebar{
-			margin-top: 60px;
-			background-color: rgb(250, 250, 250);
-			border-right: 1px solid rgb(225, 225, 225);
-			box-sizing: border-box;
-			width: 200px;
-    		height: 100%;
-			position: fixed;
-			display: fixed;
-			float: left;
-			flex-direction: column;
-			z-index: 0;
-			float: left;
-		}
-		header{
-			position: fixed;
-			top: 0px;
-			width: 100%;
-    		height: 68px;
-    		background-color: #FFFFFF;
-    		border-bottom: 1px solid rgb(225, 225, 225);
-    		z-index: 5;
-		}
-		.cor_menu{
-			padding-top: 20px;
-			right: 20px;
-			position: fixed;
-		}
-		.menu_item{
-			float: left;
-			font-weight: bold;
-			font-size: 14px;
-			padding: 6px 12px;
-		}
-		.menu_item1{
-			color: gray;
-		}
-		.menu_item1:hover{
-			color: rgb(34, 34, 34);
-		}
-		.direct{
-			color: rgb(204, 153, 0);
-		}
-		.direct:hover{
-			color: rgb(179, 142, 34);
-		}
-		.cor1_btn1{
-			width: 30px;
-			height: 30px;
-			border-radius: 4px;
-			cursor: pointer;
-			border: lightgrey;
-			float: left;
-			margin-top: 20px;
-			margin-left: 20px;
-			background-color: rgba(0, 0, 0, 0.1);
-			transition: border-color 0.3s ease 0s;
-			position: relative;
-		}
-		.cor1_btn1:hover::after{
-			border: 1px solid rgb(204, 153, 0);
-		}
-		.cor1_btn1::before{
-			position: absolute;
-			width: 30px;
-			height: 30px;
-    		display: block;
-		    inset: 0px;
-		    background-color: rgb(255, 255, 255);
-		    border-radius: 4px;
-		    background-image: url(https://down.collabee.co/companyLogoNo/0);
-		    background-size: cover;
-		    background-position: center center;
-		    content: "";
-		}
-		.samsung::before{
-			background-image: url(https://down.collabee.co/companyLogoNo/3104738);
-		}
-		.cor1_btn1::after{
-			position: absolute;
-			width: 30px;
-			height: 30px;
-		    display: block;
-		    inset: 0px;
-		    border-radius: 4px;
-		    content: "";
-		    border: 1px solid rgba(0, 0, 0, 0.1);
-		    background-color: transparent;
-		    transition: border-color 0.3s ease 0s, background-color 0.3s ease 0s;
-		}
-		h1{
-			margin-top: 20px;
-			float: left;
-			font-size: 18px;
-			color: rgb(34, 34, 34);
-			margin-left: 8px;
-    		white-space: nowrap;
-    		overflow: hidden;
-    		text-overflow: ellipsis;
-		}
-		.cor1_btn2{
-			flex-shrink: 0;
-		    position: relative;
-		    width: 38px;
-		    height: 38px;
-		    border-radius: 50%;
-		    padding: 1px;
-		    background-color: rgba(0, 0, 0, 0.1);
-		    content: "";
-		    transition: border-color 0.3s ease 0s;
-		    cursor: pointer;
-		    border: none;
-		}
-		.cor1_btn2::before{
-			position: absolute;
-		    display: block;
-		    top: 0px;
-		    left: 0px;
-		    background-color: rgb(255, 255, 255);
-		    transform: translate(1px, 1px);
-		    width: 38px;
-		    height: 38px;
-		    background-image: url(https://down.collabee.co/userProfile/-1);
-		    border-radius: 50%;
-		    background-size: cover;
-		    background-position: center center;
-		    content: "";
-		}
-		.yr::before{
-			background-image: url(https://down.collabee.co/userProfile/2972613);
-		}
-		.cor1_btn2::after{
-			position: absolute;
-		    display: block;
-		    top: 0px;
-		    left: 0px;
-		    width: 36px;
-		    height: 36px;
-		    border-radius: 50%;
-		    content: "";
-		    border: 2px solid rgba(0, 0, 0, 0);
-		    transition: border-color 0.3s ease 0s;
-		}
-		.cor1_btn2:hover::after{
-			border-color: rgb(217, 173, 43);
-		}
-		.nickname{
-			display: inline-block;
-		    font-size: 14px;
-		    font-weight: bold;
-		    transition: color 0.2s ease 0s;
-		    color: rgb(136, 136, 136);
-		    padding-top: 2px;
-		    padding-bottom: 2px;
-		}
-		.nickname:hover{
-			color: rgb(34, 34, 34);
-		}
-		.profile{
-			display: flex;
-		    flex-direction: row;
-		    margin: 22px 22px 0px 24px;
-		    padding-bottom: 22px;
-		    border-bottom: 1px solid rgb(225, 225, 225);
-		}
-		
-		
-		/* 여기부터 */
-		.section1{
-			flec-direction: column;
-			padding: 20px 40px 0;
-			margin-top: 80px;
-			margin-left: 200px;
-			position: absolute;
-		}
-		h2{
-			font-size: 18px;
-			font-weight: bold;
-			line-height: 1.57;
-    		color: rgb(34, 34, 34);
-		}
-		.expl{
-			color: rgb(136, 136, 136);
-			margin-top: -10px;
-			display: block;
-    		font-size: 12px;
-    		line-height: 1.5;
-		}
-		.bottom{
-			font-size: 13px;
-    		line-height: 20px;
-    		text-align: center;
-		}
-		.likebtn{
-			display: inline-block;
-			background-color: rgb(217, 173, 43);
-    		box-shadow: rgb(217 173 43 / 40%) 0px 6px 12px 0px;
-    		color: rgb(255, 255, 255);
-    		font-weight: bold;
-    		line-height: 22px;
-    		border-radius: 4px;
-    		width: 120px;
-    		height: 25px;
-		}
-		.likebtn:hover{
-			background-color: rgb(179, 142, 34);
-		}
-	</style>
+	<link href="css/0corporation5.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 	<header>
 <div>
-<button class="cor1_btn1 samsung" onClick=""></button><a href=""><h1>샘숭</h1></a>
+<button class="cor1_btn1 samsung" onClick="location.href='0corporation1.jsp'"></button><a href=""><h1>샘숭</h1></a>
 </div>
 <div class="cor_menu">
-	<div class="menu_item"><a class="menu_item1" href="help1.html" target="_blank">도움말</a></div>
-	<div class="menu_item"><a class="menu_item1" href="">가격 안내</a></div>
-	<div class="menu_item"><a href="main.html" class="direct">콜라비로 바로가기</a></div>
+	<div class="menu_item"><a class="menu_item1" href="0help1.jsp" target="_blank">도움말</a></div>
+	<div class="menu_item"><a class="menu_item1" href="Controller?command=settingPrice&loginId=4">가격 안내</a></div>
+	<div class="menu_item"><a href="Controller?command=Home" class="direct">콜라비로 바로가기</a></div>
 </div>
 </header>
 	
 	<main>
 	<div class="sidebar">
 	<div class="profile">
-	<button class="cor1_btn2 yr" onClick=""></button>
-	<div><a class="nickname" href="0option1.jsp" style="padding-left:10px;">유라짱짱<br/>
+	<button class="cor1_btn2 yr" onClick="location.href='Controller?command=option1'"></button>
+	<div><a class="nickname" href="Controller?command=option1" style="padding-left:10px;">유라짱짱<br/>
 	<span style="color: rgb(204, 153, 0); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 12px;">샘숭</span></a></div>
 	<div style="padding: 10px;">
 	</div>
@@ -320,7 +65,7 @@
 	</div>
 	<div class="bottom">
 	<p>파일 다운로드 이력을 확인하려면<br/>요금제를 결제해 주세요.</p>
-	<a class="likebtn" href="corporation4.html">요금제 결제하기</a>
+	<a class="likebtn" href="0corporation4.jsp">요금제 결제하기</a>
 	</div>
 	</div>
 	</main>

@@ -1,0 +1,501 @@
+@charset "EUC-KR";
+
+	* {
+		font-family: -apple-system,BlinkMacSystemFont,Malgun Gothic,Hiragino Kaku Gothic ProN,Hiragino Sans,Meiryo,MS PGothic,sans-serif,Dotum;
+	}
+	button {
+	    border: none;
+	    box-sizing: border-box;
+	    outline: 0;
+	}
+	/* The Modal (background) */
+    .dm1_modal { /* modal --> dm1_modal */
+        display: block; /* Hidden by default */
+        position: fixed; /* Stay in place */
+        margin:0;
+        z-index: 50; /* Sit on top */
+        left: 0;
+        top: 0;
+        width: 100%; /* Full width */
+        height: 100%; /* Full height */
+        overflow: auto; /* Enable scroll if needed */
+        background-color: rgb(0,0,0); /* Fallback color */
+        background-color: rgba(0,0,0,0.7); /* Black w/ opacity */
+        box-shadow: 0px 11px 15px -7px rgb(0 0 0 / 20%), 0px 24px 38px 3px rgb(0 0 0 / 14%), 0px 9px 46px 8px rgb(0 0 0 / 12%);
+        align-items: center;
+    }
+    .dm1_modal-content {
+        background-color: #fff;
+        margin: 15% auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 580px;
+        min-height: 180px;
+    	padding: 20px 20px 22px;
+        border-radius: 4px;
+        position: relative;
+    }
+    .dm1_close {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+        margin-top: -15px;
+    }
+    .dm1_close:hover, .dm1_close:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+    }
+	.dm1_modal_header{
+		padding-left: 4px;
+		font-size: 12px;
+	    font-weight: bold;
+	    line-height: 1.5;
+	    color: rgb(136, 136, 136);
+	}
+	.dm1_modal_body{
+		padding-top: 20px;
+	}
+	.dm1{
+		display: flex;
+    	flex-direction: row;
+	}
+	.dm1_textbox{
+		height: 32px
+		overflow-wrap: break-word;
+	    flex: 0 0 auto;
+	    white-space: break-spaces !important;
+	    min-height: 32px;
+	    max-height: 132px;
+	    resize: none;
+	    border: none;
+	    width: 520px;
+	    margin-left: 5px;
+	    font-size: 22px;
+	    color: rgb(34, 34, 34);
+	    line-height: 1.45;
+	}
+	.dm1_textbox::-webkit-scrollbar {
+		width:4px;
+	}
+	.dm1_textbox::-webkit-scrollbar-thumb {
+	    height: 70%; /* 스크롤바의 길이 */
+	    background: #e1e1e1; /* 스크롤바의 색상 */
+	    border-radius: 2px;
+	}
+	.dm1_textbox:focus {
+  		outline: none;
+	}
+	.dm1_textbox::placeholder {
+		color: lightgray;
+	}
+	.dm1_textbox::-webkit-input-placeholder {
+  		color: gray;
+	}
+	.dm1_textbox:-ms-input-placeholder {
+		color: gray;
+	}
+	.dm1_btn20{
+		display: inline-block;
+	    vertical-align: middle;
+	    shape-rendering: inherit;
+	    cursor: pointer;
+	    text-decoration: none;
+	    border: none;
+	    background-color: transparent;
+	}
+	ul,li{list-style:none;} 
+	
+	.dm1_modal_footer{
+		display: flex;
+	    align-items: flex-end;
+	    -webkit-box-pack: justify;
+	    justify-content: space-between;
+	    padding-top: 45px;
+	}
+    .dm1_btn21{
+    	color: rgb(255, 255, 255);
+	    font-size: 12px;
+	    font-weight: 500;
+	    line-height: 1.5;
+	    border-radius: 4px;
+	    text-align: center;
+	    padding: 5px 18px;
+	    background-color: rgb(217, 173, 43);
+	    border: 1px solid rgb(217, 173, 43);
+	    cursor: pointer;
+    }
+    .dm1_btn21:hover{
+		filter: brightness(80%);
+		/* transition: transform 10s; */
+	}
+	.dm1_selection{
+		display: none;
+		width: 190px;
+	    flex-direction: column;
+	    border-radius: 4px;
+	    box-shadow: rgb(0 0 0 / 10%) 0px 0px 6px 2px;
+	    background-color: rgb(255, 255, 255);
+	    padding: 12px 0px;
+	    margin-top: -1px;
+    	margin-left: 6px;
+    	position: absolute;
+	}
+	.dm1_file1{
+		display: block;
+		border: none;
+		font-size: 13px;
+	    line-height: 1.54;
+	    color: rgb(34, 34, 34);
+	    background-color: rgb(255, 255, 255);
+	    padding: 5px 0px 5px 18px;
+	    text-align: left;
+	    cursor: pointer;
+	    width: 100%;
+	}
+	.dm1_file1:hover{
+		filter: brightness(80%);
+		/* transition: transform 10s; */
+	}
+	.dm1_ff{
+		display: block;
+	    font-size: 12px;
+	    line-height: 1.5;
+	    color: rgb(136, 136, 136);
+	    padding-bottom: 4px;
+	    padding-left: 18px;
+	}
+	.dm1_pic_btn{
+		background-color: white;
+		color: rgb(193, 193, 193);
+	    position: absolute;
+	    margin-left: -1px;
+	    margin-top: 5px;
+	    border: none;
+	    background-color: transparent;
+	}
+	.dm1_modal_mid{
+		padding-bottom: 30px;
+	}
+	.dm1_list{
+	    color: rgb(34, 33, 32);
+	    font-size: 14px;
+	    white-space: nowrap;
+	    overflow: hidden;
+	    text-overflow: ellipsis;
+	    align-items: center;
+	    cursor: pointer;
+	    padding: 4px 10px;
+	}
+	.dm1_list:hover{
+		background-color: rgb(242,242,242);
+	}
+	.dm1_name{
+		white-space: nowrap;
+	    text-overflow: ellipsis;
+	    overflow: hidden;
+	    position: absolute;
+	}
+	.pi{
+		position: relative;
+	    width: 20px;
+	    height: 20px;
+	    border-radius: 50%;
+	    padding: 5px;
+	    content: "";
+	    cursor: pointer;
+	    float: left;
+	    margin-right: 5px;
+	    vertical-align: middle;
+	    background-image: url(https://down.collabee.co/userProfile/1);
+	    background-size: cover;
+	    background-position: center center;
+	}
+	.pi::after{
+		position: absolute;
+	    display: block;
+	    top: -1px;
+	    left: -1px;
+	    width: 18px;
+	    height: 18px;
+	    border-radius: 50%;
+	    content: "";
+	    border: 2px solid rgba(0, 0, 0, 0);
+	    transition: border-color 0.3s ease 0s;
+	}
+	.pi:hover::after{
+		border-color: rgb(217, 173, 43);
+	}
+	.select_pic{
+		display: none;
+		width: 150px;
+		padding: 4px;
+		border: 1px solid lightgray;
+		background-color: rgb(255, 255, 255);
+		border-radius: 4px;
+		margin-top: -3px;
+	    z-index: 10;
+	    margin-left: 48px;
+	    position: absolute;
+	}
+	.dm1_pii{
+		position: relative;
+	    width: 20px;
+	    height: 20px;
+	    border-radius: 50%;
+	    content: "";
+	    cursor: pointer;
+	    float: left;
+	    vertical-align: middle;
+	    margin-top: 6px; 
+	    margin-left: 25px;
+	    margin-right: 5px;
+    	background-size: cover;
+    	background-position: center center;
+    	display: block;
+	}
+	.dm1_pii::after{
+		position: absolute;
+	    top: -1px;
+	    left: -1px;
+	    width: 18px;
+	    height: 18px;
+	    border-radius: 50%;
+	    content: "";
+	    border: 2px solid rgba(0, 0, 0, 0);
+	    transition: border-color 0.3s ease 0s;
+	}
+	.dm1_pii:hover::after{
+		border-color: rgb(217, 173, 43);
+	}
+	#dm1_svg111{
+		flex-shrink: 0;
+	    margin-left: 128px;
+    	margin-top: 11px;
+	    display: none;
+	    vertical-align: middle;
+	    shape-rendering: inherit;
+	    fill: rgb(0,0,0);
+	}
+	#dm1_svg111:hover{
+		fill: #adacac;
+	}
+	.dm1_svg_box{
+		float: right;
+	    margin-top: -30px;
+	    margin-right: 468px;
+	}
+	.dm1_hidden{
+		visibility: hidden;
+	}
+	.dm1_file_container0{
+		display: inline-block;
+	    margin-left: 10px;
+	    font-size: 14px;
+	    color: rgb(133, 111, 46);
+	    white-space: nowrap;
+	    text-overflow: ellipsis;
+	    overflow: hidden;
+	}
+	.dm1_file_container1{
+		display: flex;
+	    flex-direction: row;
+	    -webkit-box-align: center;
+	    align-items: center;
+	    min-width: 0px;
+	}
+	.dm1_file_container2{
+		display: flex;
+	    flex-direction: row;
+	    -webkit-box-align: center;
+	    align-items: center;
+	    -webkit-box-pack: justify;
+	    justify-content: space-between;
+	    height: 24px;
+	    cursor: pointer;
+	}
+	.dm1_file_container2:hover{
+		background-color: rgb(251, 250, 244);
+	}
+	.dm1_file_container3{
+		border-top: 1px solid rgb(225, 225, 225);
+	    padding-top: 20px;
+	    max-height: 110px;
+	    overflow-y: auto;
+	}
+	.dm1_file_container3::-webkit-scrollbar {
+		width:4px;
+	}
+	.dm1_file_container3::-webkit-scrollbar-thumb {
+	    height: 70%; /* 스크롤바의 길이 */
+	    background: #e1e1e1; /* 스크롤바의 색상 */
+	    border-radius: 2px;
+	}
+	.dm1_file_container4{
+		position: relative;
+	    margin-left: 8px;
+	    opacity: 0;
+	    transition: opacity 0.2s ease 0s;
+	    background-color: transparent;
+	}
+	.file_svg1{
+		transform: translateY(2px);
+		display: inline-block;
+	    vertical-align: middle;
+	    shape-rendering: inherit;
+	    transition: fill 0.2s ease 0s;
+	    fill: #b3b3b3;
+	}
+	.file_svg1:hover{
+		fill: #5e5d5d;
+	}
+	/* 장소부분 시작 */
+	#dm1_div_background {
+		display: none;
+		z-index: 2000;
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom : 0;
+		width: 100%;
+		height: 100%;
+		/* background-color: rgba(0,0,0,0.5); */
+		background-color: transparent;
+	}
+	.dm1_workspace_list{ /* 누르면 열리는 공간 목록*/
+		position: absolute;
+		z-index: 2100;
+		justify-content: right;
+		margin-right:90px;
+		display : none;
+	}
+	.dm1_workspace_list ul{ /* 누르면 열리는 공간 목록*/
+		position: absolute;
+		list-style: none;
+		background-color: rgb(255, 255, 255);
+		border-radius: 4px;
+		width: 132px;
+		height:270px;
+		border:1px solid #e1e1e1;
+		font-size: 14px;
+		font-weight: 500;
+		color:rgb(34, 34, 34);
+		padding:5px 12px;
+		line-height: 2.5;
+		display:flex;
+		flex-direction: column;
+		align-items: center;
+		overflow-y: auto;
+		overflow-x: hidden;
+	}
+	.dm1_workspace_list ul li:nth-child(1){
+		color:rgb(136, 136, 136); 
+		font-size: 10.5px; 
+		pointer-events: none;
+	}
+	.dm1_workspace_list li{
+		display: block;
+		width: 135px;
+		height: 35px;
+		text-overflow: ellipsis;
+	}
+	.dm1_workspace_list li span{
+		margin-left:7px;
+	}
+	.dm1_icon_color{
+		fill:rgb(136, 136, 136);
+	}
+	#dm1_ul::-webkit-scrollbar {
+		width:4px;
+	}
+	#dm1_ul::-webkit-scrollbar-thumb {
+		height: 70%; /* 스크롤바의 길이 */
+		background: #e1e1e1; /* 스크롤바의 색상 */
+		border-radius: 2px;
+	}
+	#dm1_ul::-webkit-scrollbar-track {
+		background-color: white;
+		border-radius:2px;
+	}
+	.dm1_bottom_box{
+		display: flex;
+	    flex-direction: row;
+	    -webkit-box-align: center;
+	    align-items: center;
+	    position: relative;
+	    padding-left: 4px;
+	}
+	.dm1_bottom_box2{
+		position: relative;
+    	margin-right: 12px;
+	}
+	.dm1_dropdown{
+		position: relative;
+    	box-sizing: border-box;
+    	width: 160px;
+	    border-width: 1px;
+	    border-style: solid;
+	    border-radius: 4px;
+	    background-color: rgb(255, 255, 255);
+	    border-color: rgb(217, 173, 43);
+	}
+	.dm1_bottom_box3{
+		-webkit-box-align: center;
+	    cursor: default;
+	    display: flex;
+	    flex-wrap: wrap;
+	    -webkit-box-pack: justify;
+	    justify-content: space-between;
+	    position: relative;
+	    transition: all 100ms ease 0s;
+	    box-sizing: border-box;
+	    outline: 0px !important;
+	    padding-left: 8px;
+	    font-size: 13px;
+	    background-color: transparent !important;
+	    border: none !important;
+	    border-radius: 0px !important;
+	    box-shadow: none !important;
+	    min-height: 28px !important;
+	}
+	.dm1_bottom_box4{
+		-webkit-box-align: center;
+	    align-items: center;
+	    display: flex;
+	    flex: 1 1 0%;
+	    flex-wrap: wrap;
+	    padding: 2px 8px;
+	    position: relative;
+	    overflow: hidden;
+	    box-sizing: border-box;
+	}
+	.dm1_bottom_box5{
+		max-width: calc(100% - 8px);
+	    overflow: hidden;
+	    position: absolute;
+	    text-overflow: ellipsis;
+	    white-space: nowrap;
+	    top: 50%;
+	    transform: translateY(-50%);
+	    box-sizing: border-box;
+	    width: 100%;
+	    display: flex;
+	    flex-direction: row;
+	    -webkit-box-align: center;
+	    align-items: center;
+	    -webkit-box-pack: justify;
+	    justify-content: space-between;
+	    margin: 0px !important;
+	    color: rgb(204, 153, 0) !important;
+	}
+	.dm1_bottom_box_svg1{
+		flex-shrink: 0;
+	    margin-left: 8px;
+	    margin-right: 8px;
+	    display: inline-block;
+	    vertical-align: middle;
+	    shape-rendering: inherit;
+	    fill: rgb(217, 173, 43);
+	}

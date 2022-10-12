@@ -24,14 +24,13 @@ public class DocumentSaveDao {
 	}
 	
 	//문서 고정멘트 댓글
-	public void setFixed_Comment(int member_id, int document_id, String fixed_comment) {
-		String sql = "INSERT INTO comments VALUES (COMMENT_ID.NEXTVAL, ?, ?, SYSDATE, ?, NULL, 1, 0)";
+	public void setFixed_Comment(int member_id, int document_id) {
+		String sql = "INSERT INTO comments VALUES (COMMENT_ID.NEXTVAL, ?, ?, SYSDATE, NULL, 1, 0)";
 		try {
 			Connection conn = DBConnection.getConnection();
 			PreparedStatement pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, member_id);//로그인중id
 			pstmt.setInt(2, document_id);//현재문서id
-			pstmt.setString(3, fixed_comment);
 			pstmt.executeUpdate();
 			pstmt.close();
 		} catch (SQLException e) {

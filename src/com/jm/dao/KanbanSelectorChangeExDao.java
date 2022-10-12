@@ -34,7 +34,7 @@ public class KanbanSelectorChangeExDao {
 				pstmt.setInt(2, (i+1));
 				pstmt.setString(3, exKanban_id);
 				pstmt.executeUpdate();
-				
+				pstmt.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}

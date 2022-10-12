@@ -1,0 +1,481 @@
+@charset "EUC-KR";
+		*{
+			box-sizing: border-box;
+			margin: 0;
+    		padding: 0;
+    		border: 0;
+    		outline: 0;
+		}
+		body{
+			font-family: -apple-system,BlinkMacSystemFont,Malgun Gothic,Hiragino Kaku Gothic ProN,Hiragino Sans,Meiryo,MS PGothic,sans-serif,Dotum;
+			font-size: 13px;
+		}
+		a{
+			text-decoration: none;
+		}
+		input{
+			background-color: #fff;
+		}
+		button {
+		    border: none;
+		    font-size: 12px;
+		    outline: 0;
+		    text-transform: none;
+		    overflow: visible;
+		  	line-height: 1.15;
+		}
+		a:link{
+			text-decoration: none;
+		}
+		
+		.RootLayout{
+			display: flex;
+		    flex-direction: row;
+		    width: 100vw;
+		    height: 100vh;
+		    background-color: rgb(255, 255, 255);
+		}
+		/* 왼쪽 사이드 바 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
+		.left-bar{
+            background: #f7f6f5;
+            top: 0;
+            left: 0;
+            width: 240px;
+            height: 100%;
+            float:left;
+            transition: all 0.5s ease;
+        }
+        .left-top{
+                padding-left:22px;
+                height: 72px;
+                top: 0px;
+            }
+            .sidebar_top{
+                top: 20px;
+                right:25px;
+                width:240px;
+                display:flex;
+                align-items:stretch;
+                justify-content:space-around;
+                flex: 0 0 auto;
+                position: relative;
+            }
+		
+		/* 메인 레이아웃 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */		
+		.main_layout{
+			min-width: 730px;
+			flex: 1 1 auto;
+		    display: flex;
+		    flex-direction: column;
+		    height: 100vh;
+		    overflow-y: auto;
+		}
+		
+		.header_default{
+			position: relative;
+		    display: flex;
+		    flex-direction: column;
+		}
+		
+		.top_header{
+			position: relative;
+		    display: flex;
+		    flex-direction: row;
+		    height: 68px;
+		}
+		.top_header_left{
+			flex: 1 1 auto;
+		    display: flex;
+		    flex-direction: row;
+		    justify-content: space-between;
+		    align-items: center;
+		    margin-left: 44px;
+		    margin-right: 20px;
+		}
+		.top_header_title{
+			text-decoration: none;
+			font-size: 22px;
+		    font-weight: bold;
+		    color: rgb(34, 34, 34);
+		    overflow: hidden;
+		    min-width: 66px;
+		}
+		
+		.search_write_btn{
+			display: flex;
+		    flex-direction: row;
+		    position: relative;
+		    align-items: flex-start;
+		}
+		#bnt1_cal{
+        	display:flex;
+	    }
+	    #searchbar::placeholder{
+	        color: rgb(193, 193, 193);
+	    }
+	    #searchbar { /*상단 검색창  / 클릭하면 길어지면서 문서작성 버튼 없어짐(할지말지 고민중) */
+	        will-change: transform;
+	        background-color: rgba(255, 255, 255, 0);
+	        height:28px;
+	        width:144px;
+	        font-size:13px;
+	        border-radius:4px;
+	        border: 1px solid rgb(225, 225, 225);
+	        transition: border-color 0.2s ease 0s, background-color 0.2s ease 0s;
+	        margin-right:16px;
+	        padding:0px 32px;
+	    }
+	    #searchbar:hover{
+	        border-color:rgb(136, 136, 136);
+	    }
+	    #searchbar:focus{
+	        background-color: rgba(255, 255, 255, 0.2);
+	        border-color:rgb(136, 136, 136);
+	        width:269px;
+	    }
+	    #searchbar::placeholder:hover{
+	        color:rgb(136, 136, 136);
+	    }
+	    #search_icon{
+	        fill:rgb(224, 221, 217);
+	        position: absolute;
+	        transition: fill 0.2s ease 0s;
+	        -webkit-box-align: center;
+	        border:none;
+	        display:flex;
+	        align-items:center;
+	        padding-left:10px;
+	        padding-top:6px;
+	    }
+	    #search_icon:hover{
+	        fill:rgb(136, 136, 136);
+	    }
+	    #posting_bnt {/* 상단 문서작성버튼*/
+	        color: rgb(255, 255, 255);
+	        font-size: 12px;
+	        font-weight: 500;
+	        border-radius: 4px;
+	        border: 1px solid rgb(217, 173, 43);
+	        background-color: rgb(217, 173, 43);
+	        cursor: pointer;
+	        width: 105px;
+	        height:28px;
+	        margin-right: 23px;
+	        border:1px solid rgba(255, 255, 255, 0.2);
+	        transition: background-color 0.2s ease 0s, color 0.2s ease 0s, border-color 0.4s ease 0s, fill 0.2s ease 0s, opacity 0.2s ease 0s;
+	    }
+	    #posting_bnt:hover{
+	        background-color: rgb(179, 142, 34);
+	        border-color: rgb(179, 142, 34);
+	    }
+	    .posting_icon{ /*svg 색지정은 fill로!!*/
+	        fill: rgb(255, 255, 255);
+	        width:13px;
+	        height:13px;
+	    }
+		
+		.sub_header{
+			display: flex;
+		    flex-direction: row;
+		    -webkit-box-pack: justify;
+		    justify-content: space-between;
+		    position: relative;
+		    z-index: auto;
+		    height: 38px;
+		    margin: 0px 20px;
+		}
+		.sub_header_left{
+			margin-left: 0px;
+		    margin-right: 0px;
+		    flex: 1 1 auto;
+		    display: flex;
+		    flex-direction: row;
+		    -webkit-box-pack: justify;
+		    justify-content: space-between;
+		    -webkit-box-align: center;
+		    align-items: center;
+		}
+		.sub_header_bookmark{
+			font-size: 12px;
+		    line-height: 1.5;
+		    color: rgb(136, 136, 136);
+		    margin-left: 20px;
+		}
+		
+		.body_default{
+			position: relative;
+		    display: flex;
+		    flex-direction: row;
+		    align-items: stretch;
+		    min-width: 680px;
+		    
+		    flex-grow: 1;
+		    overflow-x: hidden;		    
+		}
+		.body_left{
+			display: flex;
+		    flex-direction: row;
+		    flex: 1 1 auto;
+		    padding: 0px 20px 0px 40px;
+		    overflow-y: auto;
+		    height: calc((100vh - 68px) - 38px);
+		}
+		
+		.after_line::after{
+			position: absolute;
+		    bottom: 0px;
+		    left: 0px;
+		    right: 0px;
+		    content: "";
+		    height: 1px;
+		    background-color: rgb(225, 225, 225);
+		}
+		
+		.bookmark_view{
+			display: flex;
+		    flex-direction: row;
+		    flex: 0 1 auto;
+		    border-bottom: 1px solid rgb(225, 225, 225);
+		}
+		.bookmark_view1{
+		    flex: 0 0 auto;
+		    width: 43px;
+		    padding: 14px 0px 0px 18px;
+		}
+		.bookmark_view2{
+			display: flex;
+		    flex-direction: column;
+		    padding: 14px 0px;
+		    flex: 1 1 auto;
+		}
+		.bookmark_view3{
+			flex: 0 0 auto;
+	    	width: 57px;
+	    	padding: 12px 0px 0px 18px;
+		}
+		
+		.kanban_select_button{
+			background-color: transparent;
+		    cursor: pointer;
+		    display: flex;
+		    flex-direction: row;
+		    -webkit-box-align: center;
+		    align-items: center;
+		    transition: fill 0.2s ease 0s;
+		}
+		.kanban_select_src{
+			width: 20px;
+    		height: 20px;
+		}
+		.bookmark_view_document_link{
+			cursor: pointer;
+		    font-size: 13px;
+		    color: rgb(34, 34, 34);
+		    line-height: 1.54;
+		    overflow: hidden;
+		    padding-bottom: 2px;
+		}
+		.bookmark_view_document_info{
+			display: flex;
+		    flex-direction: row;
+		}
+		.bookmark_view_document_info1{
+			font-size: 12px;
+		    line-height: 1.5;
+		    background-color: transparent;
+		    color: rgb(51, 132, 108);
+		}
+		.bookmark_view_document_info2{
+			font-size: 12px;
+		    line-height: 1.5;
+		    padding-left: 8px;
+		    background-color: transparent;
+		    color: rgb(136, 136, 136);
+		}
+		
+		.bookmark_button{
+			min-width: inherit;
+		    min-height: inherit;
+		    padding-left: 0px;
+		    padding-right: 0px;
+		    transition: fill 0.2s ease 0s;
+		    cursor: pointer;
+		    pointer-events: auto;
+		    width: auto;
+		    background-color: transparent;
+		    text-decoration: none;
+		}
+		.bookmark_on_color{
+		    fill: rgb(217, 173, 43);
+		}
+		.bookmark_on_color:hover{
+			fill: rgb(179, 142, 34);
+		}
+		
+		/* 칸반 셀렉터 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
+		#kanban_selector{
+			display: none;
+			z-index: 101;
+			position: absolute;
+		    top: 0px;
+		    left: 0px; 
+		}
+		#div_background {
+			display: none;
+			z-index: 100;
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom : 0;
+			width: 100%;
+			height: 100%;
+			/* background-color: rgba(0,0,0,0.5); */
+			background-color: transparent;
+		}
+		.kanban_selector_center{
+			max-width: 332px;
+		    min-width: 180px;
+		    display: flex;
+		    flex-direction: column;
+		    border-radius: 6px;
+		    box-shadow: rgb(0 0 0 / 5%) 0px 0px 0px 1px, rgb(0 0 0 / 10%) 0px 2px 4px, rgb(0 0 0 / 15%) 0px 8px 16px;
+		    background-color: rgb(255, 255, 255);
+		    padding-top: 12px;
+		    padding-bottom: 12px;
+		    
+		    width: 184px;
+		}
+		.kanban_selector_title{
+			display: block;
+		    font-weight: normal;
+		    font-size: 12px;
+		    color: rgb(136, 136, 136);
+		    line-height: 1.5;
+		    padding: 0px 10px 4px 15px;
+		}
+		.kanban_selector_menu{
+			max-height: 286px;
+		    overflow: hidden auto;
+		    display: flex;
+		    flex-direction: column;
+		}
+		.kanban_selector_menu::-webkit-scrollbar {
+			width:4px;
+		}
+		.kanban_selector_menu::-webkit-scrollbar-thumb {
+	    height: 70%; /* 스크롤바의 길이 */
+	    background: #e1e1e1; /* 스크롤바의 색상 */
+	    border-radius: 2px;
+		}
+		
+		.kanban_selector_menu_button{
+			cursor: pointer;
+		    border: none;
+		    display: flex;
+		    flex-direction: row;
+		    align-items: center;
+		    color: rgb(34, 34, 34);
+		    background-color: rgb(255, 255, 255);
+		    padding: 5px 8px 5px 13px;
+		    transition: background-color 0.2s ease 0s;
+		    text-align: left;
+		}
+		.kanban_selector_menu_button:hover{
+			background-color: rgb(242, 242, 242);
+		}
+		.kanban_img{
+			margin-right: 2px;
+		    flex-shrink: 0;
+	        width: 20px;
+		    height: 20px;
+		}
+		.kanban_selector_name{
+			white-space: nowrap;
+		    text-overflow: ellipsis;
+		    overflow: hidden;
+		    margin-right: 2px;
+		    color: rgb(34, 34, 34);
+		    font-size: 13px;
+		    max-width: 250px;
+		    flex: 1 1 0%;
+		    line-height: 24px;
+		}
+		/* 스크롤바 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
+		.body_left::-webkit-scrollbar {
+			width:4px;
+		}
+		.body_left::-webkit-scrollbar-thumb {
+	    height: 70%; /* 스크롤바의 길이 */
+	    background: #e1e1e1; /* 스크롤바의 색상 */
+	    border-radius: 2px;
+		}
+		
+		.subheader_right3_menu{
+	    	position: relative;
+		    display: flex;
+		    flex-direction: row;
+		    -webkit-box-pack: end;
+		    justify-content: flex-end;
+		    -webkit-box-align: center;
+		    align-items: center;
+		    padding-right: 20px;
+	    }
+	    .subheader_right3_menu2{
+	    	display: inline-block;
+		    cursor: pointer;
+		    font-size: 12px;
+		    line-height: 1.5;
+		    padding: 10px;
+		    margin: 0px 3px;
+		    color: rgb(34, 34, 34);
+		    transition: color 0.2s ease 0s;
+	    }
+	    .file1{
+	    	background-color: transparent;
+		    cursor: pointer;
+		    flex-direction: row;
+		    -webkit-box-align: center;
+		    align-items: center;
+		    font-size: 12px;
+		    color: rgb(34, 34, 34);
+		    line-height: 1.5;
+		    padding: 10px 0px 10px 10px;
+		    margin: 0px 0px 0px 3px;
+	    }
+	    .svg5{
+	    	margin-left: 4px;
+		    margin-bottom: 2px;
+		    display: inline-block;
+		    vertical-align: middle;
+		    shape-rendering: inherit;
+		    fill: rgb(34, 34, 34);
+	    }
+	    #div2{
+	    	display: none;
+	    	background: white;
+		    cursor: pointer;
+		    flex-direction: row;
+		    -webkit-box-align: center;
+		    align-items: center;
+		    font-size: 12px;
+		    line-height: 1.5;
+		    border-radius: 4px;
+		    width: 148px;
+		    height: 81px;
+		    margin-top: -3px;
+		    margin-left: 85px;
+		    position: absolute;
+		    z-index: 100;
+		    box-shadow: rgb(0 0 0 / 10%) 0px 3px 6px 0px;
+	    }
+	    .div2_1:hover{
+			filter: brightness(90%);
+			transition: transform 10s;
+		}
+		.div2_1{
+			padding: 10px;
+			background-color: white;
+			height: 13px;
+	    	margin: 3px;
+		}

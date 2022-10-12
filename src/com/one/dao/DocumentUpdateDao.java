@@ -19,4 +19,20 @@ public class DocumentUpdateDao {
 				e.printStackTrace();
 			}	
 	}
+	
+	//담당자 
+	public void updateDocumentPic(int member_id, int document_id) {
+		String sql = "UPDATE document SET pic = ? WHERE document_id = ?";
+		try {
+			Connection conn = DBConnection.getConnection();
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, member_id);
+			pstmt.setInt(2, document_id); 
+			pstmt.executeUpdate();
+			pstmt.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}	
+	}
+	
 }

@@ -20,586 +20,7 @@
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
   	<!-- <link rel="stylesheet" href="/resources/demos/style.css"> -->
   	<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
-  	<style>
-	html {
-	    position: relative;
-	    min-height: 100%;
-	    -webkit-tap-highlight-color: transparent;
-	    overflow-x :  hidden;
-	}
-	html::-webkit-scrollbar {
-		width:4px;
-	}
-	html::-webkit-scrollbar-thumb {
-	    height: 70%; /* 스크롤바의 길이 */
-	    background-color: #e1e1e1; /* 스크롤바의 색상 */
-	    border-radius: 2px;
-	}
-	html::-webkit-scrollbar-track{
-		background-color: white;
-	}
-	body, html {
-    	height: 100%;
-    	font-family: -apple-system,BlinkMacSystemFont,Malgun Gothic,Hiragino Kaku Gothic ProN,Hiragino Sans,Meiryo,MS PGothic,sans-serif,Dotum;
-		margin: 0px;
-	}
-	ul {
-    	list-style-type: none;
-	}
-	a{
-		text-decoration: none;
-	}
-	button{
-		border: none;
-	}
-	.home_layout{
-		display: flex;
-	    flex-direction: row;
-	   /*  width: 100vw; */
-	    height: 100vh;
-	    background-color: rgb(255, 255, 255);
-	}
-	.home_sidebar{
-		z-index: 1;
-		position: relative;
-	    width: 240px;
-	    background-color: rgb(247, 246, 245);
-	    flex: 0 0 auto;
-	    display: flex;
-	    flex-direction: column;
-	    -webkit-box-align: stretch;
-	    align-items: stretch;
-	    padding-top: 72px;
-	    overflow-y: auto;
-	    /* margin-left: -10px;
-	    margin-top: -10px; */
-	}
-	.left-bar{
-		/* position: fixed; */
-		position: relative;
-	    overflow-y: auto;
-	    flex: 1 1 auto;
-	    overflow-x: hidden;
-	}
-	.left-bar::-webkit-scrollbar {
-		width:4px;
-	}
-	.left-bar::-webkit-scrollbar-thumb {
-	    height: 70%; /* 스크롤바의 길이 */
-	    background: #e1e1e1; /* 스크롤바의 색상 */
-	    border-radius: 2px;
-	}
-	.home_top-row{
-		position: relative;
-	    display: flex;
-	    flex-direction: column;
-	    -webkit-box-align: stretch;
-	    align-items: stretch;
-	}
-	.home_header{
-		display: flex;
-	    flex-direction: row;
-	    -webkit-box-pack: justify;
-	    justify-content: space-between;
-	    -webkit-box-align: center;
-	    align-items: center;
-	    padding: 0px 14px 0px 20px;
-	    flex: 0 1 auto;
-	    height: 72px;
-	    top: 0px;
-	    z-index: 9;
-	    background-color: rgb(247, 246, 245);
-	    /* width: 205px; */
-	    width:230px;
-	    position: fixed;
-	}
-	.collabee{
-		min-width: inherit;
-	    min-height: inherit;
-	    padding-left: 0px;
-	    padding-right: 0px;
-	    transition: fill 0.2s ease 0s;
-	    cursor: pointer;
-	    pointer-events: auto;
-	    width: auto;
-	    background-color: transparent;
-	    color: yellow;
-	}
-	.alarm{
-		padding-bottom: 4px;
-		min-width: inherit;
-	    min-height: inherit;
-	    padding-left: 0px;
-	    padding-right: 0px;
-	    transition: fill 0.2s ease 0s;
-	    cursor: pointer;
-	    pointer-events: auto;
-	    width: auto;
-	    background-color: transparent;
-	    text-decoration: none;
-	    border: none;
-	    box-sizing: border-box;
-	    font-size: 12px;
-	    outline: 0;
-	    z-index:10;
-	}
-	.alarm_svg{
-		display: inline-block;
-	    vertical-align: middle;
-	    shape-rendering: inherit;
-	    fill: gray;
-	}
-	.alarm_svg:hover{
-		fill: #616060;
-	}
-	.left-navigation{
-		display: flex;
-	    flex-direction: column;
-	    -webkit-box-align: stretch;
-	    align-items: stretch;
-	    padding-bottom: 22px;
-	}
-	.home_h2{
-		margin: 0px;
-	    padding-left: 20px;
-	    padding-bottom: 2px;
-	    font-size: 13px;
-	    line-height: 1.54;
-	    font-weight: normal;
-	    color: rgb(136, 136, 136);
-	}
-	.home_svg1{
-		display: inline-block;
-	    vertical-align: middle;
-	    shape-rendering: inherit;
-	    fill: rgb(136, 136, 136);
-	}
-	.fill_black{
-		fill: rgb(34, 34, 34);
-	}
-	.menu{
-		background-color: rgba(0, 0, 0, 0.05);
-		cursor: pointer;
-	    display: flex;
-	    flex-direction: row;
-	    -webkit-box-align: center;
-	    align-items: center;
-	    background-color: transparent;
-	    padding-left: 18px;
-	    padding-right: 16px;
-	    position: relative;
-	    pointer-events: auto;
-	}
-	.menu:hover{
-		background-color: #e3e3e3;
-	}
-	.chosen{
-		background-color: #e3e3e3;
-	}
-	.name{
-		padding: 3px 0px;
-	    margin-left: 4px;
-	    white-space: nowrap;
-	    overflow: hidden;
-	    text-overflow: ellipsis;
-	    font-size: 14px;
-	    line-height: 1.57;
-	    color: rgb(34, 34, 34);
-	}
-	.f_name{
-		padding: 3px 0px;
-	    white-space: nowrap;
-	    overflow: hidden;
-	    text-overflow: ellipsis;
-	    font-size: 13px;
-	    color: rgb(136, 136, 136);
-	}
-	.bold{
-		font-weight: bold;
-	}
-	.home_svg2{
-		display: inline-block;
-	    vertical-align: middle;
-	    shape-rendering: inherit;
-	    fill: rgb(34, 34, 34);
-	    opacity:0;
-	}
-	.home_btn1{
-		display: inline-block;
-		background-color: transparent;
-		position: absolute;
-	    top: 50%;
-	    right: 16px;
-	    width: 20px;
-	    height: 20px;
-	    transform: translate(0px, -50%);
-	}
-	.menu > .home_btn1:hover{
-		background-color: #c7c5c5;
-		border-radius: 4px;
-	}
-	.beta{
-		display: inline-block;
-	    margin-left: 4px;
-	    color: #a3a3a3;
-	    font-size: 12px;
-	    vertical-align: middle;
-	}
-	.private{
-		display: flex;
-	    flex-direction: column;
-	    -webkit-box-align: stretch;
-	    align-items: stretch;
-	    padding-bottom: 22px;
-	}
-	.new_workspace{
-		margin: 6px 16px 8px;
-	    font-weight: bold;
-	    font-size: 14px;
-	    line-height: 1.57;
-	    padding: 5px;
-	    position: relative;
-	    min-height: inherit;
-	    color: rgb(255, 255, 255);
-	    border-radius: 4px;
-	    text-align: center;
-	    transition: background-color 0.2s ease 0s, color 0.2s ease 0s, border-color 0.4s ease 0s, fill 0.2s ease 0s, opacity 0.2s ease 0s;
-	    border-width: 1px;
-	    border-style: solid;
-	    border-color: rgb(51, 132, 108);
-	    background-color: rgb(51, 132, 108);
-	    cursor: pointer;
-	    opacity: 1;
-	    width: auto;
-	    box-shadow: none;
-	}
-	.new_workspace:hover{
-		background-color: rgb(44, 111, 91);
-    	border-color: rgb(44, 111, 91);
-	}
-	.w_search{
-		box-sizing: border-box;
-	    border: 1px solid rgb(193, 193, 193);
-	    border-radius: 4px;
-	    font-size: 13px;
-	    color: rgb(34, 34, 34);
-	    line-height: 1.54;
-	    width: 100%;
-	    padding: 4px 24px 4px 26px;
-	}
-	.w_search:hover{
-		border: 1px solid black;
-	}
-	.createFolder{
-		display: flex;
-	    flex-direction: column;
-	    padding-left: 16px;
-	    padding-right: 16px;
-	}
-	.home_btn2{
-		position: relative;
-	    cursor: pointer;
-	    background-color: transparent;
-	}
-	.home_btn2::before{
-		position: absolute;
-	    right: 0px;
-	    left: 0px;
-	    height: 1px;
-	    background-color: rgb(230, 230, 230);
-	    content: " ";
-	    top: 50%;
-	}
-	.contents{
-		position: relative;
-	    display: inline-flex;
-	    flex-direction: row;
-	    -webkit-box-align: center;
-	    align-items: center;
-	    background-color: rgb(247, 246, 245);
-	    font-size: 12px;
-	    color: rgb(136, 136, 136);
-	    padding: 5px 4px;
-	}
-	.home_svg3{
-		margin-right: 4px;
-		display: inline-block;
-	    vertical-align: middle;
-	    shape-rendering: inherit;
-	    fill: rgb(193, 193, 193);
-	}
-	.folder1{
-		flex: 1 0 auto;
-	    width: 100%;
-	    box-sizing: border-box;
-	    min-width: 0px;
-	}
-	.f_container{
-		position: relative;
-	    display: flex;
-	    flex-direction: row;
-	    -webkit-box-align: center;
-	    align-items: center;
-	    margin-top: 0px;
-	    margin-bottom: 0px;
-	    user-select: none;
-	    padding: 0px 0px 0px 4px;
-	    cursor: pointer;
-	    background-color: transparent;
-	}
-	.f_container:hover{
-		background-color: #e3e3e3;
-	}
-	.home_svg4{
-		visibility: hidden;
-	    flex-shrink: 0;
-	    margin-right: 2px;
-	    display: inline-block;
-	    vertical-align: middle;
-	    shape-rendering: inherit;
-	    fill: rgb(193, 193, 193);
-	}
-	.f_container2{
-		flex: 1 0 auto;
-	    display: flex;
-	    flex-direction: row;
-	    -webkit-box-align: center;
-	    align-items: center;
-	    margin-left: 0px;
-	    width: 0px;
-    }
-    .f_container3{
-	    display: flex;
-	    flex: 1 0 auto;
-	    width: 100%;
-	    flex-direction: row;
-	    -webkit-box-align: center;
-	    align-items: center;
-	    padding-right: 16px;
-    }
-    .home_svg5{
-	    display: inline-block;
-	    vertical-align: middle;
-	    shape-rendering: inherit;
-	    fill: rgb(136, 136, 136);
-    }
-    .f_container4{
-	    display: flex;
-	    flex: 1 0 auto;
-	    flex-direction: row;
-	    -webkit-box-align: center;
-	    align-items: center;
-	    padding: 2px 0px;
-	    white-space: nowrap;
-	    overflow: hidden;
-	    text-overflow: ellipsis;
-	    font-size: 13px
-	    color: rgb(136, 136, 136)
-    }
-    .home_btn3{
-	    min-width: inherit;
-	    min-height: inherit;
-	    padding-left: 0px;
-	    padding-right: 0px;
-	    transition: fill 0.2s ease 0s;
-	    cursor: pointer;
-	    pointer-events: auto;
-	    width: auto;
-	    background-color: transparent;
-	    text-decoration: none;
-	    font-weight: 400;
-	    color: gray;
-    }
-    .w_list{
-	    flex: 1 0 auto;
-	    width: 100%;
-	    box-sizing: border-box;
-	    min-width: 0px;
-	    margin-left: 10px;
-	    margin-top: -5px;
-    }
-    .sidebar-footer{
-	    display: flex;
-	    flex-direction: column;
-	    color: rgb(136, 136, 136);
-	    font-size: 12px;
-	    line-height: 1.5;
-	    padding-top: 40px;
-	    padding-left: 20px;
-	    padding-bottom: 90px;
-    }
-    .alarm_expl{
-		position: absolute;
-		z-index: 101;	
-		display: none;	
-		outline: none;
-	    width: 236px;
-    	background-color: rgb(255, 255, 255);
-	    height: 220px;
-	    box-shadow: 0px 5px 5px -3px rgb(0 0 0 / 20%), 0px 8px 10px 1px rgb(0 0 0 / 14%), 0px 3px 14px 2px rgb(0 0 0 / 12%);
-	}
-	.home_h6{
-		all: unset;
-	    display: block;
-	    font-size: 12px;
-	    line-height: 1.5;
-	    color: rgb(136, 136, 136);
-	    padding: 12px 0px 4px 18px;
-	}
-	.alarm_expl2{
-		display: flex;
-	    flex-direction: column;
-	    -webkit-box-align: stretch;
-	    align-items: stretch;
-	    padding-top: 0px;
-	    padding-bottom: 12px;
-	}
-	.alarm_btn1{
-		font-size: 13px;
-	    font-weight: normal;
-	    color: rgb(34, 34, 34);
-	    text-align: left;
-	    position: relative;
-	    line-height: 1.5;
-	    border-radius: 3px;
-	    padding: 5px 18px;
-	    background-color: transparent;
-	    cursor: pointer;
-	    border: none;
-	}
-	.alarm_btn1:hover{
-		background-color: rgb(242, 242, 242);
-    	border-color: rgb(242, 242, 242);
-	}
-	.alarm_expl3{
-		display: flex;
-	    flex-direction: column;
-	    -webkit-box-align: stretch;
-	    align-items: stretch;
-	    border-top: 1px solid rgb(225, 225, 225);
-	    padding: 12px 0px;
-	}
-	.alarm_expl4{
-		position: relative;
-		color: rgb(34, 34, 34);
-	    font-size: 12px;
-	    font-weight: 500;
-	    line-height: 1.5;
-	    padding: 5px 18px;
-	    cursor: pointer;
-	}
-	.alarm_expl4:hover{
-		background-color: rgb(242, 242, 242);
-    	border-color: rgb(242, 242, 242);
-	}
-	.folder_namebox{
-		display: none;
-		position: relative;
-	    padding: 2px 8px;
-	    width: 100%;
-	    font-size: 13px;
-	    line-height: 1.54;
-	    color: rgb(34, 34, 34);
-	    background-color: rgb(255, 255, 255);
-	    box-shadow: rgb(51 132 108) 0px 0px 0px 1px inset;
-	    border: 4px solid rgba(51, 132, 108, 0.2);
-	    border-radius: 8px;
-	    box-sizing: border-box;
-	}
-	.folder_namebox:focus{
-		outline: none;
-	}
-	.div_background{
-		display: none;
-		z-index: 9;
-		position: absolute;
-		top: 0;
-		left: 0;
-		right: 0;
-		bottom : 0;
-		width: 100%;
-		height: 100%;
-		background-color: transparent;
-	}
-	.home_svg22{
-		transition: fill 0.2s ease 0s;
-    	fill: rgb(163, 163, 163);
-	}
-	.calendar_button{
-    	background-color: rgba(0, 0, 0, 0.05);
-		cursor: pointer;
-	    display: flex;
-	    flex-direction: row;
-	    -webkit-box-align: center;
-	    align-items: center;
-	    background-color: transparent;
-	    padding-right: 16px;
-	    padding-left: 0px;
-	    position: relative;
-	    font-size: 14px;
-	    line-height: 1.57;
-	    color: rgb(34, 34, 34);
-	    pointer-events: auto;
-	    width: 100%;
-	}
-	.calendar_button:hover{
-		background-color: #e3e3e3;
-    }
-    .calendar2{
-	    cursor: pointer;
-	    display: flex;
-	    flex-direction: row;
-	    -webkit-box-align: center;
-	    align-items: center;
-	    background-color: transparent;
-	    padding-left: 18px;
-	    padding-right: 16px;
-    }
-	
-	input[type="checkbox"]{
-        display: none;
-	}
-	input[type="checkbox"] + label{
-		display: inline-block;
-	    vertical-align: middle;
-	    shape-rendering: inherit;
-	    width: 10px;
-        height: 10px;
-        border: 1px solid black;
-        cursor: pointer;
-        border-radius: 2px;
-	}
-	.folder_selection0{
-		display: none;
-		position: absolute;
-		z-index: 101;
-	}
-	.folder_selection{
-		border-radius: 4px;
-	    box-shadow: rgb(0 0 0 / 10%) 0px 0px 6px 2px;
-	    background-color: rgb(255, 255, 255);
-	    padding: 12px 0px;
-	    min-width: 160px;
-	    max-width: 100%;
-	    display: flex;
-	    flex-direction: column;
-	}
-	.folder_selection_btn1{
-		cursor: pointer;
-	    font-size: 13px;
-	    line-height: 1.54;
-	    color: rgb(34, 34, 34);
-	    padding: 5px 18px 3px;
-	    background-color: transparent;
-	    text-align: left;
-	}
-	.folder_selection_btn1:hover{
-		background-color: rgb(242, 242, 242);
-	}
-	.home_layout .hidden{
-		display: none;
-	}
-	</style>
+  	<link href="css/include_HomeSidebar1.css" rel="stylesheet" type="text/css">
 	<script>
 	$(function(){
 		$('.calendar_button').click(function (){
@@ -672,7 +93,7 @@
    					var workspaceId = $(this).attr('workspaceId');
    					arrWorkspaceId.push(workspaceId);
    				});
-   				alert(arrWorkspaceId);
+   				//alert(arrWorkspaceId);
    				$.ajax({
    					type: "post",
    					url: 'WorkspaceOrderServlet',
@@ -755,36 +176,95 @@
 	var loginId = 4;
 	$(function(){
 	
-		$(".home_sidebar button").on("click", function(){//협업공간 만들기
+       	//협업공간 만들기
+		$(".new_workspace").on("click", function(){
 			$("#cws").removeClass("none");
 		});
 		
-		$(".f_container").on("click", function(){ //공간 아이콘 누르면 협업공간으로 이동
-			var workspaceId = $(this).attr("workspaceId");
-			var workspaceName = $(this).find(".name").attr("title");
-			location.href="workspace_index.jsp?workspaceId="+workspaceId+"&workspaceName="+workspaceName;
-		});
-		
-		$("#private_Workspace").click(function(){
-			location.href="workspace_index.jsp?workspaceId=4&workspaceName=프라이빗 공간";
-			//workspaceId 가져오는 ajax
-			/* $.ajax({ //화면전환으로 바뀌어야할듯 완료여부 등 다불러옴
+		//프라이빗 공간 클릭
+		$("#private_Workspace").on("click", function(){
+			$.ajax({ 
 				type:"post",
-				url:"Controller?command=select_Workspace_Index",
+				url:"Controller?command=getPrivateId", 
 				data:{
-					"loginId":loginId,
-					"workspace_id":workspaceId
+					"loginId":loginId
 				},
 				datatype:"json",
-				success:function(data){//협업공간 id, 설명, 완료여부
-		                $("#space_main_wi > header").css("background-color","rgb(94, 85, 65)");
-		                $("#bnt1_wi").addClass("hidden");//알림, 설정 없어지기
-		                $("#summary_wi").val("나만을 위한 공간에서 아이디어를 마음껏 펼쳐 보세요. 특정 파트너에게 나의 문서를 공유할 수도 있습니다.");//readonly
-		                $("#container1_wi").addClass("hidden");
-		                $("#container1_pi").removeClass("hidden");
-		                $("#document_bnt_wi").css("background-color", "rgb(217, 173, 43)");
-				}//success 
-		 	});//ajax  */   
+				success:function(data){
+					$.ajax({
+						type:"post",
+						url:"Controller?command=putRecentConnection",
+						data:{
+							"loginId": 4,
+							"workspace_id": data.workspaceId
+						},
+						datatype:"json",
+						success:function(d){
+						},
+						error:function(r,s,e){
+							alert("putRecentConection error");
+						}
+					});
+					location.href="Controller?command=select_Workspace_Index&workspaceId="+data.workspaceId+"&workspaceName=프라이빗 공간&loginId=4";
+				},
+				error:function(r,s,e){
+					alert("error!");
+				}
+			});
+		});
+		
+		//사이드바 공간 클릭하면 공간이동
+		$(document).on("click", ".f_container", function(){
+			var workspaceId = $(this).attr("workspaceId");
+			var workspaceName = $(this).find("name").text().replace(/\s/g, "");
+			$.ajax({
+				type:"post",
+				url:"Controller?command=putRecentConnection",
+				data:{
+					"loginId":4,
+					"workspace_id": workspaceId
+				},
+				datatype:"json",
+				success:function(d){
+					location.href="Controller?command=select_Workspace_Index&workspaceId="+workspaceId+"&workspaceName="+workspaceName+"&loginId=4";
+				},
+				error:function(r,s,e){
+					alert("putRecentConection error");
+				}
+			});
+			//location.href="Controller?command=select_Workspace_Index&workspaceId="+workspaceId+"&workspaceName="+workspaceName+"&loginId=4";
+		});
+		
+		//협업공간 검색
+		$(document).on("keyup", ".w_search", function(){
+			var input = $(".w_search").val();
+			$.ajax({
+				type:"post",
+				url:"Controller?command=workspaceSearch",
+				data:{
+					"loginId":loginId,
+					"input":input
+				},
+				datatype:"json",
+				success:function(data){
+					$(".folder1").empty();
+					$.each(data, function(index, item){
+						var wsContainer = '<div class="f_container" workspaceId="'+item.workspaceId+'">' 
+							+'<svg viewBox="0 0 24 24" width="12px" height="12px" class="home_svg4"><path d="M8 5.4A2.2 2.2 0 1 1 8 1a2.2 2.2 0 0 1 0 4.4zm0 8.8a2.2 2.2 0 1 1 0-4.4 2.2 2.2 0 0 1 0 4.4zM8 23a2.2 2.2 0 1 1 0-4.4A2.2 2.2 0 0 1 8 23zm8-17.6A2.2 2.2 0 1 1 16 1a2.2 2.2 0 0 1 0 4.4zm0 8.8a2.2 2.2 0 1 1 0-4.4 2.2 2.2 0 0 1 0 4.4zm0 8.8a2.2 2.2 0 1 1 0-4.4 2.2 2.2 0 0 1 0 4.4z" color="#C1C1C1"></path></svg>'
+							+'<div class="f_continer2">'
+							+'<div class="f_container3">'
+							+'<div>'
+							+'<svg viewBox="0 0 24 24" width="16px" height="16px" class="home_svg5"><path d="M14.027 5L13.6 3H4v18h2v-7h6l.533 2H20V5z"></path></path></svg>'
+							+'</div>'
+							+'<div style="margin-top: 5px;" class="name" title="'+item.workspace_name+'">'+item.workspace_name+'</div>'
+							+'</div>'
+							+'</div>'
+							+'</div>';
+						
+						$(".folder1").append(wsContainer);	
+					});	
+				}
+			});
 		});
 	});
 	</script>	
@@ -807,7 +287,7 @@
 				<button class="alarm_btn1">아침까지 알림 끄기 (오전 9시)</button>
 			</div>
 			<div class="alarm_expl3">
-				<a class="alarm_expl4" href="">알림 설정</a>
+				<a class="alarm_expl4" href="Controller?command=option2">알림 설정</a>
 			</div>
 		</div>
 	</div>
@@ -848,7 +328,7 @@
 					<div class="name" id="bookmark_name_tag">북마크</div>
 				</a>
 				
-				<a class="menu" href="MyPostCmt.jsp?workspaceId=4&workspaceName=프라이빗 공간">
+				<a class="menu" href="Controller?command=MyPost&loginId=4">
 					<svg viewBox="0 0 24 24" width="16px" height="16px" class="home_svg1"><path d="M2 12c0 5.52 4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2C6.47 2 2 6.48 2 12zm10 8.2c-4.53 0-8.2-3.67-8.2-8.2 0-4.53 3.67-8.2 8.2-8.2 4.53 0 8.2 3.67 8.2 8.2 0 4.53-3.67 8.2-8.2 8.2zm-2.588-7c.616 1.122 1.287 1.676 2.588 1.676 1.3 0 1.972-.554 2.588-1.676H16.5c-.703 1.933-2.452 3.3-4.5 3.3s-3.797-1.367-4.5-3.3zM8.65 8.4a1.35 1.35 0 110 2.7 1.35 1.35 0 010-2.7zm6.7 0a1.35 1.35 0 110 2.7 1.35 1.35 0 010-2.7z" class="Beecon__Path-sc-3x6pq4-1 jRUwgg"></path></svg>
 					<div class="name">내가 작성한 문서</div>
 				</a>
@@ -905,6 +385,9 @@
 
 <%
 	for(NoneFolderDto dto : listNonee){
+		if(dto.getWorkspace_name().equals("프라이빗 공간")) {
+			continue;
+		}
 %>	
 			
 				<div class="f_container" workspaceId="<%= dto.getWorkspace_id()%>"> <!-- draggable="true" -->

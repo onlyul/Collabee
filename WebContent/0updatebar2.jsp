@@ -9,660 +9,19 @@
 	ArrayList<ArticleDto> list = (ArrayList<ArticleDto>)request.getAttribute("list");
 	int corporation_id = 5;
 	int loginId = 4;
+	int workspaceId = (Integer)request.getAttribute("workspaceId");
 	/* ArrayList<NoneFolderDto> listNone = (ArrayList<NoneFolderDto>)request.getAttribute("list2"); */
 %>
 <!DOCTYPE html>
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>updatebar2+include/HomeSidebar2.jsp</title>
+	<title>협업툴 콜라비 - 한 장으로 끝! 문서기반 협업툴, 콜라비</title>
 	<link rel="icon" href="images/favicon.ico" type="image/x-icon">
 	<script src="js/jquery-3.6.0.min.js"></script>
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
-  	<!-- <link rel="stylesheet" href="/resources/demos/style.css"> -->
   	<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
-	<style>
-	html{
-		overflow-y: hidden;
-	}
-	main{
-		font-family: -apple-system,BlinkMacSystemFont,Malgun Gothic,Hiragino Kaku Gothic ProN,Hiragino Sans,Meiryo,MS PGothic,sans-serif,Dotum;
-	}
-	a{
-		text-decoration: none;
-	}
-	button{
-		border: none;
-	}
-	ul {
-    	list-style-type: none;
-	}
-	body{
-		height: 100%;
-		overflow: hidden;
-	    font-size: 13px;
-	    color: #222;
-	}
-	.layout{
-		min-width: 730px;
-		flex: 1 1 auto;
-	   /*  display: flex; */
-	    flex-direction: column;
-	    height: 100vh;
-	    /* overflow-y: auto; */
-	}
-	.layout_body{
-    	position: relative;
-	    display: flex;
-	    flex-direction: row;
-	    -webkit-box-flex: 1;
-	    flex-grow: 1;
-	    -webkit-box-align: stretch;
-	    align-items: stretch;
-	    overflow-x: hidden;
-	    min-width: 680px;
-    }
-    .main_section{
-    	display: flex;
-	    flex-direction: row;
-	    flex: 1 1 auto;
-	    padding: 0px 20px 0px 40px;
-	    overflow-y: auto;
-	    box-sizing: border-box;
-	    height: calc((100vh - 108px) - 38px);
-    }
-    .main_section::-webkit-scrollbar {
-		width:4px;
-	}
-	.main_section::-webkit-scrollbar-thumb {
-	    height: 70%; /* 스크롤바의 길이 */
-	    background-color: #e1e1e1; /* 스크롤바의 색상 */
-	    border-radius: 2px;
-	}
-	.main_section::-webkit-scrollbar-track{
-		background-color: white;
-	}
-    .taindex{
-    	min-width: 0px;
-    	width: 100%;
-    }
-    .feedlist1{
-    	padding: 16px 20px;
-    	border-bottom: 1px solid rgb(225, 225, 225);
-    }
-    .feedlist2{
-    	display: block;
-	    font-size: 16px;
-	    font-weight: bold;
-	    line-height: 1.5;
-	    color: rgb(34, 34, 34);
-	    overflow-wrap: break-word;
-	    margin-bottom: 9px;
-    }
-    .feedlist2:hover{
-    	color: rgba(34, 34, 34, 0.7);
-    }
-    .feedlist_li{
-    	display: flex;
-	    flex-direction: row;
-	    background-color: rgb(255, 255, 255);
-	    margin-bottom: 8px;
-	    margin-left: -38px;
-    }
-    .feedlist_li:hover{
-    	background-color: rgb(250, 250, 250);
-    }
-    .li_1{
-    	transform: translateY(1px);
-    	flex-shrink: 0;
-    }
-    .avatar_c{
-    	flex-shrink: 0;
-	    position: relative;
-	    width: 20px;
-	    height: 20px;
-	   /*  border-radius: 50%; */
-	    padding: 1px;
-	  /*   background-color: rgba(0, 0, 0, 0.1); */
-	    content: "";
-	    transition: border-color 0.3s ease 0s;
-	    cursor: pointer;
-    }
-    .li_2{
-    	display: flex;
-	    flex-direction: column;
-	    padding-left: 6px;
-	    padding-right: 60px;
-	    position: relative;
-	    flex: 1 1 auto;
-	    min-width: 0px;
-    }
-    .li_2_1{
-    	display: flex;
-	    flex-direction: row;
-	    -webkit-box-align: center;
-	    align-items: center;
-    }
-    .comment{
-    	margin-left: 4px;
-	    margin-right: 8px;
-	    display: inline-block;
-	    font-weight: bold;
-	    font-size: 12px;
-	    color: rgb(34, 34, 34);
-	    flex-shrink: 0;
-	    text-overflow: ellipsis;
-	    white-space: nowrap;
-	    overflow: hidden;
-	    overflow-wrap: break-word;
-    }
-    .li_2_2{
-    	padding-top: 4px;
-	    font-size: 12px;
-	    color: rgb(136, 136, 136);
-    }
-    .date{
-    	font-size: 12px;
-    	color: rgb(136, 136, 136);
-    }
-    .date::before{
-    	display: inline-block;
-	    content: "・";
-	    padding-left: 4px;
-	    padding-right: 4px;
-    }
-    .feedfooter{
-    	display: flex;
-	    flex-direction: row;
-	    -webkit-box-align: center;
-	    align-items: center;
-	    -webkit-box-pack: justify;
-	    justify-content: space-between;
-	    margin-top: 9px;
-    }
-    .feedfooter1{
-    	height: 20px;
-	    display: flex;
-	    flex-direction: row;
-	    -webkit-box-align: center;
-	    align-items: center;
-	    font-size: 12px;
-	    color: rgb(136, 136, 136);
-	    width: calc(100% - 64px);
-    }
-    .document{
-    	display: flex;
-	    -webkit-box-align: center;
-	    align-items: center;
-	    color: rgb(136, 136, 136);
-	    font-size: 13px;
-	    line-height: initial;
-    }
-    .image1{
-    	margin-right: 10px;
-    	flex-shrink: 0;
-    	width: 18px;
-    	height: 18px;
-    }
-    .document2{
-    	color: rgb(136, 136, 136);
-    	margin-bottom: 2px;
-    }
-    .document2::after{
-    	content: "|";
-	    display: inline-block;
-	    padding-left: 10px;
-	    color: rgb(216, 216, 216);
-	    white-space: nowrap;
-	    text-overflow: ellipsis;
-	    overflow: hidden;
-	    font-size: 13px;
-	    max-width: 250px;
-	    flex: 1 1 0%;
-	    
-    }
-    .wname{
-    	color: rgb(51, 132, 108);
-	    overflow: hidden;
-	    word-break: keep-all;
-	    text-overflow: ellipsis;
-	    white-space: nowrap;
-	    padding-left: 10px;
-    }
-    .w_p{
-    	color: rgb(204, 153, 0);
-    }
-    .more{
-		display: flex;
-	    flex-direction: row;
-	    -webkit-box-align: center;
-	    align-items: center;
-	    font-size: 12px;
-	    color: rgb(193, 193, 193);
-	    margin-left: 24px;
-	    cursor: pointer;
-	    background-color: rgb(255, 255, 255);
-	    transition: color 0.2s ease 0s, fill 0.2s ease 0s;
-	}
-	.more:hover{
-		color: black;
-	}
-	.emoji1{
-		margin-right: 4px;
-		flex-shrink: 0;
-		width: 18px;
-		height: 18px;
-		background-image: url(data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18px' height='18px' viewBox='0 0 24 24'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cpath d='M14.414 1L21 7.586V20c0 1.652-1.348 3-3 3H5.99A2.997 2.997 0 013 20l.01-16c0-1.653 1.338-3 2.99-3h8.414zm-.538 1.3H6c-.931 0-1.69.762-1.69 1.7L4.3 20c0 .938.759 1.7 1.69 1.7H18c.934 0 1.7-.766 1.7-1.7V8.124L13.876 2.3z' fill='%23C1C1C1' opacity='1'%3E%3C/path%3E%3C/g%3E%3C/svg%3E);
-		background-size: cover;
-		background-repeat: no-repeat;
-		padding-top: 1.8px;
-		display: flex;
-		-webkit-box-align: center;
-		align-items: center;
-		-webkit-box-pack: center;
-		justify-content: center;
-	}
-	.emoji2{
-		position: relative;
-	    display: inline-block;
-	    font-size: 0;
-	    margin: 0;
-	    padding: 0;
-	    border: none;
-	    background: none;
-	    box-shadow: none;
-	}
-	
-	
-	
-	
-	header{
-		position: relative;
-	    display: flex;
-	    flex-direction: column;
-	    flex-shrink: 0;
-	    -webkit-box-align: stretch;
-	    align-items: stretch;
-	}
-	.top_header{
-		height: 108px;
-		position: relative;
-	    display: flex;
-	    flex-direction: row;
-	}
-	.top_left{
-		flex: 1 1 auto;
-	    display: flex;
-	    flex-direction: column;
-	    z-index: 2;
-	    margin-top: 20px;
-	    min-width: 0px;
-	    margin-right: 20px;
-	}
-	.top_header_title{
-		display: flex;
-	    flex-direction: row;
-	    align-items: flex-start;
-	    -webkit-box-pack: justify;
-	    justify-content: space-between;
-	    margin-left: 40px;
-	}
-	.update_title{
-		font-size: 22px;
-	    font-weight: bold;
-	    color: rgb(34, 34, 34);
-	    display: -webkit-box;
-	    -webkit-box-orient: vertical;
-	    -webkit-line-clamp: 2;
-	    overflow: hidden;
-	}
-	#bnt1_cal{
-        display:flex;
-    }
-	#searchbar::placeholder{
-        color: rgb(193, 193, 193);
-    }
-    #searchbar { 
-        will-change: transform;
-        background-color: rgba(255, 255, 255, 0);
-        height:28px;
-        width:144px;
-        font-size:13px;
-        border-radius:4px;
-        border: 1px solid rgb(225, 225, 225);
-        transition: border-color 0.2s ease 0s, background-color 0.2s ease 0s;
-        padding:0px 32px;
-    }
-    #searchbar:hover{
-        border-color:rgb(136, 136, 136);
-    }
-    #searchbar:focus{
-        background-color: rgba(255, 255, 255, 0.2);
-        border-color:rgb(136, 136, 136);
-        border: 1px;
-        width:269px;
-        z-index: 10;
-    }
-    #searchbar::placeholder:hover{
-        color:rgb(136, 136, 136);
-    }
-    #search_icon{
-        fill:rgb(224, 221, 217);
-        position: absolute;
-        transition: fill 0.2s ease 0s;
-        -webkit-box-align: center;
-        border:none;
-        display:flex;
-        align-items:center;
-        padding-left:10px;
-        padding-top:2px;
-    }
-    #search_icon:hover{
-        fill:rgb(136, 136, 136);
-    }
-    .micro{
-    	margin-top: 5px;
-    }
-    .mastersearchbar{
-    	display: flex;
-	    flex-direction: row;
-	    position: relative;
-	    align-items: flex-start;
-    }
-    .topright1{
-    	position: relative;
-	    flex: 0 0 auto;
-	    width: 250px;
-    }
-    
-    button{
-    	border: none;
-    }
-    .header_menu{
-    	position: relative;
-	    display: flex;
-	    flex-direction: row;
-	    -webkit-box-align: center;
-	    align-items: center;
-	    margin-top: 17px;
-	    margin-left: 40px;
-	    height: 32px;
-    }
-    .header_menu2{
-    	position: relative;
-	    display: flex;
-	    flex: 1 1 auto;
-	    flex-direction: row;
-	    width: 100%;
-	    -webkit-box-align: center;
-	    align-items: center;
-    }
-    .header_menu3{
-    	position: relative;
-	    flex: 1 1 100px;
-	    height: 32px;
-	    margin: 0px 6px 0px 0px;
-	    padding: 5px 4px;
-	    min-width: 60px;
-	    border-radius: 4px;
-	    cursor: pointer;
-	    border: 1px solid rgba(0, 0, 0, 0.05);
-	    background-color: rgb(247, 246, 245);
-    }
-    .header_menu3:hover{
-    	background-color: rgb(238, 236, 233);
-    }
-    .svg1{
-    	display: inline-block;
-	    vertical-align: middle;
-	    fill: rgb(136, 136, 136);
-    }
-    .svg2{
-    	display: inline-block;
-	    vertical-align: middle;
-	    fill: #ffffff;
-    }
-    .header_menu4{
-    	vertical-align: middle;
-	    font-size: 13px;
-	    line-height: 17px;
-	    margin-left: 4px;
-	    color: rgb(34, 34, 34);
-    }
-    .header_menu5{
-    	padding: 0px;
-	    min-width: 144px;
-	    width: 100%;
-	    height: 32px;
-	    display: flex;
-	    flex-direction: row;
-	    -webkit-box-align: center;
-	    align-items: center;
-	    -webkit-box-pack: center;
-	    justify-content: center;
-	    border-radius: 4px;
-	    border: 1px solid rgba(255, 255, 255, 0.2);
-	    background-color: #d9ad2b;
-	    color: white;
-    }
-    .header_menu5:hover{
-    	background-color: rgb(179, 142, 34);
-    	border-color: rgb(179, 142, 34);
-    }
-    .subheader1{
-    	display: flex;
-	    flex-direction: row;
-	    -webkit-box-pack: justify;
-	    justify-content: space-between;
-	    position: relative;
-	    z-index: auto;
-	    height: 38px;
-	    margin: 0px 20px;
-    }
-    .subheader2{
-    	margin-left: 0px;
-	    margin-right: 0px;
-	    flex: 1 1 auto;
-	    display: flex;
-	    flex-direction: row;
-	    -webkit-box-pack: justify;
-	    justify-content: space-between;
-	    -webkit-box-align: center;
-	    align-items: center;
-    }
-    .nav1{
-    	margin-left: 6px;
-	    display: flex;
-	    flex-direction: row;
-    }
-    .subheader3{
-	    color: rgb(136, 136, 136);
-	    position: relative;
-	    display: flex;
-	    flex-direction: column;
-	    -webkit-box-pack: center;
-	    justify-content: center;
-	    height: 38px;
-	    margin: 0px 16px;
-	    font-size: 12px;
-	    background-color: transparent;
-	    cursor: pointer;
-    }
-    .subheader4{
-    	position: relative;
-    }
-    .subheader4::after{
-    	background-color: rgb(34, 34, 34);
-    	position: absolute;
-	    bottom: -10px;
-	    left: 0px;
-	    right: 0px;
-	    content: "";
-	    height: 1px;
-	    z-index: 1;
-    }
-    .new{
-    	position: relative;
-	    display: flex;
-	    flex-direction: row;
-	    -webkit-box-align: center;
-	    align-items: center;
-	    height: 38px;
-	    margin: 0px 16px;
-	    font-size: 12px;
-	    font-weight: normal;
-	    background-color: transparent;
-	    cursor: pointer;
-	    color: black;
-	    font-weight: bold;
-    }
-    .call{
-    	position: relative;
-	    display: flex;
-	    flex-direction: column;
-	    -webkit-box-pack: center;
-	    justify-content: center;
-	    height: 38px;
-	    margin: 0px 16px;
-	    font-size: 12px;
-	    font-weight: normal;
-	    background-color: transparent;
-	    cursor: pointer;
-	    color: rgb(136, 136, 136);
-	    pointer-events: auto;
-    }
-    .call::after{
-    	position: absolute;
-	    bottom: 0px;
-	    left: 0px;
-	    right: 0px;
-	    content: "";
-	    height: 1px;
-	    background-color: transparent;
-	    z-index: 1;
-    }
-    .subheader_right1{
-    	position: relative;
-	    display: flex;
-	    flex-direction: row;
-	    -webkit-box-align: center;
-	    align-items: center;
-	    align-self: stretch;
-    }
-    .subheader_right2{
-    	width: 24px;
-	    height: 24px;
-	    border-radius: 4px;
-	    display: flex;
-	    -webkit-box-pack: center;
-	    justify-content: center;
-	    -webkit-box-align: center;
-	    align-items: center;
-	    min-width: inherit;
-	    min-height: inherit;
-	    padding-left: 0px;
-	    padding-right: 0px;
-	    transition: fill 0.2s ease 0s;
-	    cursor: pointer;
-	    pointer-events: auto;
-	    background-color: transparent;
-	    color: none;
-    }
-    .subheader_right3{
-    	position: relative;
-	    flex: 0 0 auto;
-	    width: 250px;
-    }
-    .subheader1::after{
-    	position: absolute;
-	    bottom: 0px;
-	    left: 0px;
-	    right: 0px;
-	    content: "";
-	    height: 1px;
-	    background-color: rgb(225, 225, 225);
-    }
-    .subheader_right3_menu{
-    	position: relative;
-	    display: flex;
-	    flex-direction: row;
-	    -webkit-box-pack: end;
-	    justify-content: flex-end;
-	    -webkit-box-align: center;
-	    align-items: center;
-	    padding-right: 20px;
-    }
-    .subheader_right3_menu2{
-    	display: inline-block;
-	    cursor: pointer;
-	    font-size: 12px;
-	    line-height: 1.5;
-	    padding: 10px;
-	    margin: 0px 3px;
-	    color: rgb(34, 34, 34);
-	    transition: color 0.2s ease 0s;
-    }
-    .file1{
-    	background-color: transparent;
-	    cursor: pointer;
-	    flex-direction: row;
-	    -webkit-box-align: center;
-	    align-items: center;
-	    font-size: 12px;
-	    color: rgb(34, 34, 34);
-	    line-height: 1.5;
-	    padding: 10px 0px 10px 10px;
-	    margin: 0px 0px 0px 3px;
-    }
-    .svg5{
-    	margin-left: 4px;
-	    margin-bottom: 2px;
-	    display: inline-block;
-	    vertical-align: middle;
-	    shape-rendering: inherit;
-	    fill: rgb(34, 34, 34);
-    }
-	
-	#div2{
-    	display: none;
-    	background: white;
-	    cursor: pointer;
-	    flex-direction: row;
-	    -webkit-box-align: center;
-	    align-items: center;
-	    font-size: 12px;
-	    line-height: 1.5;
-	    border-radius: 4px;
-	    width: 148px;
-	    height: 81px;
-	    margin-top: -3px;
-	    margin-left: 85px;
-	    position: absolute;
-	    z-index: 100;
-	    box-shadow: rgb(0 0 0 / 10%) 0px 3px 6px 0px;
-    }
-    .div2_1:hover{
-		filter: brightness(90%);
-		transition: transform 10s;
-	}
-	.div2_1{
-		padding: 10px;
-		background-color: white;
-		height: 13px;
-    	margin: 3px;
-	}
-	.comment_img{
-		width: 11px;
-		height: 11px;
-		display: inline-block;
-	}
-	.aside{
-    	flex: 0 0 auto;
-	    width: 250px;
-	    overflow-y: auto;
-	    height: calc((100vh - 126px) - 38px);
-    }
-	</style>
+  	<link href="css/0updatebar2.css" rel="stylesheet" type="text/css">
 	<script>
 	$(function(){
        	$('.file1').mouseenter(function() {
@@ -708,9 +67,35 @@
 				}
 			}); 			
 		});
+    	
+    	$(document).on("click","button[title='파일']", function(){
+			alert("서비스 준비중입니다.");
+		});
+    	//의사결정모달 띄우기
+        $(document).on("click","button[title='의사결정']", function(){    
+     	   $("#dm1_modal_include").css('display', 'block');
+     	   $("#myModal").css('display', 'block');
+ 		});
 	});
 	</script>
-	
+	<!-- 지현부분 추가 -->
+	<script>
+	$(document).on("click","button[title='일정']", function(){
+		$("#schedule").removeClass("hidden");
+	});
+	</script>
+	<!-- 정민부분 추가한 거 -->
+	<script>
+	$(function () {
+		$(document).on("click","button[title='할 일']", function(){
+			$("#todo_modal_include").css('display', 'block');
+		});
+		
+		$(".new_todo_btn_x").click(function() {
+			$("#todo_modal_include").css('display', 'none');
+		});
+	});
+	</script>
 	<!-- 태안부분 추가한거 -->
 	<script>
 	
@@ -744,6 +129,12 @@
 </head>
 <body>
 <%@ include file="WEB-INF/include/include_PartnerModal.jspf" %>	
+<div id="todo_modal_include" style="display: none"> 
+	<%@ include file="../WEB-INF/include/Todo_modal.jspf"%>
+</div>
+<div id="dm1_modal_include" style="display: none"> 
+	<%@ include file="0dm11.jspf" %>
+</div>
 <div class="row">	
 	<div>
 		<%@ include file="../WEB-INF/include/HomeSidebar2.jsp" %>
@@ -856,7 +247,7 @@
 		
 		
 	<div class="feedlist1">
-		<a href="Controller?command=showNewDocument&documentId=<%= dto.getId()%>&workspaceId=<%= dto.getW_id()%>&workspaceName=<%= dto.getWname()%>" class="feedlist2" documentId="<%= dto.getId() %>"><%= dto.getTitle() %></a> 
+		<a href="Controller?command=showNewDocument&documentId=<%= dto.getId()%>&workspaceId=<%= dto.getW_id()%>&workspaceName=<%= dto.getWname()%>&loginId=4" class="feedlist2" documentId="<%= dto.getId() %>"><%= dto.getTitle() %></a> 
 		<ul>
 		
 <%
@@ -920,5 +311,30 @@
 	</main>
 	
 </div>	
+<%@ include file="WEB-INF/include/include_NewWorkspaceModal.jspf"%>
+<%@ include file="WEB-INF/include/include_ScheduleModal.jspf"%> 
+	<script>
+		var dm1_modal_include = document.getElementById('dm1_modal_include');
+		var modal = document.getElementById('myModal');
+	    var span = document.getElementsByClassName("dm1_close")[0];
+	    var piclist = document.getElementById("selectpic");
+	    var filelist = document.getElementById("dm1_selection");
+	    
+	    span.onclick = function(e){
+	        dm1_modal_include.style.display = "none";
+	    	modal.style.display = "none";
+	        piclist.style.display = "none";
+	        filelist.style.display = "none";
+	    }
+	    window.onclick = function(event) {
+	        if (event.target == modal) {
+	        	alert("수정 중인 의사결정을 저장하지 않고 나가시겠습니까?");
+	        	dm1_modal_include.style.display = "none";
+	        	modal.style.display = "none";
+	            piclist.style.display = "none";
+	            filelist.style.display = "none";
+	        }
+	    }
+	</script>
 </body>
 </html>

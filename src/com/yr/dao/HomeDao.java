@@ -11,6 +11,20 @@ import com.yr.dto.HomeRecentDto;
 import com.yr.dto.NoneFolderDto;
 
 public class HomeDao {
+	//협업공간 누를때마다 최근들간 협업공간테이블에 넣기
+	public void setRecent_Connection(int member_id, int workspace_id) {
+		Connection conn = DBConnection.getConnection();
+		try {
+			String sql = "insert into recent_connection_workspace values (?, recent_connection_id.nextval, ?, sysdate)";
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, member_id);
+			pstmt.setInt(2, workspace_id);
+			pstmt.executeUpdate();
+			pstmt.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 	
 	// 최근7개공간보기, 밑에 협업공간애들사진까지 뽑았음
 	public ArrayList<HomeRecentDto> getRecent_Connection(int member_id) throws SQLException {
@@ -30,7 +44,6 @@ public class HomeDao {
 			for(int i = 0; list.size()<=6; i++) { // 7개만 뽑음
 				boolean b = true;
 				if (rs.next()){
-					System.out.println("meow");
 					int workspace_id = rs.getInt(1);
 					String workspace_name = rs.getString(2);
 					String color = rs.getString(3);
@@ -52,6 +65,8 @@ public class HomeDao {
 					break;
 				}
 			}
+			rs.close();
+			pstmt.close();
 		}catch(Exception e) {
 			e.printStackTrace();
 		} 
@@ -135,7 +150,24 @@ public class HomeDao {
 			e.printStackTrace();
 		}
 	}
-	 
+	public int WorkspaceOrderMax(int member_id) {
+		Connection conn = DBConnection.getConnection();
+		String sql = "select max(order_id) from workspace_order where member_id = ?";
+		int max = 0;
+		try {
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, member_id);
+			ResultSet rs = pstmt.executeQuery();
+			if(rs.next()) {
+				max = rs.getInt(1);
+			}
+			rs.close();
+			pstmt.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} 
+		return max;
+	} 
 	
 	
 	
@@ -159,6 +191,8 @@ public class HomeDao {
 				String picture = rs.getString("picture");
 				list1.add(picture);
 			}
+			rs.close();
+			pstmt.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} 
@@ -176,6 +210,8 @@ public class HomeDao {
 			if(rs.next()) {
 				name = rs.getString(1);
 			}
+			rs.close();
+			pstmt.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} 
@@ -193,6 +229,8 @@ public class HomeDao {
 			if(rs.next()) {
 				email = rs.getString(1);
 			}
+			rs.close();
+			pstmt.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} 
@@ -209,6 +247,8 @@ public class HomeDao {
 			if(rs.next()) {
 				picture = rs.getString(1);
 			}
+			rs.close();
+			pstmt.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} 
@@ -225,6 +265,8 @@ public class HomeDao {
 			if(rs.next()) {
 				CorName = rs.getString(1);
 			}
+			rs.close();
+			pstmt.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} 
@@ -242,6 +284,8 @@ public class HomeDao {
 			if(rs.next()) {
 				p = rs.getInt(1);
 			}
+			rs.close();
+			pstmt.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} 
@@ -259,6 +303,8 @@ public class HomeDao {
 			if(rs.next()) {
 				corporation_id = rs.getInt(1);
 			}
+			rs.close();
+			pstmt.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} 
@@ -275,6 +321,8 @@ public class HomeDao {
 			if(rs.next()) {
 				corporation_manager = rs.getInt(1);
 			}
+			rs.close();
+			pstmt.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} 

@@ -6,7 +6,7 @@
 <%@ page import="com.one.dao.*" %>
 <%@ page import="com.one.mvc.*" %>
 <%
-	int loginId = (Integer)session.getAttribute("loginId");//Integer.parseInt((String)getId);
+	int loginId = (Integer)session.getAttribute("loginId");
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -14,266 +14,17 @@
   <meta charset="UTF-8">
   <title>문서작성</title>
   <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+  <link href="css/Document.css" rel="stylesheet" type="text/css">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-
-<style> /*임시저장*/
-
-body, *{
-    font-family: -apple-system,BlinkMacSystemFont,Malgun Gothic,Hiragino Kaku Gothic ProN,Hiragino Sans,Meiryo,MS PGothic,sans-serif,Dotum;
-    box-sizing: border-box;
-    margin:0;
-    padding:0;
-    outline: none;
-}
-a{
-	text-decoration:none;
-}
-input, button{
-    border:none;
-}
-/* #drafts{
-    height:100%;
-} */
-#drafts header{
-    display:flex; 
-    flex-direction:row; 
-    justify-content:space-between;
-    border-bottom:1px solid rgb(225,225,225);
-    position:fixed;
-    top:0;
-    left:0;
-    right:0;
-    background-color: rgb(255,255,255);
-    z-index: 101;
-}
-
-.icon_color{
-    fill:rgb(136,136,136);
-    cursor:pointer;
-}
-.drafts_tab1{
-    display:flex;
-    color:rgb(136,136,136);
-    font-size:12px;
-    align-items:center;
-    padding:20px;
-}
-.drafts_tab1 button + label{
-    margin-left:20px;
-}
-.drafts_tab2{
-    display:flex;
-    align-items:center;
-    margin-right:20px
-}
-#drafts_more{
-    cursor:pointer;
-    background-color:transparent;
-}
-#drafts_del{
-    box-shadow:0 0 8px 2px rgb(0 0 0 / 10%);
-    font-size:13px;
-    border:1px solid #e1e1e1;
-    border-radius:4px;
-    position:absolute;
-    background-color:rgb(255,255,255);
-    width: 190px;
-    padding:15px 20px;
-    transform: translate3d(-20px, 45px, 0px);
-    cursor:pointer;
-    z-index:100;
-}
-#drafts_del:hover{
-  background-color:#f2f2f2;
-}
-#drafts_ws{
-    background-color: rgb(255, 255, 255);
-    border: 1px solid rgb(51, 132, 108);
-    border-radius:4px;
-    width: 180px;
-    color:rgb(51, 132, 108);
-    padding: 6px 10px 6px 15px;
-    overflow:hidden;
-    display:flex;
-    justify-content:space-between;
-    cursor:pointer;
-}
-.icon_color2{
-    fill:rgb(51, 132, 108);
-}
-#saveButton{
-    background-color:rgb(51, 132, 108);
-    color:rgb(255, 255, 255);
-    border-radius:4px;
-    border:1px solid rgb(51, 132, 108);
-    padding:7px 28px;
-    font-size:12px;
-    font-weight:500;
-    cursor:pointer;
-    margin-left:15px;
-    transition: background-color 0.2s ease 0s, color 0.2s ease 0s, border-color 0.4s ease 0s, fill 0.2s ease 0s, opacity 0.2s ease 0s;
-}
-#saveButton:hover{
-    background-color: rgb(42, 98, 81);
-    border-color: rgb(42, 98, 81);
-}
-.drafts_sec{
-    width: 1px;
-    height: 32px;
-    background-color: rgb(225, 225, 225);
-    margin: 0px 24px;
-}
-
-#drafts_list{
-    flex-direction:column;
-    font-size:13px;
-    width: 240px;
-    background-color: rgb(255, 255, 255);
-    border-right: 1px solid rgb(225, 225, 225);
-    padding-top:66px;
-    overflow:scroll;
-    height:100%;
-    position:fixed;
-    z-index:100;
-}
-#drafts_cnt{
-    font-weight:bold;
-    font-size:12px;
-    color:rgb(136,136,136);
-    background-color:rgb(250, 250, 250);
-    height: 32px;
-    padding:8px 0px 8px 18px;
-}
-.drafts_post{
-    padding:15px 20px;
-    border-bottom:1px solid rgb(225, 225, 225);
-    cursor:pointer;
-    line-height:1.5;
-}
-.drafts_title{
-    display:flex;
-    flex-direction:row;
-    align-items:center;
-    font-size:14px;
-    /* font-weight:bold; */
-}
-.drafts_title img{
-    width: 18px;
-    height: 18px;
-    cursor: pointer;
-}
-.drafts_info{
-    color:rgb(136,136,136);
-    display:flex;
-    align-items:center;
-    font-size:12px;
-}
-.drafts_ws2{
-    color:rgb(51, 132, 108);
-    margin-left:7px;
-}
-
-
-
-
-
-
-.drafts_scrollbar{
-    background: #e1e1e1;
-}
-.drafts_scrollbar::-webkit-scrollbar{
-    width:4px;
-}
-.drafts_scrollbar::-webkit-scrollbar-thumb{
-    border-radius:2px;
-    height:40%;
-    background-color: #e1e1e1;
-}
-::-webkit-scrollbar{
-  width:4px;
-}
-::-webkit-scrollbar-thumb{
-  border-radius:2px;
-  height:40%;
-  background-color: #e1e1e1;
-}
-#postDocument .hidden{
-  visibility:hidden;
-  opacity:0;
-}
-#postDocument .none{
-  display:none;
-  opacity:0;
-}
-
-</style>  
-
-<style>
-#postDocument .workspace_list{/* 누르면 열리는 공간 목록*/
-    display:flex;
-    justify-content: right;
-    margin-right:90px;
-}
-#postDocument .workspace_list ul{ /* 누르면 열리는 공간 목록*/
-    position: fixed;
-    list-style: none;
-    background-color: rgb(255, 255, 255);
-    border-radius: 4px;
-    width: 160px;
-    height:270px;
-    border:1px solid #e1e1e1;
-    font-size: 14px;
-    font-weight: 500;
-    color:rgb(34, 34, 34);
-    padding:5px 12px;
-    line-height: 2.5;
-    z-index:102;
-    margin-right:110px; 
-    margin-top:35px;
-    overflow: auto;
-}
-#postDocument workspace_list ul li:nth-child(1){
-    color:rgb(136, 136, 136); 
-    font-size: 10.5px; 
-    pointer-events: none;
-}
-#postDocument .workspace_list li{
-    display:flex;
-    flex-direction: row;
-    align-items: center;
-}
-#postDocument .workspace_list li span{
-    margin-left:7px;
-}
-.alert{
-    background-color:rgb(66,64,63);
-    color:rgb(255,255,255);
-    font-size:14px;
-    width:320px;
-    height:auto;
-    border-radius:4px;
-    position:absolute;
-    bottom:0;
-    margin:20px;
-    padding:16px;
-    overflow:auto;
-    line-height:1.5;
-    display:none;
-    z-index:200;
-    box-shadow: 0px 11px 15px -7px rgb(0 0 0 / 20%), 0px 24px 38px 3px rgb(0 0 0 / 14%), 0px 9px 46px 8px rgb(0 0 0 / 12%);
-}
-.closed{
-    margin-left:20px;
-    float:right;
-    cursor:pointer;
-}
-
-</style>
-
+  <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+<%
+	int documentId = (Integer)request.getAttribute("documentId");
+	int workspaceId = (Integer)request.getAttribute("workspaceId");
+%>
 <script> /*임시저장*/
   	$(function() {
-  		var documentId = <%=request.getParameter("documentId")%>; 
-		var workspaceId = <%=request.getParameter("workspaceId")%>;
+  		var documentId = <%=documentId%>; 
+		var workspaceId = <%=workspaceId%>;
     	var x="<svg viewBox='0 0 24 24' width='24px' height='24px' class='closed'><path fill='rgb(255,255,255)' d='M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z'></path></svg>";
     	
 		$("textarea.document_title").attr("documentId", documentId);
@@ -307,7 +58,7 @@ input, button{
     	//나의 협업공간 목록 채우기
     	$.ajax({
 			type:"post", 
-			url:"Controller?command=ModalWorkspaceListjh",
+			url:"Controller?command=ModalWorkspaceList",
 			data:{
 				"loginId":<%=loginId%>
 			},
@@ -587,150 +338,6 @@ input, button{
 	  	});
 	}); 
 </script>
-<style>
-	.row{
-		display:flex;
-		flex-direction:row;
-	}
-	.column{
-		display:flex;
-		flex-direction:column;
-	}
-	.document_header{
-		max-width: 650px;
-		margin: 0 auto;
-		margin-bottom:30px;
-	}
-	.document_kanban{
-		padding: 1px 5px;
-		border: 1px solid rgb(224, 221, 217);
-		border-radius: 6px;
-		background-color: transparent;
-		cursor: pointer;
-		display: flex;
-		flex-direction: row;
-		-webkit-box-align: center;
-		align-items: center;
-		transition: fill 0.2s ease 0s;
-		color: #75726f;
-		font-size: 14px;
-	}
-	.document_kanban:hover{
-	  background-color: rgb(247, 246, 245);
-	}
-	.document_ws{
-		overflow: hidden;
-		display: inline-block;
-		margin-left: 6px;
-		padding: 2px 8px;
-		border-radius: 6px;
-		background-color: rgb(234, 242, 240);
-		color: rgb(51, 132, 108);
-		font-size: 14px;
-		line-height: 24px;
-		white-space: nowrap;
-		text-overflow: ellipsis;
-		transition: color 0.2s ease 0s;
-  	}
-	.document_title{
-	    border:none;
-	    font-size:36px;
-	    line-height:46px;
-	    font-weight:bold;
-	    padding-top:5px;
-	    width: 100%;
-	    resize:none;
-	    height:auto;
-	    overflow: hidden;
-	}
-	.document_title::placeholder{
-	   color:rgb(196,196,196);
-	}
-  	.drafts_bnt{
-	  	width:22px;
-	  	height:22px;
-  		background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 22 22'%3E%3Cg fill='grey' fill-rule='evenodd'%3E%3Cpath d='M14.823 2.083c.773 0 1.454.51 1.676 1.254l2.251 8.33v4.166c0 1.15-.933 2.084-2.083 2.084H3.333a2.083 2.083 0 0 1-2.083-2.084v-4.166l2.25-8.33a1.751 1.751 0 0 1 1.677-1.254h9.646zm0 1.167H5.177a.585.585 0 0 0-.522.32l-.028.071-2.169 8.026h5.459a2.083 2.083 0 0 0 4.166 0h5.458L15.38 3.67a.586.586 0 0 0-.474-.415l-.084-.006zm-.678 5.25c.334 0 .605.261.605.583 0 .322-.27.584-.605.584h-8.29a.594.594 0 0 1-.605-.584c0-.322.27-.583.605-.583h8.29zm-.908-3.333a.59.59 0 0 1 .596.583.59.59 0 0 1-.596.583H6.763a.59.59 0 0 1-.596-.583.59.59 0 0 1 .596-.583h6.474z'%3E%3C/path%3E%3C/g%3E%3C/svg%3E");
-  		cursor:pointer;
-  		background-color:rgb(255,255,255);
-  	}
-	#kanban_selector{
-		display: none;
-		z-index: 101;
-		position: absolute;
-	    top: 0px;
-	    left: 0px; 
-	}
-	#postDocument #div_background {
-		z-index: 100;
-		position: absolute;
-		top: 0;
-		left: 0;
-		right: 0;
-		bottom : 0;
-		width: 100%;
-		height: 100%;
-		/* background-color: rgba(0,0,0,0.5); */
-		background-color: transparent;
-	}
-	.kanban_selector_center{
-		max-width: 332px;
-	    min-width: 180px;
-	    display: flex;
-	    flex-direction: column;
-	    border-radius: 6px;
-	    box-shadow: rgb(0 0 0 / 5%) 0px 0px 0px 1px, rgb(0 0 0 / 10%) 0px 2px 4px, rgb(0 0 0 / 15%) 0px 8px 16px;
-	    background-color: rgb(255, 255, 255);
-	    padding-top: 12px;
-	    padding-bottom: 12px;
-	    width: 184px;
-	}
-	.kanban_selector_title{
-		display: block;
-	    font-weight: normal;
-	    font-size: 12px;
-	    color: rgb(136, 136, 136);
-	    line-height: 1.5;
-	    padding: 0px 10px 4px 15px;
-	}
-	.kanban_selector_menu{
-		max-height: 286px;
-	    overflow: hidden auto;
-	    display: flex;
-	    flex-direction: column;
-	}
-	.kanban_selector_menu_button{
-		cursor: pointer;
-	    border: none;
-	    display: flex;
-	    flex-direction: row;
-	    align-items: center;
-	    color: rgb(34, 34, 34);
-	    background-color: rgb(255, 255, 255);
-	    padding: 5px 8px 5px 13px;
-	    transition: background-color 0.2s ease 0s;
-	    text-align: left;
-	}
-	.kanban_selector_menu_button:hover{
-		background-color: rgb(242, 242, 242);
-	}
-	.kanban_img{
-		margin-right: 2px;
-	    flex-shrink: 0;
-        width: 20px;
-	    height: 20px;
-	}
-	.kanban_selector_name{
-		white-space: nowrap;
-	    text-overflow: ellipsis;
-	    overflow: hidden;
-	    margin-right: 2px;
-	    color: rgb(34, 34, 34);
-	    font-size: 13px;
-	    max-width: 250px;
-	    flex: 1 1 0%;
-	    line-height: 24px;
-	}
-</style>
 </head>
 <body>
   <div class="alert"></div>
@@ -747,7 +354,6 @@ input, button{
             <button id="drafts_more"><svg viewBox="0 0 24 24" width="24px" height="24px" class='icon_color'><path d="M6 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm12 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-6 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"></path></svg></button>
             <div id="drafts_del" class="hidden">삭제</div>
             <div class="drafts_sec"></div>
-            <!--  style="position:absolute; right:200px;" -->
             <button id="drafts_ws"><svg viewBox="0 0 24 24" width="16px" height="16px" class='icon_color2'><path d="M17.0278306,8 C18.1356358,8 18.40014,8.63354932 17.6171348,9.41655445 L13.4502437,13.5834455 C12.6679023,14.365787 11.40014,14.3664507 10.6171348,13.5834455 L6.45024373,9.41655445 C5.66790231,8.63421303 5.93074941,8 7.03954794,8 L17.0278306,8 Z"></path></svg></button>
             <button id="saveButton">저장</button> 
             <div class="drafts_sec"></div>
@@ -757,7 +363,7 @@ input, button{
 
     <div class="workspace_list">
       <ul class="icon_color hidden">
-          <li>공간 검색</li>
+          <li style="cursor:none;">공간 검색</li>
       </ul>
 	</div>
 

@@ -29,7 +29,8 @@ public class KanbanIconListDao {
 				kIList.add(new KanbanIconListDto(kanban_icon_id, kanban_icon_p));
 				
 			}
-			
+			rs.close();
+			pstmt.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

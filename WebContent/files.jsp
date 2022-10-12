@@ -4,15 +4,18 @@
 <%@ page import="com.ta.dao.*" %>
 <%@ page import="java.util.ArrayList" %>
 <%
-	session.setAttribute("id",2);
-	int loginId = (int)(session.getAttribute("id"));
+	/* session.setAttribute("id",2); */
+	int loginId = (Integer)session.getAttribute("loginId");
+	int workspaceId = (Integer)request.getAttribute("workspaceId");
 %>
 <!DOCTYPE html>
 <html>
 <head>
 	<meta charset="UTF-8">
 	<title>Insert title here</title>
+	<link rel="icon" href="images/favicon.ico" type="image/x-icon">
 	<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+	<link href="css/files.css" rel="stylesheet" type="text/css">
     <script>
         $(function() {
             $("#fileBoxBtn").mouseenter(function() {
@@ -283,400 +286,26 @@
             },function(){
             	$(this).children().css("filter","brightness(0) saturate(100%) invert(93%) sepia(0%) saturate(1646%) hue-rotate(76deg) brightness(95%) contrast(89%)");
             });
+            
+            $("#documentwrite").on("click", function(){ 
+    			$.ajax({   //-->화면 안에서 변할때 사용. 화면 전환해주지 않음.
+    				type:"post",
+    				url:"Controller?command=getPrivateId", //프라이빗 공간 찾기
+    				data:{
+    					"loginId": 4
+    				},
+    				datatype:"json",
+    				success:function(data){
+    					location.href="Controller?command=writedocument&loginId=4&workspaceId="+data.workspaceId;
+    				},
+    				error:function(r,s,e){
+    					alert("error!");
+    				}
+    			}); 			
+    		});
         });
         
     </script>
-     <style>
-     	.file_information {
-     		background-repeat: no-repeat;
-    		background-position: center center;
-    		background-size: cover;
-     	}
-     	.downloadFile {
-     		text-decoration : none;
-     		color: rgb(136,136,136);
-     	}
-        body{
-            margin: 0px;
-            padding: 0px;
-         }
-         * {
-            font-family: -apple-system,BlinkMacSystemFont,Malgun Gothic,Hiragino Kaku Gothic ProN,Hiragino Sans,Meiryo,MS PGothic,sans-serif,Dotum;
-         }
-        #rooptop {
-            position:fixed;
-            z-index: 1;
-        }
-        #top {
-            width:1720px;
-            height:122px;
-            background-image: url('image/fileTop.png');
-            margin-left: 1px;
-         }
-        #top2 {
-            position: absolute;
-            content: "";
-            display: block;
-            width: 1720px;
-            height: 122px;
-            background-color: rgba(0, 0, 0, 0.6);
-            z-index:0;
-        } 
-        #bottom {
-            margin-top: 122px;
-        }
-        #leftTop {
-            position: relative;
-            padding-left: 40px;
-            flex-direction: column;
-            -webkit-box-pack: justify;
-            justify-content: space-between;
-            width:1423px;
-            height: 121px;
-            margin-right:0px;    
-            float:left;  
-        }
-        #rightTop {
-            width:240px;
-            height:121px;
-            margin-left:0px;
-            margin-top:25px;
-            font-size: 12px;
-            color:white;  
-            position: relative; 
-            float:right;  
-            padding: 0px;  
-        }
-        
-        #leftBottom {
-            float: left;
-            width: 1470px;
-            height:840px;
-            padding: 0px;
-            overflow: auto;
-        }
-        #leftBottom::-webkit-scrollbar {
-            width: 4px;
-        }
-        #leftBottom::-webkit-scrollbar-track {
-            background-color: white;
-            border-radius: 5px;
-        }
-        #leftBottom::-webkit-scrollbar-thumb {
-            background-color: rgb(225,225,225);
-            border-radius: 5px;
-        }
-
-        #rightBottom {
-            float: right;
-            width:180px;
-            height:100%;
-            margin-top: 33px;
-            margin-left: 1500px;
-            position: fixed;
-           
-        }
-        .fileicon {
-            float: right;
-            width: 21px;
-            height: 21px;
-        }
-        option {
-            background-color: aliceblue;
-            color: black;
-        }
-        select {
-            border: 0px; 
-            background-color: #5c664c;
-            margin-top: 24px;
-            margin-bottom: 12px;
-            color:white;
-        }
-        .search_bar{
-            float: right;
-            border: 1px solid rgba(255, 255, 255, 0.6);
-            border-radius: 4px;
-            width:143px;
-            height:27px;
-            margin-top: 18px;
-        }
-        #search {
-            width:100px;
-            height: 27px;
-            background-color: rgba(255, 255, 255, 0);
-            font-size: 13px;
-            border: 0px ; 
-            color: white;
-            vertical-align: top;
-            border: none;
-        }
-        #search_img {
-            margin-top: 5px;
-            margin-left: 7px;
-            width: 17px;
-            top: 10px;
-            right: 12px;
-        }
-        #documentwrite {
-            float: right; 
-            background-color: rgb(217,173,43);
-            text-align: center;
-            border-radius: 4px;
-            font-size: 12px;
-            font-weight: 500;
-            line-height: 1.5;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            padding: 0px;
-            width: 105px;
-            height: 28px;
-            margin-top: 18px;
-            margin-left: 20px;
-
-        }
-        .file {
-            width:136px;
-            height:176px;
-            float:left;
-            margin-left: 8px;
-            text-align: left;
-            margin-top: 5px;
-        	white-space: nowrap;
-    		overflow: hidden;
-    		text-overflow: ellipsis;
-        }
-        .file_information {
-            border: 1px solid rgb(220,220,220);
-            width: 133px;
-            height: 100px;
-            text-align: center;
-            background-color: #fafafa;
-            border-radius: 2px;
-            margin-bottom: 4px;
-        }
-        .file_img {
-            width:29px;
-            height:29px;
-            margin-top: 25px;
-            margin-bottom: 0;
-        }
-        .extension {
-            font-size:14px;
-            margin-top: -5px;
-            padding: 0;
-            display: block;
-        }
-        .fileA {
-            font-size: 12px;
-        }
-        .recentlyFiles {
-            font-size: 14px;
-            color: rgb(136,136,136)
-        }
-        #left {
-            float: left;
-            width: 200px;
-            height: 969px;
-            background-color: #232323;
-            border: none;
-            position:absolute;
-            display:block;
-        }
-        #right {
-            float: left;
-            margin-left: 200px;
-            height: 100px; 
-        }
-        #fileBoxBtn {
-            float: left; 
-            margin-left:20px;
-            cursor: pointer;
-        	margin-left: 26px;
-        }
-        #fileBoxList {
-            display : none; 
-            border: 1px solid white; 
-            width:150px; 
-            height: 75px; 
-            margin-top: 3px;
-            border-radius: 5px; 
-            margin-left: 60px; 
-            background-color: white;
-            color: black;
-            cursor: pointer;
-        }
-        .fileTypeAndFilter {
-            float: right;
-            width: 20px;
-        }
-        img {
-            filter: opacity(0.6) drop-shadow(0 0 0 white);
-        }  
-        #close{
-            background-color: #232323;
-            border: 0px; width:40px; height:40px; margin-left: 18px; margin-top: 18px; padding:0px; z-index:1; position: fixed;
-        }
-     	#workspaceListBtn {
-	    	margin-top : 24px;
-			white-space: nowrap;
-			text-overflow: ellipsis;
-			overflow: hidden;
-			background-color: rgba(255, 255, 255, 0);
-			color: white;
-			font-weight: bold;
-			border:none;
-	    }
-	    #workspaceDownSvg {
-	        filter: brightness(0) saturate(100%) invert(100%) sepia(100%) saturate(0%) hue-rotate(241deg) brightness(103%) contrast(103%);
-	        width:16px; 
-	        height:16px;
-	    }
-	    #workspace_list {
-	    	display:flex;
-			justify-content: right;
-			position: absolute;
-			margin-top:-10px;
-			margin-left: 240px;
-			z-index: 1;
-	    }
-	    #workspace_list ul{ 
-	        position: absolute;
-	        list-style: none;
-	        background-color: rgb(255, 255, 255);
-	        border-radius: 4px;
-	        width: 160px;
-	        height: 205px;
-	        border:1px solid #e1e1e1;
-	        font-size: 14px;
-	        font-weight: 500;
-	        color:rgb(34, 34, 34);
-	        padding:5px 12px;
-	        line-height: 2.5;
-	        display:none;
-	        overflow: auto;
-	    }
-	    #workspace_list ul::-webkit-scrollbar {
-            width: 4px;
-        }
-        #workspace_list ul::-webkit-scrollbar-track {
-            background-color: white;
-            border-radius: 5px;
-        }
-       	#workspace_list ul::-webkit-scrollbar-thumb {
-            background-color: rgb(225,225,225);
-            border-radius: 5px;
-        }
-	    #workspace_list ul li:nth-child(1){
-	        color:rgb(136, 136, 136); 
-	        font-size: 10.5px; 
-	        pointer-events: none;
-	    }
-	    #workspace_list li{
-	    	padding:2px;
-	        display:flex;
-	        flex-direction: row;
-	        align-items: center;
-	        border-radius:5px;
-	    }
-	    #files {
-	    	padding: 16 16 16 16; width:1300px; height: 98%;  margin-top:15px; margin-left: 32px;
-	    }
-	    .pptx {
-        	filter: brightness(0) saturate(100%) invert(27%) sepia(86%) saturate(1088%) hue-rotate(346deg) brightness(106%) contrast(105%); 
-        } 
-        .xlsx {
-        	filter: brightness(0) saturate(100%) invert(30%) sepia(14%) saturate(1966%) hue-rotate(77deg) brightness(98%) contrast(86%);
-        }
-        .zip {
-        	filter: brightness(0) saturate(100%) invert(21%) sepia(57%) saturate(867%) hue-rotate(238deg) brightness(91%) contrast(92%);
-        }
-        .docx {
-        	filter: brightness(0) saturate(100%) invert(31%) sepia(7%) saturate(3352%) hue-rotate(160deg) brightness(94%) contrast(92%);
-        }
-        .pdf {
-        	filter: brightness(0) saturate(100%) invert(10%) sepia(88%) saturate(5623%) hue-rotate(343deg) brightness(71%) contrast(114%);
-        }
-        .etc {
-        	filter: brightness(0) saturate(100%) invert(62%) sepia(3%) saturate(12%) hue-rotate(47deg) brightness(85%) contrast(91%);
-        }
-        #close > img {
-        	width:35px; height:35px; margin:0px; padding: 0px;
-        }
-        #documentwrite > img {
-           	width:13px; height: 13px; margin-top: 3px;
-		}
-		#documentwrite > span {
-			color:white; vertical-align:top;
-		}
-		#me {
-			margin-right: 26px; font-size: 12px; color: rgb(190,194,183);
-		}
-		#all {
-			font-size: 12px; color: white;
-		}
-		#do {
-			float: left; margin-left:34px;
-		}
-		#do > a {
-			text-decoration:none; color:white;
-		}
-		#decision_making {
-			float: left; margin-left:26px;
-		}
-		#decision_making > a {
-			text-decoration:none; color:white;
-		}
-		#fileBoxBtn > img {
-			width:12px; height:12px; vertical-align: center;
-		}
-		#fileBtn {
-			margin: 17px 0px 0px 10px;
-		}
-		#fileBtn > img {
-			width: 15px; height:15px; margin-right: 8px;  vertical-align: bottom;
-		}
-		#linkbtn {
-			margin: 10px 0px 0px 10px;
-		}
-		#linkbtn > a {
-			text-decoration:none; color:black;
-		}
-		#linkbtn > a > img {
-			width: 15px; height:15px; margin-right: 8px;  vertical-align: bottom;
-		}
-		#recentlyImg > p {
-       		font-size:12px; margin-left:5px;
-       	}
-       	.li {
-       		width:151px;
-       	}
-       	li {
-       		font-size:14px; margin: 5px 0px 0px 0px;
-       		white-space: nowrap;
-			text-overflow: ellipsis;
-			overflow: hidden;
-       	}
-       	#mainText {
-       		float: left; margin-top: 20px; margin-bottom: 3px; color:white; font-size: 22px; margin-right: 8px;  font-weight: 900;
-       	}
-       	#subText {
-       		clear:both; margin-top:0px; font-size: 12px; color: white; margin-bottom: 18px;
-       	}
-       	.fileliImg {
-       		 list-style: none;
-       		 width:200px;
-       	}
-       	.ImgliImg {
-       		list-style: none;
-       		width:200px;
-       	}
-       	.fileliImg > img, .ImgliImg > img {
-       		margin: 0px 5px;
-       		width:13px;
-       		vertical-align:bottom;
-       		filter: brightness(0) saturate(100%) invert(93%) sepia(2%) saturate(30%) hue-rotate(317deg) brightness(84%) contrast(90%);
-       	}
-       	
-	</style>
 </head>
 <body>
 	<div id="left">
@@ -724,8 +353,8 @@
                     <span><img class="fileTypeAndFilter fileicon" src="image/list,gird.svg" style="margin-top: 2px;" /></span>
               	</div>
                 <div id="rightTop">
-                    <div id="do"><a class="hoverRightTop" href="todo.jsp">할 일</a></div>
-                    <div id="decision_making"><a class="hoverRightTop" href="0dm2.jsp">의사결정</a></div>
+                    <div id="do"><a class="hoverRightTop" href="Controller?command=Todo">할 일</a></div>
+                    <div id="decision_making"><a class="hoverRightTop" href="Controller?command=dm2">의사결정</a></div>
                     <div id = "fileBoxBtn" class="hoverRightTop">파일함 <img src="image/down.svg"/></div><br/>
                     <div id = "fileBoxList">
                         <div id="fileBtn"><img src="image/file.svg"/>파일</div>

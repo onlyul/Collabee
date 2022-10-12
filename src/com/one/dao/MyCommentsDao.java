@@ -12,12 +12,13 @@ public class MyCommentsDao {
 	public ArrayList<MyCommentsDto> getMyComments(int member_id) {
 		ArrayList<MyCommentsDto> list = new ArrayList<MyCommentsDto>();
 		String sql = "SELECT d.document_id, c.content, w.workspace_name, d.title, to_char(c.creation_date, '\"\"yy\"년 \"mm\"월 \"dd\"일\"') \"creationDate\" FROM comments c, document d, workspace w "
-				+ "WHERE c.comment_writer = ? AND c.document_id = d.document_id AND d.workspace_id = w.workspace_id AND c.fixed_comment = 0 ORDER BY c.creation_date DESC";
+				+ "WHERE c.comment_writer = ? AND c.document_id = d.document_id AND d.workspace_id = w.workspace_id ORDER BY c.creation_date DESC";
+
 		Connection conn = null;
 		try {
 			conn = DBConnection.getConnection();
 			PreparedStatement pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, member_id); //로그인한 멤버 세션
+			pstmt.setInt(1, member_id); 
 			ResultSet rs = pstmt.executeQuery();
 			while(rs.next()) {
 				int document_id = rs.getInt("document_id");

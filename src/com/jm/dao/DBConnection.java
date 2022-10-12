@@ -14,7 +14,7 @@ public class DBConnection {
 		}else { //새롭게 접속을 해야하는 경우
 			String driver = "oracle.jdbc.driver.OracleDriver";
 			String url = "jdbc:oracle:thin:@localhost:1521:xe";
-			String dbID = "testoraclePort";
+			String dbID = "PROJECT7";
 			String dbPW = "369369";
 			
 			try {

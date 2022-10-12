@@ -11,13 +11,13 @@ public class MyWorkspaceListDao {
 	
 	//내가 가입한 협업공간 목록
 	public ArrayList<MyWorkspaceListDto> getMyWorkspace_List(int member_id) {
-		String sql = "SELECT w.*, m.workspace_alarm FROM workspace w, workspace_mb m " 
+		String sql = "SELECT w.workspace_id, w.workspace_name, w.color, nvl(w.summary,' '), w.invite_url, w.confidential, w.complete, w.creation_date, m.workspace_alarm FROM workspace w, workspace_mb m " 
 				+ "WHERE w.workspace_id = m.workspace_id AND m.member_id = ? ORDER BY w.creation_date";
 		Connection conn = DBConnection.getConnection();
 		ArrayList<MyWorkspaceListDto> list = new ArrayList<MyWorkspaceListDto>();
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, member_id);//로그인한 id 세션?
+			pstmt.setInt(1, member_id);
 			ResultSet rs = pstmt.executeQuery();
 			while(rs.next()) {
 				int workspace_id = rs.getInt(1);

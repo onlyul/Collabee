@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.one.dao.PrivateIdDao;
 import com.yr.dao.HomeDao;
 import com.yr.dao.UpdatebarDao;
 import com.yr.dto.NewsDto;
@@ -27,6 +28,8 @@ public class Updatebar1Action implements Action{
 		ArrayList<NoneFolderDto> listNone = null;
 		ArrayList<NewsDto> list = null;
 		ArrayList<IssueDto> list2 = null;
+		PrivateIdDao dao = new PrivateIdDao();
+		int privateSpaceId = dao.getPrivateId(member_id);
 		String email = "";
 		String corName = "";
 		int partnerN = 0;
@@ -54,6 +57,8 @@ public class Updatebar1Action implements Action{
 			request.setAttribute("picture", picture);
 		}
 		request.setAttribute("list3", listNone);
+		request.setAttribute("workspaceId", privateSpaceId);
+		request.setAttribute("loginId", member_id);
 		request.setAttribute("partnerN", partnerN);
 		request.setAttribute("name", name);
 		request.setAttribute("list", list);

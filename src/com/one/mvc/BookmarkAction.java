@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.jm.dao.BookmarkDao;
 import com.jm.dto.BookmarkDto;
+import com.one.dao.PrivateIdDao;
 import com.yr.dao.HomeDao;
 
 public class BookmarkAction implements Action {
@@ -44,6 +45,11 @@ public class BookmarkAction implements Action {
 				picture = "image/upload/" + picture;
 			request.setAttribute("picture", picture);
 		}
+		
+		PrivateIdDao dao = new PrivateIdDao();
+		int privateSpaceId = dao.getPrivateId(loginId);
+		request.setAttribute("workspaceId", privateSpaceId); 
+		
 //		System.out.println("BookmarkAction에서 bList : " + bList);
 		request.setAttribute("bList", bList);
 		request.getRequestDispatcher("bookmark2.jsp").forward(request, response);

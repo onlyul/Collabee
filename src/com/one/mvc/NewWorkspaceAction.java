@@ -19,9 +19,8 @@ public class NewWorkspaceAction implements Action{
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		String title = request.getParameter("title");
-		String invite_url = "http://localhost:9090/WebProject1/workspace_index.jsp?workspaceId=&workspaceName="+title;
 		String summary = request.getParameter("summary");
-		int loginId = 4;//Integer.parseInt(request.getParameter("loginId"));
+		int loginId = Integer.parseInt(request.getParameter("loginId"));
 
 		ArrayList<String> colorList = new ArrayList<String>();
 		colorList.add("rgb(191, 128, 255)");
@@ -33,12 +32,13 @@ public class NewWorkspaceAction implements Action{
 		colorList.add("rgb(250, 164, 119)");
 		colorList.add("rgb(46, 122, 83)");
 		int r = (int)(Math.random()*8);
-		String color = colorList.get(r);
+		String color = colorList.get(r);//협업공간 색
 		
 		NewWorkspaceDao dao = new NewWorkspaceDao();
-		dao.setWorkspace(new NewWorkspaceDto(title, color, summary, invite_url, loginId));
-		int workspace_id = dao.getNewWorkspace_id(title);
-		dao.setWorkspaceMember(loginId, workspace_id);
+		dao.setWorkspace(new NewWorkspaceDto(title, color, summary, "", loginId));//협업공간 생성
+		int workspace_id = dao.getNewWorkspace_id(title);//새로 만든 공간 id
+		dao.setWorkspaceMember(loginId, workspace_id);//협업공간 멤버 테이블 삽입
+		dao.connectWorkspace(loginId, workspace_id);//최근 접속한 협업공간에 추가
 		
 		response.setContentType("application/json");
 		response.setCharacterEncoding("UTF-8");

@@ -13,7 +13,7 @@ public class DBConnection {
 		} else {//접속 해야하는 경우
 			String driver = "oracle.jdbc.driver.OracleDriver";
 			String url = "jdbc:oracle:thin:@localhost:1521:xe";//"jdbc:oracle:thin:@192.168.1.7:1521:xe";
-			String dbid ="testoraclePort";
+			String dbid ="PROJECT7";
 			String dbpw="369369";
 			
 			try {

@@ -22,6 +22,7 @@ public class WorkspaceFindManagerDao { //이 공간의 매니저인지 아닌지
 				int private_fl = rs.getInt("private_fl");
 
 				WorkspaceFindManagerDto dto = new WorkspaceFindManagerDto(member_id, private_fl);
+				list.add(dto);
 			}
 			DBConnection.getClose(pstmt, rs);
 		} catch (SQLException e) {

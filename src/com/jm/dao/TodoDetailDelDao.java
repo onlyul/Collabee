@@ -14,7 +14,7 @@ public class TodoDetailDelDao {
 			PreparedStatement pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, todo_id);
 			result += pstmt.executeUpdate();
-			
+			pstmt.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -25,7 +25,7 @@ public class TodoDetailDelDao {
 			PreparedStatement pstmt = conn.prepareStatement(sql1);
 			pstmt.setInt(1, todo_id);
 			result += pstmt.executeUpdate();
-			
+			pstmt.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

@@ -23,6 +23,8 @@ public class Collabee_newinfoDao {
 			Collabee_newinfoDto dto = new Collabee_newinfoDto(collabee_newinfo_id, title, content, creation_date);
 			list1.add(dto);
 		}
+		rs.close();
+		pstmt.close();
 		return list1;
 	}
 	
@@ -42,6 +44,8 @@ public class Collabee_newinfoDao {
 			CollabeenewinfoDto dto = new CollabeenewinfoDto(title, content, creation_date);
 			return dto;
 		}
+		rs.close();
+		pstmt.close();
 		return null;
 	}
 }

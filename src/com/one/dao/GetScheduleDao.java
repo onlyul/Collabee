@@ -48,6 +48,8 @@ public class GetScheduleDao {
 			while(rs.next()) {
 				list.add(rs.getInt("member_id"));
 			}
+			rs.close();
+			pstmt.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

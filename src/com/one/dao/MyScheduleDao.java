@@ -33,7 +33,8 @@ public class MyScheduleDao {
 				MyScheduleDto sdto = new MyScheduleDto(dto.getWorkspace_id(), schedule_id, dto.getMember_id(), title, start_date, finish_date);
 				list.add(sdto);
 			}
-			DBConnection.getConnection();
+			rs.close();
+			pstmt.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -64,7 +65,8 @@ public class MyScheduleDao {
 					MyScheduleDto dto = new MyScheduleDto(workspace_id, schedule_id, member_id, title, start_date, finish_date);
 					list.add(dto);
 				}
-				DBConnection.getConnection();
+				rs.close();
+				pstmt.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}

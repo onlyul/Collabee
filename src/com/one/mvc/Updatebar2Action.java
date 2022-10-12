@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.one.dao.PrivateIdDao;
 import com.yr.dao.HomeDao;
 import com.yr.dao.UpdatebarDao;
 import com.yr.dto.ArticleDto;
@@ -28,6 +29,8 @@ public class Updatebar2Action implements Action{
 		String corName = "";
 		UpdatebarDao uDao = new UpdatebarDao();
 		ArrayList<ArticleDto> list = null;
+		PrivateIdDao dao = new PrivateIdDao();
+		int privateSpaceId = dao.getPrivateId(member_id);
 		int partnerN = 0;
 		String picture = null;
 		try {
@@ -53,6 +56,8 @@ public class Updatebar2Action implements Action{
 		}
 		request.setAttribute("name", name);
 		request.setAttribute("partnerN", partnerN);
+		request.setAttribute("workspaceId", privateSpaceId);
+		request.setAttribute("loginId", member_id);
 		request.setAttribute("list", list);
 		request.getRequestDispatcher("0updatebar2.jsp").forward(request, response);
 	}

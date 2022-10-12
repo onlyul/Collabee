@@ -2,6 +2,8 @@
     pageEncoding="UTF-8"%>
 <%
 	int loginId = (Integer)session.getAttribute("loginId");
+	int corporation_id = (Integer)session.getAttribute("corporation_id");
+	ArrayList<Option2CheckedDto> list1 = (ArrayList<Option2CheckedDto>)request.getAttribute("list1");
 %>
 
 <!DOCTYPE html>
@@ -12,511 +14,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>가격 및 결제</title>
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
-   
-    <style>  /* 설정 상단 탭 */
-    body, *{
-        font-family: -apple-system,BlinkMacSystemFont,Malgun Gothic,Hiragino Kaku Gothic ProN,Hiragino Sans,Meiryo,MS PGothic,sans-serif,Dotum;
-        box-sizing: border-box;  
-        margin:0;
-        padding:0;
-        outline: none;
-        font-size:13px;
-        color:rgb(34, 34, 34);
-    }
-    div{
-        -webkit-box-sizing: border-box;
-        -moz-box-sizing: border-box;  
-        box-sizing: border-box; 
-    }
-    a{
-        text-decoration:none;
-    }
-    input, button{
-        border:none;
-    }
-    .micro{
-        margin-top: 5px;
-    }
-    .im{
-    	width: 240px;
-    	float: left;
-    	margin-left: -10px;
-    	margin-top: -10px;
-    }
-    .content{
-    	flex: 1 1 auto;
-    	height: 100vh;
-	    overflow-y: auto;
-	    overflow-x: hidden;
-	    padding: 40px;
-	    margin-top: -30px;
-    }
-    header{
-    	width: 100%;
-    	height: 106px;
-        position: fixed;
-        background-color: rgb(255,255,255);
-        z-index: 1;
-    }
-    .setting_top{
-    	position: relative;
-	    height: 68px;
-	    display: flex;
-	    flex-direction: row;
-    }
-    .title{
-        flex: 1 1 auto;
-    	display: flex;
-	    flex-direction: row;
-	    -webkit-box-pack: justify;
-	    justify-content: space-between;
-	    -webkit-box-align: center;
-	    align-items: center;
-	    margin-right: 20px;
-    }
-    h1{
-    	font-size: 22px;
-	    font-weight: bold;
-	    color: rgb(34, 34, 34);
-	    text-shadow: none;
-	    margin-left: 40px;
-    }
-    .mastersearchbar{
-    	display: flex;
-	    flex-direction: row;
-	    position: relative;
-	    align-items: center;
-    }
-    .searchbar { /*상단 검색창*/
-        will-change: transform;
-        background-color: rgba(255, 255, 255, 0);
-        height:28px;
-        width:144px;
-        font-size:13px;
-        border-radius:4px;
-        border: 1px solid rgb(225, 225, 225);
-        transition: border-color 0.2s ease 0s, background-color 0.2s ease 0s;
-        margin-right:16px;
-        padding:0px 32px;
-    }
-    .searchbar::placeholder{
-        color:rgb(225, 225, 225);
-    }
-    .searchbar:hover{
-        border:1px solid rgb(136, 136, 136);
-    } 
-    .searchbar:focus{
-        background-color: rgba(255, 255, 255, 0.2);
-        border: ipx solid rgb(136, 136, 136);
-        width:269px;
-    }
-    .search_icon{
-        fill: rgb(225, 225, 225);
-        position: absolute;
-        transition: fill 0.2s ease 0s;
-        -webkit-box-align: center;
-        border:none;
-        margin-left:10px;
-    }
-    .topright{
-    	position: relative;
-	    display: flex;
-	    flex-direction: row;
-	    -webkit-box-align: center;
-	    align-items: center;
-	    -webkit-box-pack: end;
-	    justify-content: flex-end;
-	    padding-right: 280px;
-    }
-    .btn1{
-    	width: 32px;
-	    height: 32px;
-	    border-radius: 50%;
-	    padding: 1px;
-	    background-color: rgba(0, 0, 0, 0.1);
-	    content: "";
-        cursor: pointer;
-        position: relative;
-    }
-    .btn1::before{
-    	position: absolute;
-	    display: block;
-	    top: 0px;
-	    left: 0px;
-	    background-color: rgb(255, 255, 255);
-	    width: 30px;
-	    height: 30px;
-	    background-image: url(https://down.collabee.co/userProfile/2972613);
-	    border-radius: 50%;
-	    background-size: cover;
-	    background-position: center center;
-    	content: "";
-    }
-    .btn2{
-    	width: 32px;
-	    height: 32px;
-	    margin-left: 8px;
-	    padding-top: 4px;
-	    border-radius: 4px;
-	    cursor: pointer;
-	    background-color: white;
-    }
-    .btn3{
-    	display: flex;
-	    flex-direction: row;
-	    -webkit-box-align: center;
-	    align-items: center;
-	    margin-left: 8px;
-	    padding: 0px 4px 0px 6px;
-	    border-radius: 4px;
-	    background-color: white;
-	    color: rgb(34, 34, 34);
-	    font-size: 13px;
-	    line-height: 32px;
-	    cursor: pointer;
-    }
-    .number{
-    	display: inline-block;
-	    padding-left: 4px;
-	    padding-right: 4px;
-    }
-    .btn2:hover, .btn3:hover{
-    	filter: brightness(90%);
-		transition: transform 10s;
-    }
-    .header_mid{
-    	display: flex;
-	    flex-direction: row;
-	    -webkit-box-pack: justify;
-	    justify-content: space-between;
-	    position: relative;
-	    z-index: 2;
-	    height: 25px;
-	    margin: 0px 20px;
-	    border: none;
-	    border-bottom: 1px solid lightgray;
-    }
-    .sort{
-    	margin-left: 6px;
-	    display: flex;
-	    flex-direction: row;
-    }
-    .m{
-    	margin: 0px 16px;
-    	font-size: 12px;
-    	cursor: pointer;
-    	color: rgb(136,136,136);
-    }
-    .m:hover{
-    	color: black;
-    	font-weight: bold;
-    }
-    .selected{
-    	color: black;
-    	font-weight: bold;
-    	border: none;
-    	border-bottom: 1px solid black;
-    }
-    .posting_bnt {/* 상단 문서작성버튼*/
-        color: rgb(255, 255, 255);
-        font-size: 12px;
-        font-weight: 500;
-        border-radius: 4px;
-        border: 1px solid rgb(217, 173, 43);
-        background-color: rgb(217, 173, 43);
-        cursor: pointer;
-        width: 105px;
-        height:28px;
-        border:1px solid rgba(255, 255, 255, 0.2);
-        margin-right:70px;
-        transition: background-color 0.2s ease 0s, color 0.2s ease 0s, border-color 0.4s ease 0s, fill 0.2s ease 0s, opacity 0.2s ease 0s;
-    }
-    .posting_bnt:hover{
-        background-color: rgb(179, 142, 34);
-        border-color: rgb(179, 142, 34);
-    }
-    .posting_icon{ /*svg 색지정은 fill로!!*/
-        fill: rgb(255, 255, 255);
-        width:13px;
-        height:13px;
-    }
-    .non{
-        display:none;
-    }
-
-
-    </style>
- 
-    <style>
-    #setting_price{
-        display:flex;
-        flex-direction:row;
-        width: 100vw;
-        min-width: 1100px;
-        height: 100vh;
-        overflow:hidden;
-    }
-    #price_container1{
-        display:flex;
-        flex-direction:column;
-        /* width: 100%; */
-        flex:1 1 auto;
-        height: 100vh;
-        min-width: 690px;
-        overflow-y: auto;
-    }
-    #price_container2{
-        min-width: 680px;
-        max-width: 900px;
-        overflow-x: hidden;
-        padding: 40px;
-        margin-top: 104px;
-    }
-    #price_head{
-        display:flex;
-        flex-direction:row;
-        min-width: 860px;
-        margin-bottom: 30px;
-        line-height:1.6;
-        justify-content:space-between;
-    }
-    #price_bnt1{
-        display:none;
-    }
-    #price_bnt1_label{ /* 동그라미 라벨*/
-        position: relative;
-        width: 36px;
-        height: 22px;
-        background-color: rgb(217, 173, 43);
-        border-radius: 11px;
-        cursor: pointer;
-        content:"";
-    }
-    #price_monthly{
-        font-size:12px; 
-        padding-right:10px;
-    }
-    #price_daily{
-        font-size:12px; 
-        padding-left:10px;
-        color:rgb(136, 136, 136);
-    }
-    /* 버튼 누르면 가격 바뀌고 동그라미 옮겨짐. 제이쿼리 */
-    .bnt1_style{ /* 동그라미*/
-        display: block;
-        position: absolute;
-        top: 2px;
-        left: 0px;
-        cursor: pointer;
-        background-color: rgb(255, 255, 255);
-        width: 18px;
-        height: 18px;
-        border-radius: 9px;
-        content: "";
-        transition: transform 0.2s ease 0s;
-        transform: translateX(2px);
-    }
-    table{
-        width: 860px;
-        border-collapse: separate;
-        border-spacing: 0px;
-        margin-bottom: 8px;
-        font-size:14px;
-    }
-    thead, tbody{
-        display: table-row-group;
-        vertical-align: middle;
-        border-spacing: 0px;
-    }
-    tbody{
-        margin-bottom:30px;
-    }
-    th{
-        border-bottom:1px solid rgb(34, 34, 34);
-        text-align:left;
-        font-size: 14px;
-        line-height: 22px;
-        font-weight: bold;
-    }
-    .price_table1{
-        width: 140px;
-        height: 226px;
-        position: relative;
-        text-align: center;
-        padding: 0px 12px 10px;
-        margin: 0px 8px 0px 45px;
-    }
-    .price_table2{
-        text-align: left;
-        vertical-align: middle;
-        padding: 12px 0px;
-        line-height: 1.5;
-        color: rgb(34, 34, 34);
-        font-size: 14px;
-        font-weight: normal;
-        border-bottom: 1px solid rgb(225, 225, 225);
-    }
-    .price_table3{
-        text-align: center;
-        vertical-align: middle;
-        padding: 12px 8px;
-        line-height: 1.5;
-        color: rgb(34, 34, 34);
-        border-bottom: 1px solid rgb(225, 225, 225);
-        font-size: 14px;
-    }
-    .price_table4{
-        display: flex;
-        -webkit-box-align: center;
-        padding: 16px 0px;
-        line-height: 1.57;
-        color: rgb(34, 34, 34);
-        font-size: 14px;
-        border-bottom: 1px solid rgb(225, 225, 225);
-        align-items: center;
-    }
-    .price_table5{
-        text-align: center;
-        vertical-align: middle;
-        padding: 16px 8px;
-        line-height: 1.5;
-        color: rgb(34, 34, 34);
-        border-bottom: 1px solid rgb(225, 225, 225);
-        font-size: 14px;
-        width:172px;
-    }
-    .price_table6{
-        border-right: 1px solid rgb(225, 225, 225);
-    }
-    .font_weight{
-        font-weight:bold;
-    }
-    .price_thead_title{
-        height: 26px;
-        font-size: 16px;
-        font-weight: bold;
-        line-height: 26px;
-        padding: 0px 16px;
-        border-radius: 8px;
-        margin-bottom:30px;
-    }
-    .price_thead_bnt{
-        position: relative;
-        font-size: 16px;
-        padding: 10px 0px;
-        margin-top:25px;
-        border-radius: 8px;
-        width: 100%;
-        border-width:1px;
-        border-style:solid;
-        font-weight: 500;
-        line-height: 1.5;
-        transition: background-color 0.2s ease 0s, color 0.2s ease 0s, border-color 0.4s ease 0s, fill 0.2s ease 0s, opacity 0.2s ease 0s;
-    }
-    .thead_bnt_style1{
-        margin-top:61px;
-        cursor: not-allowed;
-        opacity: 0.6;
-        background-color: transparent;
-        border-color: rgb(193, 193, 193);
-    }
-    .thead_bnt_style2{
-        color:rgb(255,255,255);
-        border-color:rgb(217,173,43);
-        background-color:rgb(217,173,43);
-        cursor:pointer;
-    }
-    .thead_bnt_style2:hover{
-        background-color: rgb(179, 142, 34);
-        border-color: rgb(179, 142, 34);
-    }
-    .thead_bnt_style3{
-        color:rgb(255,255,255);
-        border-color:rgb(0,113,99);
-        background-color:rgb(0, 113, 99);
-        cursor:pointer;
-    }
-    .thead_bnt_style3:hover{
-        background-color: rgb(17, 87, 78);
-        border-color: rgb(17, 87, 78);
-    }
-    .thead_bnt_style4{
-        color:rgb(0, 113, 99);
-        border-color:rgb(0, 113, 99);
-        background-color:rgb(255, 255, 255);
-        cursor:pointer;
-    }
-    .thead_bnt_style4:hover{
-        color:rgb(255,255,255);
-        background-color:rgb(0, 113, 99);
-    }
-    .price_span_style1{
-        height: 32px;
-        margin-left: 4px;
-        border-radius: 8px;
-        background-color: rgb(245, 244, 243);
-        padding: 4px 8px;
-        font-weight: bold;
-        line-height: 24px;
-        font-size: 16px;
-        text-align: center;
-    }
-    .price_ask{
-        margin-left: 4px;
-        font-size: 14px;
-        border-bottom:1px solid rgb(204, 153, 0);
-        color: rgb(204, 153, 0);
-        background-color: rgb(255, 255, 255);
-        cursor:pointer;
-    }
-    .price_messenger{
-        font-size: 14px;
-        line-height: 22px;
-        padding: 2px 6px;
-        margin-left:3px;
-        border-radius: 8px;
-        position: relative;
-        font-weight: 500;
-        text-align: center;
-        transition: background-color 0.2s ease 0s, color 0.2s ease 0s, border-color 0.4s ease 0s, fill 0.2s ease 0s, opacity 0.2s ease 0s;
-        cursor: pointer;
-        color: rgb(204, 153, 0);
-        background-color: rgb(255, 255, 255);
-        border: 1px solid rgb(217, 173, 43);
-    }
-    #price_fold{
-        display: flex;
-        align-items: center;
-        height: 32px;
-        margin-bottom: 24px;
-        padding: 5px 16px 5px 20px;
-        border-radius: 16px;
-        box-shadow: rgb(0 0 0 / 20%) 0px 2px 4px 0px;
-        border: 1px solid rgba(0, 0, 0, 0.1);
-        background-color: rgb(255, 255, 255);
-        transition: background-color 0.2s ease 0s, color 0.2s ease 0s, border-color 0.4s ease 0s;
-        font-size: 14px;
-        line-height: 22px;
-        cursor:pointer;
-    }
-    ::-webkit-scrollbar{
-        width:4px;
-    }
-    ::-webkit-scrollbar-thumb{
-        border-radius:2px;
-        background:#e1e1e1;
-    }
-
-
-    /* .none{
-        display:none;
-    }
-    .hidden{
-        visibility:hidden;
-    } */
-   
-    </style>
-
+   	<link href="css/setting_price.css" rel="stylesheet" type="text/css">
+   	<link rel="icon" href="images/favicon.ico" type="image/x-icon">
+   	<style>
+   	.home_option_ul {
+  		padding: 13px;
+  	}
+   	</style>
     <script>
     var loginId = <%=loginId%>;  
     
@@ -602,17 +106,47 @@
         		    location.href="Controller?command=SearchP1&search="+search+"&member_id="+member_id;
         		}
     		});
+			
+			
+			
+    		$(".home_btn21").on("click", function(){
+    			$("#partnerInviteBox").css("display","block");
+    			$('.homehead_background1').css('display', 'block');
+    		});
+    		
+    		$('.homehead_background1').click(function(){
+    			var result = confirm('파트너 초대를 그만하고 나가시겠습니까?');
+    			if(result){
+    				$("#partnerInviteBox").css("display","none");
+    		        $('.homehead_background1').css("display", "none");
+    			}
+    		});
+    		
+    		$("#invitePartner").click(function(){
+    		    $("#partnerInviteBox").css("display","block");
+    		    $('.homehead_background1').css("display", "block");
+    		});
+    		
+    		$("#inviteXbtn").click(function(){
+    		    $("#partnerInviteBox").css("display","none");
+    		    $('.homehead_background1').css("display", "none");
+    		    $("#inviteMails").html("");
+    		});
+			
+			
         });
 
     </script>
 </head>
 <body>
+<%@ include file="WEB-INF/include/include_PartnerModal.jspf" %>
+<%@ include file="WEB-INF/include/include_NewWorkspaceModal.jspf"%>
 <div style="z-index:20; position:absolute;">
 <%@ include file="payment.jsp"%>
 </div>
 <div id="setting_price">
 
-<%@ include file="WEB-INF/include/HomeSidebar.jspf" %>
+<%@ include file="HomeSidebar2.jspf" %>
     
 <section id="price_container1"> 
     <header>
@@ -630,27 +164,18 @@
                 </div>
         	</div>
         </div>
-    		
-    	<%@ include file="WEB-INF/include/homehead2.jspf" %>	
-           <!--  <div class="topright">
-                <button class="btn1"></button>
-                <button class="btn2">
-                <svg width="20px" height="20px" viewBox="0 0 24 24"><path fill="#888888" fill-rule="evenodd" d="M15 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm-9-2V7H4v3H1v2h3v3h2v-3h3v-2H6zm9 4c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"></path></svg>
-                </button>
-                <button class="btn3">
-                <span>파트너</span>
-                <span class="number">4</span>
-                </button>
-            </div> -->
+    	<div class="topright">
+    		<%@ include file="homehead11.jspf" %>
+    	</div>	
         </div>
     	
     	<div class="header_mid">
     		<nav class="sort">
-    			<a class="m" href="">내 정보</a>
+    			<a class="m" href="Controller?command=option1">내 정보</a>
     			<a class="m" href="Controller?command=option2">알림</a>
-    			<a class="m" href="partner_management.jsp">파트너 관리</a>
+    			<a class="m" href="Controller?command=option4">파트너 관리</a>
     			<a class="m" id="ready1">외부 서비스</a>
-    			<a class="m selected" href="setting_price.jsp">가격 및 결제</a>
+    			<a class="m selected" href="">가격 및 결제</a>
     			<a class="m" href="Controller?command=option3">업데이트</a>
     			<a class="m" id="ready2">Webhook &#946;</a>
     		</nav>

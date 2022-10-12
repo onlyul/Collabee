@@ -9,15 +9,20 @@ public class WorkspacePostListDto {
 	private int document_id;
 	
 	public WorkspacePostListDto() {}
-	public WorkspacePostListDto(String name, String kanban_icon_p, String title, String creation_date, String edit_date, int document_id) {
+	
+	
+	public WorkspacePostListDto(String name, String kanban_icon_p, String title, String creation_date, String edit_date,
+			int document_id) {
+		super();
 		this.name = name;
 		this.kanban_icon_p = kanban_icon_p;
 		this.title = title;
 		this.creation_date = creation_date;
+		this.edit_date = edit_date;
 		this.document_id = document_id;
 	}
-	
-	
+
+
 	public String getName() {
 		return name;
 	}

@@ -6,134 +6,33 @@
 	<meta charset="UTF-8">
 	<title>Insert title here</title>
 	<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
-<script>
-    $(function(){
-        $("#slideComment").click(function(){
-            $("#comment").animate({width:"toggle"},400);
-
-        });
-        $("#checkbox").click(function(){
-            alert("댓글만보기");
-        });
-        $(".recommentBtn").click(function(){
-            alert("답글쓰기");
-        });
-        $("#save").click(function(){
-            alert("저장");
-        });
-        $("#save").mouseenter(function() {
-                $("#save").css("background-color","#d9ad2b");
-        });
-        $("#save").mouseleave(function() {
-            $("#save").css("background-color","#d3d3d3");
-        });
-        $("#recommentXbtn").click(function(){
-            $("#clickRecomment").css("display","none")
-        });
-    });
-</script>
-<style>
-    #comment {
-        width: 380px;
-        height:875px;
-        background-color: #fafafa;
-        float: right;
-        margin-top: 70px;
-    }
-    #comments {
-        margin-top: 10px;
-        margin-left: 20px;
-        width:360px;
-        height:650px;
-        overflow: auto;
-    }
-    #comments::-webkit-scrollbar{
-        width: 5px;
-    }
-    #comments::-webkit-scrollbar-thumb{
-        background-color: #e1e1e1;
-        border-radius: 5px;
-    }
-    #comments::-webkit-scrollbar-track{
-        background-color: #e1e1e1;
-        border-radius: 5px;
-    }
-    .profile {
-        width:22px;
-        float: left;
-    }
-    .information {
-        padding: 0px;
-        margin: 0px;
-        margin-left: 25px;
-        font-size: 12px;
-        margin-top: 5px;
-    }
-    .recommentBtn {
-        width:60px;
-        font-size: 12px;
-        padding: 0px;
-        margin-left: 25px;
-        margin-top: 10px;
-    }
-    #commentwrite {
-        width: 380px;
-        height: 175px;
-    }
-    #textbox {
-        border: none;
-        width: 320px;
-        height:100px;
-        text-align:start;
-        margin-top: 5px;
-    }
-    #checkbox {
-        margin-left: 20px; 
-        width:10px;
-    }
-    .checkboxCotent {
-        font-size: 12px;
-        vertical-align: center;
-        margin-top: 0px;
-        padding: 0px;
-    }
-    #save {
-        margin-left: 280px;
-        margin-bottom: 10px;
-        border: none;
-        background-color: #d3d3d3;
-        color:white;
-        border-radius: 5px;
-        height:25px;
-        width: 40px;
-        font-size: 12px;
-    }
-    .recommentContent {
-        padding: 0px;
-        font-size: 12px;
-        margin-top: 0px;
-        margin-bottom: 0px;
-    }
-    #clickRecomment{
-        width:320px;
-        height: 45px;
-        border-bottom: 1px solid #d3d3d3;
-    }
-    #recommentXbtn {
-        float: right;
-        width: 20px;
-        height: 20px;
-        padding: 0px;
-        margin-top: 5px;
-        border:none;
-        background-color:white;
-    }
-    #buttonImg {
-        width: 20px;
-        filter: brightness(0) saturate(100%) invert(0%) sepia(86%) saturate(2941%) hue-rotate(215deg) brightness(85%) contrast(110%);
-    
-    }
-</style>
+	<link href="css/comment.css" rel="stylesheet" type="text/css">
+	<script>
+	    $(function(){
+	        $("#slideComment").click(function(){
+	            $("#comment").animate({width:"toggle"},400);
+	
+	        });
+	        $("#checkbox").click(function(){
+	            alert("댓글만보기");
+	        });
+	        $(".recommentBtn").click(function(){
+	            alert("답글쓰기");
+	        });
+	        $("#save").click(function(){
+	            alert("저장");
+	        });
+	        $("#save").mouseenter(function() {
+	                $("#save").css("background-color","#d9ad2b");
+	        });
+	        $("#save").mouseleave(function() {
+	            $("#save").css("background-color","#d3d3d3");
+	        });
+	        $("#recommentXbtn").click(function(){
+	            $("#clickRecomment").css("display","none")
+	        });
+	    });
+	</script>
 </head>
 <body>
 	<div id="comment">

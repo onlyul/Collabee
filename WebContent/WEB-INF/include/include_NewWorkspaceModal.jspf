@@ -7,232 +7,18 @@
 <head>
 <meta charset="UTF-8">
 <title>새 협업공간 만들기</title>
-<!-- <script src="js/jquery-3.6.0.min.js"></script> -->
-<!-- <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script> -->
-    
-<style>
-	body, *{
-        font-family: -apple-system,BlinkMacSystemFont,Malgun Gothic,Hiragino Kaku Gothic ProN,Hiragino Sans,Meiryo,MS PGothic,sans-serif,Dotum;
-        margin:0;
-        padding:0;
-        outline: none;
-    }
-    .modal_cws{
-    	 transition: opacity 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
-         display: flex;
-         justify-content:center;
-         position:fixed;
-         margin:0;
-         width:100%;
-         height:100%;
-         background-color:rgba(0, 0, 0, 0.5);
-         box-shadow: 0px 11px 15px -7px rgb(0 0 0 / 20%), 0px 24px 38px 3px rgb(0 0 0 / 14%), 0px 9px 46px 8px rgb(0 0 0 / 12%);
-         align-items: center;
-         z-index: 100;
-     }
-     .modal_content{
-         background-color: #fff;
-         margin:15% auto;
-         width:80%;
-     }
-     #create_workspace{
-         width:580px;
-         height:445px;
-         max-width:600px;
-         max-height:calc(100% - 96px);
-         border-radius: 4px;
-         margin: 48px;
-         background-color: #fff;
-         display: flex;
-         position: relative;
-         overflow-y: auto;
-         flex-direction: column;
-         flex: 0 1 auto;
-         box-shadow: 0px 11px 15px -7px rgb(0 0 0 / 20%), 0px 24px 38px 3px rgb(0 0 0 / 14%), 0px 9px 46px 8px rgb(0 0 0 / 12%);
-     }
-     #container1_cws{
-         height: 445px;
-         border-radius: 4px;
-         box-shadow: rgb(0 0 0 / 10%) 0px 0px 8px 2px;
-         background-color: var(--white);
-         padding: 28px;
-         display: flex;
-         flex-direction: column;
-         -webkit-box-pack: justify;
-         justify-content: space-between;
-     }
-     .header_cws{
-         display:flex;
-         justify-content:space-between;
-         margin-top:3px;
-     }
-     .header_cws span{
-         font-size: 16px;
-         font-weight: bold;
-     }
-     .header_cws p{
-         font-size: 12px;
-         color: rgb(34, 34, 34);
-         line-height: 1.55;
-         color: rgb(136, 136, 136);
-         margin-top:4px;
-     }
-     .header_summary{
-     	font-size: 12px;
-		line-height: 1.5;
-		color: rgb(136, 136, 136);
-     }
-     #create_workspace .closing_bnt{
-         padding-left: 0;
-         padding-right: 0;
-         cursor: pointer;
-         transition: fill 0.2s ease 0s;
-         background-color: transparent;
-         fill: rgb(136, 136, 136);
-         border:none;
-     }
-     #create_workspace .closing_bnt:hover{
-         fill:rgb(86, 86, 86);
-     }
-     #create_workspace label{
-         display: block;
-         font-size: 12px;
-         font-weight: bold;
-         color: rgb(136, 136, 136);
-         padding-bottom: 10px;
-     }
-     #setname_cws{
-         width: 100%;
-         padding-bottom: 10px;
-         font-size: 20px;
-         line-height: 1.5;
-         border-top: none;
-         border-right: none;
-         border-left: none;
-         border-image: initial;
-         border-bottom: 1px solid rgb(225, 225, 225);
-         transition: border-bottom-color 0.2s ease 0s;
-         background-color:#fff;
-         color:rgb(34, 34, 34);
-         overflow: visible;
-         outline: 0;
-     }
-     #setsummary_cws{
-         width:100%;
-         border-radius: 4px;
-         padding-bottom:40px;
-         padding-top:15px; 
-         padding-left:12px;
-         font-size: 14px;
-         border: 1px solid rgb(225, 225, 225);
-         overflow: auto;
-         resize: none;
-         outline: 0;
-     }
-     #setname_cws::placeholder{
-         color:rgb(193, 193, 193);
-     }
-     textarea::placeholder{
-         font-size: 14px;
-         color:rgb(193, 193, 193);
-     }
-     #cancel_bnt_cws{
-         font-size: 14px;
-         padding-right: 27px;
-         padding-left: 27px;  
-         margin-right: 5px;   
-         background-color: transparent;
-         cursor: pointer;
-         transition: color 0.2s ease 0s, background-color 0.2s ease 0s;
-         color: rgb(136, 136, 136);
-         line-height: 1.5;
-         border:none;
-     }
-     #cancel_bnt_cws:hover{
-     	color:rgba(136, 136, 136, 0.8);
-     }
-     #create_bnt_cws{
-         font-size: 14px;
-         padding: 5px 32px;
-         position: relative;
-         color: rgb(255, 255, 255);
-         font-weight: 500;
-         line-height: 1.5;
-         border-radius: 4px;
-         transition: background-color 0.2s ease 0s, color 0.2s ease 0s, border-color 0.4s ease 0s, fill 0.2s ease 0s, opacity 0.2s ease 0s;
-         border: 1px solid rgb(51, 132, 108);
-         background-color: rgb(51, 132, 108);
-         cursor: pointer;
-         text-align: center;
-     }
-     #create_bnt_cws:hover{
-         background-color: rgb(42, 98, 81);
-         border-color: rgb(42, 98, 81);
-     }
-     #cnt1, #cnt2, #cnt3, #cnt4{
-         color: rgb(51, 132, 108);
-     }
-     .cnt_cws{
-         color: rgb(136, 136, 136);
-         line-height: 1.5;
-         font-size: 12px;
-         padding: 3px 0px 9px 4px;
-         transition: opacity 0.2s ease 0s;
-     }
-     #footer_cws{
-         display: flex;
-         flex-direction: row;
-         -webkit-box-pack: end;
-         justify-content: flex-end;
-         line-height: 1;
-     }
-     .hidden{
-         visibility: hidden;
-         opacity:0;
-     }
-     .none{
-         display:none;
-         opacity:0;
-    }
-	.alert{
-		background-color:rgb(66,64,63);
-        color:rgb(255,255,255);
-        font-size:14px;
-        width:320px;
-        height:auto;
-        border-radius:4px;
-        position:fixed;
-        bottom:0;
-        margin:20px;
-        padding:16px;
-        overflow:auto;
-        line-height:1.6;
-        display:none;
-        z-index:200;
-        box-shadow: 0px 11px 15px -7px rgb(0 0 0 / 20%), 0px 24px 38px 3px rgb(0 0 0 / 14%), 0px 9px 46px 8px rgb(0 0 0 / 12%);
-     }
-     .closed{
-         margin-left:20px;
-         float:right;
-         cursor:pointer;
-     }
-   
-    </style>
-
-</style>
-
+<link href="css/include_NewWorkspaceModal.css" rel="stylesheet" type="text/css">    
   <script>
 	var workspaceId = <%=request.getParameter("workspaceId")%>;
 	var workspaceName = "<%=request.getParameter("workspaceName")%>";
-	var loginId = 4; <%-- <%=(Integer)session.getAttribute("loginJH")%>; --%>
+	var loginId = <%=loginId%>; 
 	
-    var g_d;
      $(document).ready(function() {
     	 $(".new_workspace").click(function(){
          	$("#cws").removeClass("none");
          });
     	 
-         var x = "<svg viewBox='0 0 24 24' width='24px' height='24px' class='closed'><path fill='rgb(255,255,255)' d='M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z'></path></svg>"
+         var x = "<svg viewBox='0 0 24 24' width='24px' height='24px' class='closed'><path fill='rgb(255,255,255)' d='M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z'></path></svg>";
         //협업공간이름 글자수
         $("#setname_cws").on("keyup", function(){
         	$("#name_cnt_cws").removeClass("hidden"); //글자수 뜨기
@@ -245,7 +31,7 @@
                 alert_message.fadeIn(function(){
                     setTimeout(function() {
                         alert_message.fadeOut() //3초후에 자동으로 닫힘
-                    }, 3000);
+                    }, 2000);
 		            //안내메세지 높이
 		            var height = alert_message.prop("scrollHeight");
 		            alert_message.css("height", height);
@@ -263,7 +49,7 @@
                 alert_message.fadeIn(function(){
 	                setTimeout(function() {
                     alert_message.fadeOut() //3초후에 자동으로 닫힘
-                }, 3000);
+                }, 2000);
 	            //안내메세지 높이
 	            var height = alert_message.prop("scrollHeight");
 	            alert_message.css("height", height);
@@ -286,19 +72,43 @@
 	            	},
 	            	datatype:"json",
 	            	success:function(data){
-
-	            		if(data.result == 1){
-				          	var alert_message = $(".alert").html(x+title +" 협업공간이 생성되었습니다.");
+		            		alert("1");
+	            			$.ajax({//workspace_order에 넣어주고 사이드바 밑에 넣기
+		    	            	type:"post",
+		    	            	url:"Controller?command=AddOrder",
+		    	            	data:{
+		    	            		"loginId" : <%=loginId%>,
+		    	            		"workspace_id":data.workspaceId
+		    	            	},
+		    	            	datatype:"json",
+		    	            	success:function(){
+		    	            		alert("2");
+		    	            		var str = "<div class='f_container' workspaceId='" + data.workspaceId + "'>"
+		    						+ "<svg viewBox='0 0 24 24' width='12px' height='12px' class='svg4'><path d='M8 5.4A2.2 2.2 0 1 1 8 1a2.2 2.2 0 0 1 0 4.4zm0 8.8a2.2 2.2 0 1 1 0-4.4 2.2 2.2 0 0 1 0 4.4zM8 23a2.2 2.2 0 1 1 0-4.4A2.2 2.2 0 0 1 8 23zm8-17.6A2.2 2.2 0 1 1 16 1a2.2 2.2 0 0 1 0 4.4zm0 8.8a2.2 2.2 0 1 1 0-4.4 2.2 2.2 0 0 1 0 4.4zm0 8.8a2.2 2.2 0 1 1 0-4.4 2.2 2.2 0 0 1 0 4.4z' color='#C1C1C1'></path></svg>"
+		    						+ "<div class='f_continer2'>"
+		    						+	"<div class='f_container3'>"
+		    						+		"<div>"
+		    						+			"<svg viewBox='0 0 24 24' width='16px' height='16px' class='svg5'><path d='M14.027 5L13.6 3H4v18h2v-7h6l.533 2H20V5z'></path></path></svg>"
+		    						+		"</div>"
+		    						+		"<div style='margin-top: 5px;' class='name' title='" + data.workspace_name + "'>" + data.workspace_name + "</div>"
+		    						+	"</div>"
+		    						+"</div>"
+		    						+"</div>"
+		    	            		$(".folder1").append(str);
+		    	            	},
+		    	            	error:function(r,s,e){
+		    	            		alert("workspace_order error");
+		    	            	}
+		    	            });
+	            			var alert_message = $(".alert").html(x+title +" 협업공간이 생성되었습니다.");
 				            alert_message.fadeIn(function(){
 					            setTimeout(function() {
 									alert_message.fadeOut() //3초후에 자동으로 닫힘
-					            }, 3000);
+					            }, 2000);
 					            //안내메세지 높이
 					            var height = alert_message.prop("scrollHeight");
 					            alert_message.css("height", height);
 				            });
-	            		}
-						
 							$.ajax({//칸반 생성
 		    	            	type:"post",
 		    	            	url:"Controller?command=KanbanNewWS",
@@ -311,7 +121,7 @@
 		    	            	}
 		    	            });
 			        	$("#setname_cws, #setsummary_cws, #cnt1, #cnt2").val("");
-						location.href="Controller?command=zAction&sec_command=select_Workspace_Index&workspaceId="+data.workspaceId+"&workspaceName="+title;
+						location.href="Controller?command=select_Workspace_Index&loginId="+loginId+"&workspaceId="+data.workspaceId;
 	    	        },
 	            	error:function(r,s,e) {
 	            		alert("다시 시도해 주세요.");
@@ -332,7 +142,7 @@
                alert_message.fadeIn(function(){
                    setTimeout(function() {
                        alert_message.fadeOut(); //3초후에 자동으로 닫힘
-                   }, 3000);
+                   }, 2000);
             	//안내메세지 높이
 	            var height = alert_message.prop("scrollHeight");
 	            alert_message.css("height", height);
@@ -391,13 +201,11 @@
                 <input type="text" id="setname_cws" maxlength="29" placeholder="콜라비 디자인 리뉴얼"/>
             </div>
             <div id="name_cnt_cws" class="cnt_cws hidden"><span id="cnt1">0</span><span> / 28</span></div>
-            <!--  -->
             <div>
                 <label for="setsummary_cws">협업공간 설명</label>
                 <textarea id="setsummary_cws" maxlength="101" placeholder="콜라비 서비스 디자인 개선 협업공간"></textarea>
             </div>
             <div id="summary_cnt_cws" class="cnt_cws hidden"><span id="cnt2">0</span><span>/ 100</span></div>
-            <!--  -->
             <footer id="footer_cws">
                 <button type="button" id="cancel_bnt_cws">취소</button>
                 <button type="button" id="create_bnt_cws">만들기</button>

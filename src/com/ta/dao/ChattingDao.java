@@ -599,10 +599,10 @@ public class ChattingDao {
 			pstmt.executeUpdate(); 			
 			pstmt.close();
 			sql = "UPDATE chatting_room_member SET alarm = 0 WHERE chatting_member_id = ?";
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, loginId);
-			pstmt.executeUpdate(); 			
-			pstmt.close();
+			PreparedStatement pstmt2 = conn.prepareStatement(sql);
+			pstmt2.setInt(1, loginId);
+			pstmt2.executeUpdate(); 			
+			pstmt2.close();
 		} catch(SQLException e) {
 			e.printStackTrace();
 		}

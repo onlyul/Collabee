@@ -25,9 +25,9 @@ public class ModalWorkspaceListAction implements Action{
 		 * HttpSession session = request.getSession(); int member_id =
 		 * (Integer)session.getAttribute("member_id");
 		 */
-		
+		int loginId = Integer.parseInt(request.getParameter("loginId"));
 		ModalWorkspaceListDao mWDao = new ModalWorkspaceListDao();
-		ArrayList<ModalWorkspaceListDto> mWList = mWDao.workspaceList(1);
+		ArrayList<ModalWorkspaceListDto> mWList = mWDao.workspaceList(loginId);
 		
 //		request.setAttribute("mWList", mWList);
 //		request.getRequestDispatcher("Todo_modal2.jsp").forward(request, response);

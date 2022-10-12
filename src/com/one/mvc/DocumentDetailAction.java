@@ -1,17 +1,15 @@
 package com.one.mvc;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.json.simple.JSONObject;
-
 import com.one.dao.DocumentEtcDao;
 import com.one.dao.DocumentShowDao;
+import com.one.dao.MemberIdentifiedDao;
 import com.one.dto.DocumentShowDto;
 
 public class DocumentDetailAction implements Action{
@@ -26,12 +24,9 @@ public class DocumentDetailAction implements Action{
 			DocumentShowDao dao = new DocumentShowDao();
 			list = dao.showDocument(document_id);
 			
-		/*	for(DocumentShowDto dto : list) {
-				request.setAttribute("title", dto.getTitle());
-				request.setAttribute("content", dto.getContent());
-				request.setAttribute("workspace_name", dto.getWorkspace_name());
-				request.setAttribute("pic", dto.getPic());
-			}*/
+			MemberIdentifiedDao mdao = new MemberIdentifiedDao();
+			String name = mdao.MemberNameIdentified(member_id);
+			request.setAttribute("name", name);
 			
 			DocumentEtcDao edao = new DocumentEtcDao();
 			request.setAttribute("alarm", edao.getDocumentAlarm(document_id, member_id));

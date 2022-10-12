@@ -13,1221 +13,22 @@
 	//String corId = String.valueOf(request.getAttribute("corporation_id"));
 	//int corporation_id = Integer.parseInt(corId);
 	/* int member_id = Integer.parseInt(request.getParameter("member_id")); */
-	session.setAttribute("loginId", 4);
-	int member_id = 4;
+	int loginId = (int)request.getAttribute("loginId");
+	session.setAttribute("loginId", loginId);
 	int corporation_id = 5;
-	session.setAttribute("corporation_id", (Integer)request.getAttribute("corporation_id"));
-	int loginId = 4;
+	session.setAttribute("corporation_id", corporation_id);
 	//int corporation_id = (Integer)session.getAttribute("corporation_id");
 %>
 <!DOCTYPE html>
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>collabee.co/home</title> 
+	<title>협업툴 콜라비 - 한 장으로 끝! 문서기반 협업툴, 콜라비</title> 
 	<link rel="icon" href="images/favicon.ico" type="image/x-icon">
 	<script src="js/jquery-3.6.0.min.js"></script>
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
   	<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
-  	<!-- <link rel="stylesheet" href="/resources/demos/style.css"> -->
-  	<!-- <link href="main.css" type="text/css" rel="stylesheet"> -->
-	<style>
-	html {
-	    position: relative;
-	    min-height: 100%;
-	    -webkit-tap-highlight-color: transparent;
-	    overflow-x :  hidden;
-	}
-	.layout2::-webkit-scrollbar {
-		width:4px;
-	}
-	.layout2::-webkit-scrollbar-thumb {
-	    height: 70%; /* 스크롤바의 길이 */
-	    background-color: #e1e1e1; /* 스크롤바의 색상 */
-	    border-radius: 2px;
-	}
-	.layout2::-webkit-scrollbar-track{
-		background-color: white;
-	}
-	body, html {
-    	height: 100%;
-    	font-family: -apple-system,BlinkMacSystemFont,Malgun Gothic,Hiragino Kaku Gothic ProN,Hiragino Sans,Meiryo,MS PGothic,sans-serif,Dotum;
-		margin: 0px;
-	}
-	ul {
-    	list-style-type: none;
-	}
-	a{
-		text-decoration: none;
-		color: black;
-	}
-	button{
-		border: none;
-	}
-	.layout{
-		display: flex;
-	    flex-direction: row;
-	    width: 100vw;
-	    height: 100vh;
-	    background-color: rgb(255, 255, 255);
-	}
-	.sidebar{
-		z-index: 1;
-		position: relative;
-	    width: 240px;
-	    background-color: rgb(247, 246, 245);
-	    flex: 0 0 auto;
-	    display: flex;
-	    flex-direction: column;
-	    -webkit-box-align: stretch;
-	    align-items: stretch;
-	    padding-top: 72px;
-	    overflow-y: auto;
-	    /* margin-left: -10px;
-	    margin-top: -10px; */
-	}
-	.left-bar{
-		/* position: fixed; */
-		position: relative;
-	    overflow-y: auto;
-	    flex: 1 1 auto;
-	    overflow-x: hidden;
-	}
-	.left-bar::-webkit-scrollbar {
-		width:4px;
-	}
-	.left-bar::-webkit-scrollbar-thumb {
-	    height: 70%; /* 스크롤바의 길이 */
-	    background: #e1e1e1; /* 스크롤바의 색상 */
-	    border-radius: 2px;
-	}
-	.top-row{
-		position: relative;
-	    display: flex;
-	    flex-direction: column;
-	    -webkit-box-align: stretch;
-	    align-items: stretch;
-	}
-	.header{
-		display: flex;
-	    flex-direction: row;
-	    -webkit-box-pack: justify;
-	    justify-content: space-between;
-	    -webkit-box-align: center;
-	    align-items: center;
-	    padding: 0px 14px 0px 20px;
-	    flex: 0 1 auto;
-	    height: 72px;
-	    top: 0px;
-	    z-index: 9;
-	    background-color: rgb(247, 246, 245);
-	    width: 205px;
-	    position: fixed;
-	}
-	.collabee{
-		min-width: inherit;
-	    min-height: inherit;
-	    padding-left: 0px;
-	    padding-right: 0px;
-	    transition: fill 0.2s ease 0s;
-	    cursor: pointer;
-	    pointer-events: auto;
-	    width: auto;
-	    background-color: transparent;
-	    color: yellow;
-	}
-	.alarm{
-		padding-bottom: 4px;
-		min-width: inherit;
-	    min-height: inherit;
-	    padding-left: 0px;
-	    padding-right: 0px;
-	    transition: fill 0.2s ease 0s;
-	    cursor: pointer;
-	    pointer-events: auto;
-	    width: auto;
-	    background-color: transparent;
-	    text-decoration: none;
-	    border: none;
-	    box-sizing: border-box;
-	    font-size: 12px;
-	    outline: 0;
-	    z-index:10;
-	}
-	.alarm_svg{
-		display: inline-block;
-	    vertical-align: middle;
-	    shape-rendering: inherit;
-	    fill: gray;
-	}
-	.alarm_svg:hover{
-		fill: #616060;
-	}
-	.left-navigation{
-		display: flex;
-	    flex-direction: column;
-	    -webkit-box-align: stretch;
-	    align-items: stretch;
-	    padding-bottom: 22px;
-	}
-	h2{
-		margin: 0px;
-	    padding-left: 20px;
-	    padding-bottom: 2px;
-	    font-size: 13px;
-	    line-height: 1.54;
-	    font-weight: normal;
-	    color: rgb(136, 136, 136);
-	}
-	.svg1{
-		display: inline-block;
-	    vertical-align: middle;
-	    shape-rendering: inherit;
-	    fill: rgb(136, 136, 136);
-	}
-	.fill_black{
-		fill: rgb(34, 34, 34);
-	}
-	.menu{
-		background-color: rgba(0, 0, 0, 0.05);
-		cursor: pointer;
-	    display: flex;
-	    flex-direction: row;
-	    -webkit-box-align: center;
-	    align-items: center;
-	    background-color: transparent;
-	    padding-left: 18px;
-	    padding-right: 16px;
-	    position: relative;
-	    pointer-events: auto;
-	}
-	.menu:hover{
-		background-color: #e3e3e3;
-	}
-	.chosen{
-		background-color: #e3e3e3;
-	}
-	.name{
-		padding: 3px 0px;
-	    margin-left: 4px;
-	    white-space: nowrap;
-	    overflow: hidden;
-	    text-overflow: ellipsis;
-	    font-size: 14px;
-	    line-height: 1.57;
-	    color: rgb(34, 34, 34);
-	}
-	.f_name{
-		padding: 3px 0px;
-	    white-space: nowrap;
-	    overflow: hidden;
-	    text-overflow: ellipsis;
-	    font-size: 13px;
-	    color: rgb(136, 136, 136);
-	}
-	.bold{
-		font-weight: bold;
-	}
-	.svg2_1{
-		display: inline-block;
-	    vertical-align: middle;
-	    shape-rendering: inherit;
-	    fill: rgb(34, 34, 34);
-	    opacity:0;
-	}
-	.svg2{
-		display: inline-block;
-	    vertical-align: middle;
-	    shape-rendering: inherit;
-	    fill: rgb(34, 34, 34);
-	    opacity:0;
-	}
-	.btn1{
-		display: inline-block;
-		background-color: transparent;
-		position: absolute;
-	    top: 50%;
-	    right: 16px;
-	    width: 20px;
-	    height: 20px;
-	    transform: translate(0px, -50%);
-	}
-	.menu > .btn1:hover{
-		background-color: #c7c5c5;
-		border-radius: 4px;
-	}
-	.beta{
-		display: inline-block;
-	    margin-left: 4px;
-	    color: #a3a3a3;
-	    font-size: 12px;
-	    vertical-align: middle;
-	}
-	.private{
-		display: flex;
-	    flex-direction: column;
-	    -webkit-box-align: stretch;
-	    align-items: stretch;
-	    padding-bottom: 22px;
-	}
-	h2{
-		margin: 0px;
-	    padding-left: 20px;
-	    padding-bottom: 2px;
-	    font-size: 13px;
-	    line-height: 1.54;
-	    font-weight: normal;
-	    color: rgb(136, 136, 136);
-	}
-	.new_workspace{
-		margin: 6px 16px 8px;
-	    font-weight: bold;
-	    font-size: 14px;
-	    line-height: 1.57;
-	    padding: 5px;
-	    position: relative;
-	    min-height: inherit;
-	    color: rgb(255, 255, 255);
-	    border-radius: 4px;
-	    text-align: center;
-	    transition: background-color 0.2s ease 0s, color 0.2s ease 0s, border-color 0.4s ease 0s, fill 0.2s ease 0s, opacity 0.2s ease 0s;
-	    border-width: 1px;
-	    border-style: solid;
-	    border-color: rgb(51, 132, 108);
-	    background-color: rgb(51, 132, 108);
-	    cursor: pointer;
-	    opacity: 1;
-	    width: auto;
-	    box-shadow: none;
-	}
-	.new_workspace:hover{
-		background-color: rgb(44, 111, 91);
-    	border-color: rgb(44, 111, 91);
-	}
-	.w_search{
-		box-sizing: border-box;
-	    border: 1px solid rgb(193, 193, 193);
-	    border-radius: 4px;
-	    font-size: 13px;
-	    color: rgb(34, 34, 34);
-	    line-height: 1.54;
-	    width: 100%;
-	    padding: 4px 24px 4px 26px;
-	}
-	.w_search:hover{
-		border: 1px solid black;
-	}
-	.createFolder{
-		display: flex;
-	    flex-direction: column;
-	    padding-left: 16px;
-	    padding-right: 16px;
-	}
-	.btn2{
-		position: relative;
-	    cursor: pointer;
-	    background-color: transparent;
-	}
-	.btn2::before{
-		position: absolute;
-	    right: 0px;
-	    left: 0px;
-	    height: 1px;
-	    background-color: rgb(230, 230, 230);
-	    content: " ";
-	    top: 50%;
-	}
-	.contents{
-		position: relative;
-	    display: inline-flex;
-	    flex-direction: row;
-	    -webkit-box-align: center;
-	    align-items: center;
-	    background-color: rgb(247, 246, 245);
-	    font-size: 12px;
-	    color: rgb(136, 136, 136);
-	    padding: 5px 4px;
-	}
-	.svg3{
-		margin-right: 4px;
-		display: inline-block;
-	    vertical-align: middle;
-	    shape-rendering: inherit;
-	    fill: rgb(193, 193, 193);
-	}
-	.folder1{
-		flex: 1 0 auto;
-	    width: 100%;
-	    box-sizing: border-box;
-	    min-width: 0px;
-	}
-	.f_container{
-		position: relative;
-	    display: flex;
-	    flex-direction: row;
-	    -webkit-box-align: center;
-	    align-items: center;
-	    margin-top: 0px;
-	    margin-bottom: 0px;
-	    user-select: none;
-	    padding: 0px 0px 0px 4px;
-	    cursor: pointer;
-	    background-color: transparent;
-	}
-	.f_container:hover{
-		background-color: #e3e3e3;
-	}
-	.svg4{
-		visibility: hidden;
-	    flex-shrink: 0;
-	    margin-right: 2px;
-	    display: inline-block;
-	    vertical-align: middle;
-	    shape-rendering: inherit;
-	    fill: rgb(193, 193, 193);
-	}
-	.f_container2{
-		flex: 1 0 auto;
-	    display: flex;
-	    flex-direction: row;
-	    -webkit-box-align: center;
-	    align-items: center;
-	    margin-left: 0px;
-	    width: 0px;
-    }
-    .f_container3{
-	    display: flex;
-	    flex: 1 0 auto;
-	    width: 100%;
-	    flex-direction: row;
-	    -webkit-box-align: center;
-	    align-items: center;
-	    padding-right: 16px;
-    }
-    .svg5{
-	    display: inline-block;
-	    vertical-align: middle;
-	    shape-rendering: inherit;
-	    fill: rgb(136, 136, 136);
-    }
-    .f_container4{
-	    display: flex;
-	    flex: 1 0 auto;
-	    flex-direction: row;
-	    -webkit-box-align: center;
-	    align-items: center;
-	    padding: 2px 0px;
-	    white-space: nowrap;
-	    overflow: hidden;
-	    text-overflow: ellipsis;
-	    font-size: 13px
-	    color: rgb(136, 136, 136)
-    }
-    .btn3{
-	    min-width: inherit;
-	    min-height: inherit;
-	    padding-left: 0px;
-	    padding-right: 0px;
-	    transition: fill 0.2s ease 0s;
-	    cursor: pointer;
-	    pointer-events: auto;
-	    width: auto;
-	    background-color: transparent;
-	    text-decoration: none;
-	    font-weight: 400;
-	    color: gray;
-    }
-    .w_list{
-	    flex: 1 0 auto;
-	    width: 100%;
-	    box-sizing: border-box;
-	    min-width: 0px;
-	    margin-left: 10px;
-	    margin-top: -5px;
-    }
-    .sidebar-footer{
-	    display: flex;
-	    flex-direction: column;
-	    color: rgb(136, 136, 136);
-	    font-size: 12px;
-	    line-height: 1.5;
-	    padding-top: 40px;
-	    padding-left: 20px;
-	    padding-bottom: 90px;
-    }
-    /* 사이드바 끝??? */
-    
-    .top_left{
-		flex: 1 1 auto;
-	    display: flex;
-	    flex-direction: column;
-	    z-index: 2;
-	    margin-top: 10px;
-	    min-width: 0px;
-	    margin-right: 20px;
-	}
-	.top_header_title{
-		display: flex;
-	    flex-direction: row;
-	    align-items: flex-start;
-	    -webkit-box-pack: justify;
-	    justify-content: space-between;
-	    margin-left: 40px;
-	}
-	.home_title{
-		font-size: 22px;
-	    font-weight: bold;
-	    color: rgb(34, 34, 34);
-	    display: -webkit-box;
-	    -webkit-box-orient: vertical;
-	    -webkit-line-clamp: 2;
-	    overflow: hidden;
-	}
-	#bnt1_cal{
-        display:flex;
-    }
-	#searchbar::placeholder{
-        color: rgb(193, 193, 193);
-    }
-    #searchbar { /*상단 검색창  / 클릭하면 길어지면서 문서작성 버튼 없어짐(할지말지 고민중) */
-        will-change: transform;
-        background-color: rgba(255, 255, 255, 0);
-        height:28px;
-        width:86px;
-        font-size:13px;
-        border-radius:4px;
-        border: 1px solid rgb(225, 225, 225);
-        transition: border-color 0.2s ease 0s, background-color 0.2s ease 0s;
-        padding:0px 32px;
-    }
-    #searchbar:hover{
-        border-color:rgb(136, 136, 136);
-    }
-    #searchbar:focus{
-        background-color: rgba(255, 255, 255, 0.2);
-        border-color:rgb(136, 136, 136);
-        border: 1px;
-        width:269px;
-        z-index: 10;
-    }
-    #searchbar::placeholder:hover{
-        color:rgb(136, 136, 136);
-    }
-    #search_icon{
-        fill:rgb(224, 221, 217);
-        position: absolute;
-        transition: fill 0.2s ease 0s;
-        -webkit-box-align: center;
-        border:none;
-        display:flex;
-        align-items:center;
-        padding-left:10px;
-        padding-top:2px;
-    }
-    #search_icon:hover{
-        fill:rgb(136, 136, 136);
-    }
-    .micro{
-    	margin-top: 5px;
-    }
-    .mastersearchbar{
-    	display: flex;
-	    flex-direction: row;
-	    position: relative;
-	    align-items: flex-start;
-    }
-    .layout2{
-	    z-index: 2;
-	    flex: 1 1 auto;
-	    display: flex;
-	    flex-direction: column;
-	    height: 100vh;
-	    overflow-y: auto;
-	    min-width: 690px;
-	    overflow-x: hidden;
-    }
-    .layout3{
-	    max-width: 1210px;
-    	min-width: 700px;
-	    margin: 0px auto;
-	    width: 100%;
-    }
-    .body_header{
-	    position: relative;
-	    display: flex;
-	    flex-direction: column;
-	    flex-shrink: 0;
-	    -webkit-box-align: stretch;
-	    align-items: stretch;
-    }
-    .body_header2{
-	    position: relative;
-	    display: flex;
-	    flex-direction: row;
-	    height: 108px;
-    }
-    .header_menu{
-    	position: relative;
-	    display: flex;
-	    flex-direction: row;
-	    -webkit-box-align: center;
-	    align-items: center;
-	    margin-top: 17px;
-	    margin-left: 40px;
-	    height: 32px;
-    }
-    .header_menu2{
-    	position: relative;
-	    display: flex;
-	    flex: 1 1 auto;
-	    flex-direction: row;
-	    width: 100%;
-	    -webkit-box-align: center;
-	    align-items: center;
-    }
-    .header_menu3{
-    	position: relative;
-	    flex: 1 1 100px;
-	    height: 32px;
-	    margin: 0px 6px 0px 0px;
-	    padding: 5px 4px;
-	    min-width: 60px;
-	    border-radius: 4px;
-	    cursor: pointer;
-	    border: 1px solid rgba(0, 0, 0, 0.05);
-	    background-color: rgb(247, 246, 245);
-    }
-    .header_menu3:hover{
-    	background-color: rgb(238, 236, 233);
-    }
-   	.svg11{
-    	display: inline-block;
-	    vertical-align: middle;
-	    fill: rgb(136, 136, 136);
-    }
-    .svg21{
-    	display: inline-block;
-	    vertical-align: middle;
-	    fill: #ffffff;
-    }
-    .header_menu4{
-    	vertical-align: middle;
-	    font-size: 13px;
-	    line-height: 17px;
-	    margin-left: 4px;
-	    color: rgb(34, 34, 34);
-    }
-    .header_menu5{
-    	padding: 0px;
-	    min-width: 144px;
-	    width: 100%;
-	    height: 32px;
-	    display: flex;
-	    flex-direction: row;
-	    -webkit-box-align: center;
-	    align-items: center;
-	    -webkit-box-pack: center;
-	    justify-content: center;
-	    border-radius: 4px;
-	    border: 1px solid rgba(255, 255, 255, 0.2);
-	    background-color: #d9ad2b;
-	    color: white;
-	    cursor: pointer;
-    }
-    .header_menu5:hover{
-    	background-color: rgb(179, 142, 34);
-    	border-color: rgb(179, 142, 34);
-    }
-    .topright1{
-    	position: relative;
-	    flex: 0 0 auto;
-	    width: 250px;
-    }
-    .topright{
-    	position: relative;
-	    display: flex;
-	    flex-direction: row;
-	    -webkit-box-align: center;
-	    align-items: center;
-	    -webkit-box-pack: end;
-	    justify-content: flex-end;
-	    padding-right: 60px;
-    	margin-top: 11px;
-    }
-    .subheader_right3{
-    	position: relative;
-	    flex: 0 0 auto;
-	    width: 250px;
-    }
-    .subheader_right3_menu{
-    	position: relative;
-	    display: flex;
-	    flex-direction: row;
-	    -webkit-box-pack: end;
-	    justify-content: flex-end;
-	    -webkit-box-align: center;
-	    align-items: center;
-	    padding-right: 48px;
-    	padding-top: 11px;
-    }
-    .subheader_right3_menu2{
-    	display: inline-block;
-	    cursor: pointer;
-	    font-size: 12px;
-	    line-height: 1.5;
-	    padding: 10px;
-	    margin: 0px 3px;
-	    color: rgb(34, 34, 34);
-	    transition: color 0.2s ease 0s;
-    }
-    .file1{
-    	background-color: transparent;
-	    cursor: pointer;
-	    flex-direction: row;
-	    -webkit-box-align: center;
-	    align-items: center;
-	    font-size: 12px;
-	    color: rgb(34, 34, 34);
-	    line-height: 1.5;
-	    padding: 10px 0px 10px 10px;
-	    margin: 0px 0px 0px 3px;
-    }
-    .svg51{
-    	margin-left: 4px;
-	    margin-bottom: 2px;
-	    display: inline-block;
-	    vertical-align: middle;
-	    shape-rendering: inherit;
-	    fill: rgb(34, 34, 34);
-    }
-    .body_body{
-	    position: relative;
-	    display: flex;
-	    -webkit-box-flex: 1;
-	    flex-grow: 1;
-	    -webkit-box-align: stretch;
-	    align-items: stretch;
-	    overflow-x: inherit;
-	    min-width: auto;
-	    margin: 0px 38px 80px;
-	    flex-direction: column;
-    }
-    .homeBanner{
-	    position: relative;
-	    width: 100%;
-	    min-height: 160px;
-	    margin-top: 30px;
-	    border-radius: 16px;
-	    background-color: rgb(240, 243, 251);
-	    background-image: url(https://cdn.collabee.co/front/collabee.co/hornet/530/static/media/appletest.93bd6295.png);
-	    background-size: 640px 160px;
-	    background-position: 50% 0px;
-	    background-repeat: no-repeat;
-	    cursor: pointer;
-    }
-    .homeBanner2{
-	    position: absolute;
-	    inset: 0px;
-	    padding: 20px 0px 0px 24px;
-    }
-    h3{
-	    font-size: 18px;
-	    line-height: 24px;
-	    font-weight: 700;
-	    color: #222;
-	    cursor: pointer;
-	    margin: 0;
-    }
-    .disc{
-	    margin-top: 8px;
-	    font-size: 13px;
-	    line-height: 20px;
-    }
-    .btn100{
-	    position: absolute;
-	    top: 50%;
-	    left: 50%;
-	    transform: translate(-50%, -50%);
-	    width: 64px;
-	    height: 64px;
-	    outline: rgba(255, 255, 255, 0.2) solid 2px;
-	    border-radius: 50%;
-	    background-color: rgb(230, 193, 46);
-	    box-shadow: rgb(217 173 43 / 50%) 0px 4px 8px 0px;
-	    font-size: 0px;
-	    cursor: pointer;
-    }
-    .btn100::before{
-	    position: absolute;
-	    top: 50%;
-	    left: 50%;
-	    transform: translate(-50%, -50%);
-	    width: 32px;
-	    height: 32px;
-	    background-image: url(https://cdn.collabee.co/front/collabee.co/hornet/530/static/media/img_home_banner_triangle.fa35f0b8.png);
-	    background-size: 32px 32px;
-	    content: "";
-    }
-    .recentList_btn1{
-	    position: relative;
-	    left: -4px;
-	    font-size: 18px;
-	    font-weight: bold;
-	    margin: 46px 0px 6px;
-	    padding: 0px 4px;
-	    line-height: 28px;
-	    background-color: rgb(255, 255, 255);
-	    color: rgb(34, 34, 34);
-	    cursor: pointer;
-    }
-    .recent_svg1{
-	    margin-top: -7px;
-	    display: inline-block;
-	    vertical-align: middle;
-	    shape-rendering: inherit;
-	    fill: rgb(34, 34, 34);
-    }
-    .recentList1{
-	    display: flex;
-	    flex-wrap: wrap;
-	    -webkit-box-pack: start;
-	    justify-content: flex-start;
-	    gap: 20px;
-	    width: 100%;
-    }
-    .recent_container{
-	    display: inline-block;
-	    position: relative;
-	    overflow: hidden;
-	    width: 107px;
-    	height: 122px;
-	    padding: 14px 16px 0px;
-	    border-radius: 16px;
-	    box-shadow: rgb(0 0 0 / 10%) 0px 3px 6px 0px;
-	    vertical-align: top;
-	    word-break: break-all;
-	    cursor: pointer;
-    }
-    .recent_container:hover{
-	    position: relative;
-	    top: -4px;
-	    box-shadow: rgb(0 0 0 / 30%) 0px 5px 10px 0px;
-    }
-    .recent_container2{
-	    display: -webkit-box;
-	    -webkit-line-clamp: 3;
-	    overflow: hidden;
-	    text-overflow: ellipsis;
-	    -webkit-box-orient: vertical;
-	    overflow-wrap: break-word;
-	    font-size: 14px;
-	    font-weight: bold;
-	    line-height: 1.71;
-	    color: rgb(255, 255, 255);
-	    text-shadow: rgb(0 0 0 / 10%) 0px 1px 1px;
-    }
-    .recent_container3{
-	    display: flex;
-	    -webkit-box-align: center;
-	    align-items: center;
-	    position: absolute;
-	    height: 16px;
-	    right: 0px;
-	    left: 0px;
-	    bottom: 0px;
-	    padding: 12px 16px;
-	    background-color: rgba(0, 0, 0, 0.05);
-	    font-size: 12px;
-	    color: rgb(255, 255, 255);
-    }
-    .recent_svg2{
-	    position: absolute;
-	    right: 13px;
-	    display: inline-block;
-	    vertical-align: middle;
-	    shape-rendering: inherit;
-	    fill: rgba(255, 255, 255, 0.5);
-    }
-    .recent_container4{
-    	z-index: 3;
-	    margin-left: -10px;
-	    padding: 2px;
-	    background: rgba(217, 173, 43, 0.05);
-	    flex-shrink: 0;
-	    position: relative;
-	    width: 20px;
-	    height: 20px;
-	    border-radius: 50%;
-	    cursor: pointer;
-    }
-    .recent_container4::before{
-	    position: absolute;
-	    top: 50%;
-	    left: 50%;
-	    transform: translate(-50%, -50%);
-	    z-index: 1;
-	    display: block;
-	    background-color: rgb(255, 255, 255);
-	    width: 18px;
-	    height: 18px;
-	    border-radius: 50%;
-	    background-size: cover;
-	    background-position: center center;
-	    content: "";
-    }
-    .private::before{
-    	background-image: url(https://down.collabee.co/userProfile/1);
-    }
-    .recent_container4::after{
-	    position: absolute;
-	    top: 50%;
-	    left: 50%;
-	    transform: translate(-50%, -50%);
-	    width: 26px;
-	    height: 26px;
-	    padding: 0px;
-	    display: block;
-	    border-radius: 50%;
-	    content: "";
-	    transition: border-color 0.3s ease 0s;
-    }
-    .NofolderList{
-	    width: 100%;
-	    margin-top: 64px;
-	    display: flex;
-	    flex-wrap: wrap;
-	    -webkit-box-pack: start;
-	    justify-content: flex-start;
-	    gap: 20px;
-    }
-    .btn100:hover{
-    	background-color: rgb(167 139 31);
-    }
-    .FolderList{
-	    width: 100%;
-	    margin-top: 15px;
-    }
-    .recent_svg3{
-	    display: inline-block;
-	    vertical-align: middle;
-	    shape-rendering: inherit;
-	    transition: fill 0.2s ease 0s;
-	    fill: rgb(136, 136, 136);
-    }
-    .recentList_btn2{
-    	display: none;
-	    width: 24px;
-	    height: 24px;
-	    margin-left: -6px;
-	    margin-top: 48px;
-	    padding-left: 0px;
-	    padding-right: 0px;
-	    transition: fill 0.2s ease 0s;
-	    cursor: pointer;
-	    pointer-events: auto;
-	    width: auto;
-	    background-color: transparent;
-	    text-decoration: none;
-    }
-    .FolderList_List{
-	    display: flex;
-	    flex-wrap: wrap;
-	    -webkit-box-pack: start;
-	    justify-content: flex-start;
-	    gap: 20px;
-	    width: 100%;
-    }
-    .createW_btn{
-	    display: inline-block;
-	    position: relative;
-	    width: 140px;
-	    height: 140px;
-	    padding: 14px 16px;
-	    border-radius: 16px;
-	    background-image: url(https://cdn.collabee.co/front/collabee.co/hornet/530/static/media/bg_home_projectbox_dashline.27b1d3f3.png);
-	    background-repeat: no-repeat;
-	    background-size: 140px 140px;
-	    background-color: rgb(255, 255, 255);
-	    vertical-align: top;
-	    text-align: center;
-	    word-break: break-all;
-	    cursor: pointer;
-    }
-    .createW_btn:hover{
-	    position: relative;
-	    top: -4px;
-	    box-shadow: rgb(0 0 0 / 30%) 0px 5px 10px 0px;
-    }
-    .createW_svg{
-	    padding: 6px 0px 0px 6px;
-	    display: inline-block;
-	    vertical-align: middle;
-	    shape-rendering: inherit;
-		stroke: rgb(255, 255, 255);
-	    stroke-width: 2%;
-	    fill: rgb(189, 186, 183);
-    }
-    #div2{
-    	display: none;
-    	background: white;
-	    cursor: pointer;
-	    flex-direction: row;
-	    -webkit-box-align: center;
-	    align-items: center;
-	    font-size: 12px;
-	    line-height: 1.5;
-	    border-radius: 4px;
-	    width: 148px;
-	    height: 81px;
-	    margin-top: -3px;
-	    margin-left: 55px;
-	    position: absolute;
-	    z-index: 100;
-	    box-shadow: rgb(0 0 0 / 10%) 0px 3px 6px 0px;
-    }
-    .div2_1:hover{
-		filter: brightness(90%);
-		transition: transform 10s;
-	}
-	.div2_1{
-		padding: 10px;
-		background-color: white;
-		height: 13px;
-    	margin: 3px;
-	}
-	.float_root{
-		top: 0;
-	    left: 0;
-	    right: 0;
-	    bottom: 0;
-	    z-index: 1300;
-	    position: fixed;
-	    background-color: rgba(0,0,0,0.5);
-	    height: 100%;
-	    outline: none;
-	    display: none;
-	    align-items: center;
-	    justify-content: center;
-	}
-	.frame1{
-		box-shadow: none;
-	    overflow: hidden;
-	    width: 854px;
-	    height: 600px;
-	    max-width: 960px;
-	    margin: 0 auto;
-	    display: flex;
-	    position: relative;
-	    flex-direction: column;
-	    top: 15%;
-	}
-	.B_Movie{
-		position: relative;
-	    background-color: transparent;
-	    height: 540px;
-	}
-	.B_Movie2{
-		margin-top: 60px;
-	    width: 854px;
-	    height: 480px;
-	    box-sizing: border-box;
-	}
-	.B_Movie_close{
-		position: absolute;
-	    top: 0px;
-	    right: 0px;
-	    width: 48px;
-	    height: 48px;
-	    padding: 8px;
-	    border-radius: 8px;
-	    background-color: rgba(0, 0, 0, 0.4);
-	    cursor: pointer;
-	}
-	.B_Movie_close:hover{
-		background-color: rgba(0, 0, 0, 0.8);
-	}
-	.B_Movie_close_svg{
-		display: inline-block;
-	    vertical-align: middle;
-	    shape-rendering: inherit;
-	    fill: rgb(193, 193, 193);
-	}
-	.alarm_expl{
-		position: absolute;
-		z-index: 101;	
-		display: none;	
-		outline: none;
-	    width: 236px;
-    	background-color: rgb(255, 255, 255);
-	    height: 220px;
-	    box-shadow: 0px 5px 5px -3px rgb(0 0 0 / 20%), 0px 8px 10px 1px rgb(0 0 0 / 14%), 0px 3px 14px 2px rgb(0 0 0 / 12%);
-	}
-	h6{
-		all: unset;
-	    display: block;
-	    font-size: 12px;
-	    line-height: 1.5;
-	    color: rgb(136, 136, 136);
-	    padding: 12px 0px 4px 18px;
-	}
-	.alarm_expl2{
-		display: flex;
-	    flex-direction: column;
-	    -webkit-box-align: stretch;
-	    align-items: stretch;
-	    padding-top: 0px;
-	    padding-bottom: 12px;
-	}
-	.alarm_btn1{
-		font-size: 13px;
-	    font-weight: normal;
-	    color: rgb(34, 34, 34);
-	    text-align: left;
-	    position: relative;
-	    line-height: 1.5;
-	    border-radius: 3px;
-	    padding: 5px 18px;
-	    background-color: transparent;
-	    cursor: pointer;
-	    border: none;
-	}
-	.alarm_btn1:hover{
-		background-color: rgb(242, 242, 242);
-    	border-color: rgb(242, 242, 242);
-	}
-	.alarm_expl3{
-		display: flex;
-	    flex-direction: column;
-	    -webkit-box-align: stretch;
-	    align-items: stretch;
-	    border-top: 1px solid rgb(225, 225, 225);
-	    padding: 12px 0px;
-	}
-	.alarm_expl4{
-		position: relative;
-		color: rgb(34, 34, 34);
-	    font-size: 12px;
-	    font-weight: 500;
-	    line-height: 1.5;
-	    padding: 5px 18px;
-	    cursor: pointer;
-	}
-	.alarm_expl4:hover{
-		background-color: rgb(242, 242, 242);
-    	border-color: rgb(242, 242, 242);
-	}
-	.folder_namebox{
-		display: none;
-		position: relative;
-	    padding: 2px 8px;
-	    width: 100%;
-	    font-size: 13px;
-	    line-height: 1.54;
-	    color: rgb(34, 34, 34);
-	    background-color: rgb(255, 255, 255);
-	    box-shadow: rgb(51 132 108) 0px 0px 0px 1px inset;
-	    border: 4px solid rgba(51, 132, 108, 0.2);
-	    border-radius: 8px;
-	    box-sizing: border-box;
-	}
-	.folder_namebox:focus{
-		outline: none;
-	}
-	.svg22{
-		transition: fill 0.2s ease 0s;
-    	fill: rgb(163, 163, 163);
-	}
-    .calendar_button{
-    	background-color: rgba(0, 0, 0, 0.05);
-		cursor: pointer;
-	    display: flex;
-	    flex-direction: row;
-	    -webkit-box-align: center;
-	    align-items: center;
-	    background-color: transparent;
-	    padding-right: 16px;
-	    padding-left: 0px;
-	    position: relative;
-	    font-size: 14px;
-	    line-height: 1.57;
-	    color: rgb(34, 34, 34);
-	    pointer-events: auto;
-	    width: 100%;
-	}
-	.calendar_button:hover{
-		background-color: #e3e3e3;
-    }
-    .calendar2{
-	    cursor: pointer;
-	    display: flex;
-	    flex-direction: row;
-	    -webkit-box-align: center;
-	    align-items: center;
-	    background-color: transparent;
-	    padding-left: 20px;
-	    padding-right: 16px;
-    }
-	input[type="checkbox"]{
-        display: none;
-	}
-	input[type="checkbox"] + label{
-		display: inline-block;
-	    vertical-align: middle;
-	    shape-rendering: inherit;
-	    width: 10px;
-        height: 10px;
-        border: 1px solid black;
-        cursor: pointer;
-        border-radius: 2px;
-	}
-	.div_background{
-		display: none;
-		z-index: 100;
-		position: absolute;
-		top: 0;
-		left: 0;
-		right: 0;
-		bottom : 0;
-		width: 100%;
-		height: 100%;
-		background-color: transparent;
-	}
-	.folder_selection0{
-		display: none;
-		position: absolute;
-		z-index: 101;
-	}
-	.folder_selection{
-		border-radius: 4px;
-	    box-shadow: rgb(0 0 0 / 10%) 0px 0px 6px 2px;
-	    background-color: rgb(255, 255, 255);
-	    padding: 12px 0px;
-	    min-width: 160px;
-	    max-width: 100%;
-	    display: flex;
-	    flex-direction: column;
-	}
-	.folder_selection_btn1{
-		cursor: pointer;
-	    font-size: 13px;
-	    line-height: 1.54;
-	    color: rgb(34, 34, 34);
-	    padding: 5px 18px 3px;
-	    background-color: transparent;
-	    text-align: left;
-	}
-	.folder_selection_btn1:hover{
-		background-color: rgb(242, 242, 242);
-	}
-	</style>
-	<style>
-	.chosen{
-		background-color: #e3e3e3;
-	}
-	.layout > .hidden{
-		display: none;
-	}
-	</style>
+  	<link href="css/0CollabeeHome.css" rel="stylesheet" type="text/css">
 	<script>
 	$(function(){
 		$('.calendar_button').click(function (){
@@ -1338,7 +139,7 @@
    					var workspaceId = $(this).attr('workspaceId');
    					arrWorkspaceId.push(workspaceId);
    				});
-   				alert(arrWorkspaceId);
+   				//alert(arrWorkspaceId);
    				$.ajax({
    					type: "post",
    					url: 'Controller?command=WorkspaceOrder',
@@ -1413,6 +214,12 @@
     		   location.href="Controller?command=SearchP1&search="+search+"&member_id="+member_id;
     	   }
        });
+       
+     	//의사결정모달 띄우기
+       $(document).on("click","button[title='의사결정']", function(){    
+    	   $("#dm1_modal_include").css('display', 'block');
+    	   $("#myModal").css('display', 'block');
+		});
 	});
 	</script>
 	
@@ -1443,7 +250,7 @@
 		});
 		
 		//협업공간 만들기
-		$(".new_workspace").on("click", function(){
+		$(".new_workspace, .createW_btn").on("click", function(){
 			$("#cws").removeClass("none");
 		});
 		
@@ -1451,14 +258,42 @@
 		$(".recent_container").on("click", function(){ 
 			var workspaceId = $(this).attr("workspaceId");
 			var workspaceName = $(this).find(".recent_container2").text();//.replace(/\s/g, "");
-			location.href="Controller?command=select_Workspace_Index&workspaceId="+workspaceId+"&workspaceName="+workspaceName+"&loginId=<%=loginId%>";
+			$.ajax({
+				type:"post",
+				url:"Controller?command=putRecentConnection",
+				data:{
+					"loginId":<%=loginId%>,
+					"workspace_id": workspaceId
+				},
+				datatype:"json",
+				success:function(d){
+					location.href="Controller?command=select_Workspace_Index&workspaceId="+workspaceId+"&workspaceName="+workspaceName+"&loginId=<%=loginId%>";
+				},
+				error:function(r,s,e){
+					alert("putRecentConection error");
+				}
+			});
 		});
 		
 		//사이드바 공간 클릭하면 공간이동
 		$(document).on("click", ".f_container", function(){
 			var workspaceId = $(this).attr("workspaceId");
 			var workspaceName = $(this).find("name").text();//.replace(/\s/g, "");
-			location.href="Controller?command=select_Workspace_Index&workspaceId="+workspaceId+"&workspaceName="+workspaceName+"&loginId=<%=loginId%>";
+			$.ajax({
+				type:"post",
+				url:"Controller?command=putRecentConnection",
+				data:{
+					"loginId":<%=loginId%>,
+					"workspace_id": workspaceId
+				},
+				datatype:"json",
+				success:function(d){
+					location.href="Controller?command=select_Workspace_Index&workspaceId="+workspaceId+"&workspaceName="+workspaceName+"&loginId=<%=loginId%>";
+				},
+				error:function(r,s,e){
+					alert("putRecentConection error");
+				}
+			});
 		});
 		
 		//프라이빗 공간 클릭
@@ -1471,6 +306,20 @@
 				},
 				datatype:"json",
 				success:function(data){
+					$.ajax({
+						type:"post",
+						url:"Controller?command=putRecentConnection",
+						data:{
+							"loginId":<%=loginId%>,
+							"workspace_id": data.workspaceId
+						},
+						datatype:"json",
+						success:function(d){
+						},
+						error:function(r,s,e){
+							alert("putRecentConection error");
+						}
+					});
 					location.href="Controller?command=select_Workspace_Index&workspaceId="+data.workspaceId+"&workspaceName=프라이빗 공간&loginId=<%=loginId%>";
 				}, 
 				error:function(r,s,e){
@@ -1518,9 +367,12 @@
 	<!-- 정민부분 추가한 거 -->
 	<script>
 	$(function () {
-		$(".header_menu_Todo").click(function() {
+		$(document).on("click","button[title='할 일']", function(){    
 			$("#todo_modal_include").css('display', 'block');
-		}); 
+		});
+		$(".new_todo_btn_x").click(function() {
+			$("#todo_modal_include").css('display', 'none');
+		});
 	});
 	</script>
 	
@@ -1560,9 +412,11 @@
 <%@ include file="WEB-INF/include/include_NewWorkspaceModal.jspf" %> 
 <%@ include file="WEB-INF/include/include_ScheduleModal.jspf" %>
 <div id="todo_modal_include" style="display: none"> 
-	<%-- <%@ include file="../WEB-INF/include/Todo_modal.jspf"%> --%>
+	<%@ include file="../WEB-INF/include/Todo_modal.jspf"%>
 </div>
-<%-- <%@ include file="0dm11.jspf" %> --%>
+<div id="dm1_modal_include" style="display: none"> 
+	<%@ include file="0dm11.jspf" %>
+</div>
 	<div class="div_background"></div>
 	<!-- <div class="folder_selection0">
 		<div class="folder_selection">
@@ -1581,7 +435,7 @@
 				<button class="alarm_btn1">아침까지 알림 끄기 (오전 9시)</button>
 			</div>
 			<div class="alarm_expl3">
-				<a class="alarm_expl4" href="">알림 설정</a>
+				<a class="alarm_expl4" href="Controller?command=option2">알림 설정</a>
 			</div>
 		</div>
 	</div>
@@ -1621,7 +475,7 @@
 					<div class="name">북마크</div>
 				</a>
 				
-				<a class="menu" href="Controller?command=MyPost&loginId=<%=member_id %>">
+				<a class="menu" href="Controller?command=MyPost&loginId=<%=loginId %>">
 					<svg viewBox="0 0 24 24" width="16px" height="16px" class="svg1"><path d="M2 12c0 5.52 4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2C6.47 2 2 6.48 2 12zm10 8.2c-4.53 0-8.2-3.67-8.2-8.2 0-4.53 3.67-8.2 8.2-8.2 4.53 0 8.2 3.67 8.2 8.2 0 4.53-3.67 8.2-8.2 8.2zm-2.588-7c.616 1.122 1.287 1.676 2.588 1.676 1.3 0 1.972-.554 2.588-1.676H16.5c-.703 1.933-2.452 3.3-4.5 3.3s-3.797-1.367-4.5-3.3zM8.65 8.4a1.35 1.35 0 110 2.7 1.35 1.35 0 010-2.7zm6.7 0a1.35 1.35 0 110 2.7 1.35 1.35 0 010-2.7z" class="Beecon__Path-sc-3x6pq4-1 jRUwgg"></path></svg>
 					<div class="name">내가 작성한 문서</div>
 				</a>
@@ -1757,7 +611,7 @@
 	</div>
 	
 	<div class="topright1">
-		<%@ include file="homehead11.jspf" %>
+		<%@ include file="homehead16.jspf" %>
    		
    		<div class="subheader_right3">
 			<div class="subheader_right3_menu">
@@ -1862,6 +716,28 @@
 				videoscreen.style.display = "none";
 			}
 		}
+		
+		var dm1_modal_include = document.getElementById('dm1_modal_include');
+		var modal = document.getElementById('myModal');
+	    var span = document.getElementsByClassName("dm1_close")[0];
+	    var piclist = document.getElementById("selectpic");
+	    var filelist = document.getElementById("dm1_selection");
+	    
+	    span.onclick = function(e){
+	        dm1_modal_include.style.display = "none";
+	    	modal.style.display = "none";
+	        piclist.style.display = "none";
+            filelist.style.display = "none";
+	    }
+	    window.onclick = function(event) {
+	        if (event.target == modal) {
+	        	alert("수정 중인 의사결정을 저장하지 않고 나가시겠습니까?");
+	        	dm1_modal_include.style.display = "none";
+	        	modal.style.display = "none";
+	            piclist.style.display = "none";
+	            filelist.style.display = "none";
+	        }
+	    }
 	</script>
 	
 	

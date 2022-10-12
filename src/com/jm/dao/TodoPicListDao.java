@@ -17,7 +17,7 @@ public class TodoPicListDao {
 			for(int i = 0; i<str.length; i++) {
 				pic.add( Integer.parseInt(str[i]) );
 			}
-			
+			System.out.println(pic);
 			return pic;
 		}
 		

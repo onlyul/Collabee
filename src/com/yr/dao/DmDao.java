@@ -21,7 +21,7 @@ public class DmDao {
 		PreparedStatement pstmt = null;
 		Connection conn = DBConnection.getConnection();
 		try{
-			String sql = "select wm.workspace_id, w.workspace_name from workspace_mb wm, workspace w where wm.workspace_id = w.workspace_id and wm.member_id = ?";
+			String sql = "select w.workspace_id, w.workspace_name from workspace_mb wm, workspace w where wm.workspace_id = w.workspace_id and wm.member_id = ?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1,member_id);
 			rs = pstmt.executeQuery();

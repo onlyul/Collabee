@@ -14,7 +14,7 @@ import org.json.simple.JSONObject;
 import com.one.dao.myWorkspacePostDao;
 import com.one.dto.MyPostDto;
 
-public class MyWorkspacePostAction implements Action{
+public class MyWorkspacePostAction implements Action{//협업공간별 내가 쓴 문서
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -32,9 +32,9 @@ public class MyWorkspacePostAction implements Action{
 		JSONArray array = new JSONArray();
 		for(MyPostDto dto : list) {
 			JSONObject obj = new JSONObject();
+			obj.put("document_id", dto.getDocument_id());
 			obj.put("kanban_icon_p", dto.getKanban_icon_p());
 			obj.put("title", dto.getTitle());
-			System.out.println(dto.getTitle());
 			obj.put("workspace_name", dto.getWorkspace_name());
 			obj.put("date", dto.getDate());
 			array.add(obj);

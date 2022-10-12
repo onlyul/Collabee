@@ -143,6 +143,8 @@ public class UpdatebarDao {
 				IssueDto dto = new IssueDto(w_id, wname, picture, period, title, edit_date, id, sort, name2, name);
 				list1.add(dto);
 			}
+			rs.close();
+			pstmt.close();
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -158,7 +160,7 @@ public class UpdatebarDao {
 		ResultSet rs = null;
 		Connection conn = DBConnection.getConnection();
 		try {
-			String sql = "select m.picture, c.content, m.name, to_char(c.creation_date, 'FMMM\"월\" DD\"일\"') as creation_date, c.fixed_comment"
+			String sql = "select m.picture, c.content, m.name, to_char(c.creation_date, 'FMMM\"월\" DD\"일\"') as creation_date"
 					+ " from member m, comments c, document d"
 					+ " where m.member_id = c.comment_writer and d.document_id = c.document_id"
 					+ " and d.document_id = ? order by c.creation_date";
@@ -171,14 +173,13 @@ public class UpdatebarDao {
 				String yetcontent = rs.getString(2);
 				String name = rs.getString(3);
 				String creation_date = rs.getString(4);
-				int fixed_comment = rs.getInt(5);
+				/* int fixed_comment = rs.getInt(5); */
 				String content = "";
 				String comment = "";
-				if(fixed_comment == 0) {
-					content = "\"" + yetcontent + "\"";
-				} else {
-					content = yetcontent;
-				}
+				/*
+				 * if(fixed_comment == 0) { content = "\"" + yetcontent + "\""; } else { content
+				 * = yetcontent; }
+				 */
 				list.add(new ArticleCommentDto(picture, content, name, creation_date, comment));
 				/*
 				 * list.add(picture); list.add(content); list.add(name);
@@ -199,7 +200,7 @@ public class UpdatebarDao {
 		ResultSet rs = null;
 		Connection conn = DBConnection.getConnection();
 		try {
-			String sql = "select m.picture, c.content, m.name, to_char(c.creation_date, 'FMMM\"월\" DD\"일\"') as creation_date, c.fixed_comment"
+			String sql = "select m.picture, c.content, m.name, to_char(c.creation_date, 'FMMM\"월\" DD\"일\"') as creation_date"
 					+ " from member m, comments c, todo t"
 					+ " where m.member_id = c.comment_writer and t.document_id = c.document_id"
 					+ " and t.todo_id = ? order by creation_date";
@@ -211,7 +212,7 @@ public class UpdatebarDao {
 				String content = rs.getString(2);
 				String name = rs.getString(3);
 				String creation_date = rs.getString(4);
-				int fixed_comment = rs.getInt(5);
+				/* int fixed_comment = rs.getInt(5); */
 				String comment = "";
 				list.add(new ArticleCommentDto(picture, content, name, creation_date, comment));
 				/*
@@ -233,7 +234,7 @@ public class UpdatebarDao {
 		ResultSet rs = null;
 		Connection conn = DBConnection.getConnection();
 		try {
-			String sql = "select m.picture, c.content, m.name, to_char(c.creation_date, 'FMMM\"월\" DD\"일\"') as creation_date, c.fixed_comment"
+			String sql = "select m.picture, c.content, m.name, to_char(c.creation_date, 'FMMM\"월\" DD\"일\"') as creation_date"
 					+ " from member m, comments c, schedule s"
 					+ " where m.member_id = c.comment_writer and s.document_id = c.document_id"
 					+ " and s.document_id = ? order by creation_date";
@@ -245,7 +246,7 @@ public class UpdatebarDao {
 				String content = rs.getString(2);
 				String name = rs.getString(3);
 				String creation_date = rs.getString(4);
-				int fixed_comment = rs.getInt(5);
+				/* int fixed_comment = rs.getInt(5); */
 				String comment = "";
 				list.add(new ArticleCommentDto(picture, content, name, creation_date, comment));
 				/*
